@@ -10,6 +10,7 @@ namespace Lab2
 {
 	public class Global : System.Web.HttpApplication
 	{
+		string path;
 
 		protected void Application_Start(object sender, EventArgs e)
 		{
@@ -19,7 +20,16 @@ namespace Lab2
 		protected void Session_Start(object sender, EventArgs e)
 		{
 			FileStream fs;
-			string path = Request.PhysicalApplicationPath + "Output\\Sessions.log";
+
+			path = Server.MapPath("~/default.aspx");
+
+			FileInfo fi = new FileInfo(path);
+			path = fi.Directory + "\\Output\\Sessions.log";
+
+			path = Request.PhysicalApplicationPath + "Output\\Sessions.log";
+
+			//Session["path"] = path;
+			Application["path"] = path;
 
 			if (File.Exists(path))
 			{
@@ -54,7 +64,9 @@ namespace Lab2
 		protected void Session_End(object sender, EventArgs e)
 		{
 			FileStream fs;
-			string path = Request.PhysicalApplicationPath + "Output\\Sessions.log";
+
+			//path = (string)Session["path"];
+			path = (string)Application["path"];
 
 			if (File.Exists(path))
 			{

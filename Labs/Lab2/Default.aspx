@@ -10,6 +10,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            Task1
+            <br />
+            <asp:Button ID="Button1" runat="server" Text="Завершить сессию" OnClick="Button1_Click" />
+            <hr />
+
             Task2
             <br />
 
