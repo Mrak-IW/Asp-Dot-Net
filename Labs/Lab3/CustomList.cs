@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Lab3
+{
+	public class CustomList : System.Web.UI.UserControl
+	{
+		string[] fields = new string[3];
+
+		public CustomList(params string[] args)
+		{
+			if (args != null)
+			{
+				for (int i = 0; i < args.Length && i < fields.Length; i++)
+				{
+					fields[i] = args[i];
+				}
+			}
+		}
+
+		protected override void Render(HtmlTextWriter writer)
+		{
+			writer.RenderBeginTag(HtmlTextWriterTag.Ol);
+			for (int i = 0; i < fields.Length; i++)
+			{
+				writer.RenderBeginTag(HtmlTextWriterTag.Li);
+				writer.Write(fields[i]);
+				writer.RenderEndTag();
+			}
+			writer.RenderEndTag();
+
+		}
+	}
+}
