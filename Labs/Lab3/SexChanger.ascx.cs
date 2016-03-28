@@ -11,6 +11,26 @@ namespace Lab3
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			if (this.Controls.Count == 0)
+			{
+				rb_male = new RadioButton();
+				rb_female = new RadioButton();
+				BtnConfirm = new Button();
+				LblResult = new Label();
+
+				rb_female.Text = "Ж";
+				rb_male.Text = "М";
+				rb_female.GroupName = "rb_sex";
+				rb_male.GroupName = "rb_sex";
+				BtnConfirm.Text = "Сменить пол";
+
+				Controls.Add(rb_male);
+				//Controls.Add(new )
+				Controls.Add(rb_female);
+				Controls.Add(BtnConfirm);
+				Controls.Add(LblResult);
+			}
+
 			if (IsPostBack)
 			{
 				BtnConfirm.Click += BtnConfirm_OnClick;
@@ -32,5 +52,13 @@ namespace Lab3
 				LblResult.Text = "Вы не выбрали пол. Определяйтесь быстрее, а то так и будете без пола ходить.";
 			}
 		}
+
+		//protected override void Render(HtmlTextWriter writer)
+		//{
+		//	foreach (Control c in this.Controls)
+		//	{
+		//		c.RenderControl(writer);
+		//	}
+		//}
 	}
 }

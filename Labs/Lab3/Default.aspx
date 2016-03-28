@@ -8,19 +8,46 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div>
-            Task1<br />
-            <my:sc runat="server" />
-            <hr />
+	<form id="form1" runat="server">
+		<div>
+			Task1<br />
+			<my:sc runat="server" />
+			<hr />
 
-            Task2<br />
-            <hr />
-        </div>
-    </form>
+			Task2
+			<br />
+			А вот хрен там! Не регистрируется контрол без aspx-разметки. Кстати, контрол с aspx-разметкой ("пользовательский" элемент управления)
+			принципиально ничем не отличается от "специального серверного", кроме отсутствия этой самой разметки, и прекрасно регистрируется
+			обоими приведёнными способами.
+			<br />
+			<s>UPD: А ещё, похоже, у "пользовательских" контролов, отсутствует реализация метода Render.</s>
+			<br />
+			UPD2: При создании "пользовательского" элемента методом добавления динамических контролов, у него не инициализируется внутренняя структура.
+			Приходится инициализировать её вручную, к примеру в методе Page_Load.
+			<br />
+			UPD3: Есть нихреновая разница, добавлять-ли пользовательский элемент, зарегистрированный с атрибутом Src="*.ascx" или без него.
+			<hr />
+
+			Task3<br />
+			<my:sc runat="server" ID="task3" />
+			<%
+				Label lblres = task3.FindControl("LblResult") as Label;
+				if (lblres.Text != "")
+				{
+					Response.Write("<br/ >Выведено динамически:&nbsp;" + lblres.Text);
+				}
+			%>
+			<%= GetHtmlList("это", "список", "любой", "длины", "которая", "будет", "нужна") %>
+			<hr />
+
+			Task4<br />
+			<asp:PlaceHolder ID="PhTask4" runat="server"></asp:PlaceHolder>
+			<hr />
+		</div>
+	</form>
 </body>
 </html>
