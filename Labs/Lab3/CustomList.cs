@@ -11,6 +11,9 @@ namespace Lab3
 	{
 		string[] fields = new string[3];
 
+		/// <summary>
+		/// Этот конструктор по-умолчанию необходим для добавления данного контрола в aspx-разметку
+		/// </summary>
 		public CustomList()
 		{
 			fields[0] = "строка 0";
