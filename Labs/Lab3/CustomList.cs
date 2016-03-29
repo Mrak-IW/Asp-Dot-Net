@@ -7,9 +7,16 @@ using System.Web.UI.WebControls;
 
 namespace Lab3
 {
-	public class CustomList : System.Web.UI.UserControl
+	public class CustomList : Control
 	{
 		string[] fields = new string[3];
+
+		public CustomList()
+		{
+			fields[0] = "строка 0";
+			fields[1] = "строка 1";
+			fields[2] = "строка 2";
+		}
 
 		public CustomList(params string[] args)
 		{
@@ -32,7 +39,6 @@ namespace Lab3
 				writer.RenderEndTag();
 			}
 			writer.RenderEndTag();
-
 		}
 	}
 }
