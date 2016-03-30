@@ -11,7 +11,6 @@
 <body>
     <form id="form1" runat="server">
     <div>
-		<sh:dev runat="server"/>
 		<asp:PlaceHolder ID="PhDevices" runat="server"></asp:PlaceHolder>
     </div>
     </form>

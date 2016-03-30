@@ -13,18 +13,34 @@ namespace Homework1
 {
 	public partial class Default : System.Web.UI.Page
 	{
+		SmartHouse sh;
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			SmartHouse sh = new SmartHouse();
-			sh.AddDevice(new SmartLamp("l1", new Dimmer(100, 10, 10)));
-			sh.AddDevice(new SmartLamp("l2", new Dimmer(100, 10, 15)));
-			sh.AddDevice(new Fridge("fr", new Dimmer(0, -5, 1)));
-			sh.AddDevice(new Clock("clk"));
-			sh["fr"].On();
-			sh["clk"].On();
-			(sh["fr"] as IHaveThermostat).DecreaseTemperature();
+			if (Session["SmartHouse"] == null)
+			{
+				sh = new SmartHouse();
+				sh.AddDevice(new SmartLamp("l1", new Dimmer(100, 10, 10)));
+				sh.AddDevice(new SmartLamp("l2", new Dimmer(100, 10, 15)));
+				sh.AddDevice(new Fridge("fr", new Dimmer(0, -5, 1)));
+				sh.AddDevice(new Clock("clk"));
+				sh["fr"].On();
+				sh["clk"].On();
+				(sh["fr"] as IHaveThermostat).Temperature= (sh["fr"] as IHaveThermostat).TempMin;
 
-			PhDevices.Controls.Add(new WfDevice());
+				Session.Add("SmartHouse", sh);
+			}
+			else
+			{
+				sh = Session["SmartHouse"] as SmartHouse;
+			}
+
+			foreach (ISmartDevice dev in sh)
+			{
+				WfDevice c = Page.LoadControl("~/WfDevice.ascx") as WfDevice;
+				c.Device = dev;
+				PhDevices.Controls.Add(c);
+			}
+			
 		}
 	}
 }
