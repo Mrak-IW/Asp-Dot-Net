@@ -22,15 +22,6 @@ namespace Homework1 {
         protected global::System.Web.UI.WebControls.Panel PnlMain;
         
         /// <summary>
-        /// ChbSelect элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ChbSelect;
-        
-        /// <summary>
         /// LblId элемент управления.
         /// </summary>
         /// <remarks>
@@ -38,6 +29,33 @@ namespace Homework1 {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblId;
+        
+        /// <summary>
+        /// btnChangeState элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnChangeState;
+        
+        /// <summary>
+        /// imgDevIcon элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgDevIcon;
+        
+        /// <summary>
+        /// tblPropertiesTable элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblPropertiesTable;
         
         /// <summary>
         /// PhControls элемент управления.

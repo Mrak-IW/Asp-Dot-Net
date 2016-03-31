@@ -15,99 +15,42 @@ namespace Homework1
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			Button b;
+
 			if (Device != null)
 			{
-				LblId.Text = Device.Name;
-				Label state = new Label();
-				state.Text = Device.ToString().Replace(" ", "&nbsp;");
-				PhControls.Controls.Add(state);
+				Button b;
 
-				b = new Button();
-				b.ID = "btnChangeStatus";
+				LblId.Text = Device.DeviceType + " \"" + Device.Name + "\"";
+
+				b = btnChangeState;
 				switch (Device.State)
 				{
 					case EPowerState.On:
-						b.Text = "Выключить";
+						b.Text = "On";
+						b.Attributes.Add("title", "выключить");
 						b.Click += (senderCtrl, eargs) =>
 						{
 							Device.Off();
-							state.Text = Device.ToString().Replace(" ", "&nbsp;");
+							//state.Text = Device.ToString().Replace(" ", "&nbsp;");
 							Server.Transfer(Request.Path);
 						};
 						break;
 					case EPowerState.Off:
-						b.Text = "Включить";
+						b.Text = "Off";
+						b.Attributes.Add("title", "включить");
 						b.Click += (senderCtrl, eargs) =>
 						{
 							Device.On();
-							state.Text = Device.ToString().Replace(" ", "&nbsp;");
+							//state.Text = Device.ToString().Replace(" ", "&nbsp;");
 							Server.Transfer(Request.Path);
 						};
 						break;
-					case EPowerState.Broken:
-						if (Device is IRepareable)
-						{
-							b.Text = "Починить";
-							b.Click += (senderCtrl, eargs) =>
-							{
-								(Device as IRepareable).Repare();
-								state.Text = Device.ToString().Replace(" ", "&nbsp;");
-								Server.Transfer(Request.Path);
-							};
-						}
-						break;
-				}
-				if (b.Text != "")
-				{
-					PhControls.Controls.Add(b);
 				}
 
-				if (Device is IHaveThermostat)
-				{
-					b = new Button();
-					b.ID = "btnIncresaeTemp";
-					b.Text = "Теплее";
-					b.Click += (senderCtrl, eargs) =>
-					{
-						(Device as IHaveThermostat).IncreaseTemperature();
-						state.Text = Device.ToString().Replace(" ", "&nbsp;");
-					};
-					PhControls.Controls.Add(b);
+				imgDevIcon.ImageUrl = "Images/lampIcon.png";
 
-					b = new Button();
-					b.ID = "btnDecresaeTemp";
-					b.Text = "Холоднее";
-					b.Click += (senderCtrl, eargs) =>
-					{
-						(Device as IHaveThermostat).DecreaseTemperature();
-						state.Text = Device.ToString().Replace(" ", "&nbsp;");
-					};
-					PhControls.Controls.Add(b);
-				}
-
-				if (Device is IBrightable)
-				{
-					b = new Button();
-					b.ID = "btnIncresaeLight";
-					b.Text = "Светлее";
-					b.Click += (senderCtrl, eargs) =>
-					{
-						(Device as IBrightable).IncreaseBrightness();
-						state.Text = Device.ToString().Replace(" ", "&nbsp;");
-					};
-					PhControls.Controls.Add(b);
-
-					b = new Button();
-					b.ID = "btnDecresaeLight";
-					b.Text = "Темнее";
-					b.Click += (senderCtrl, eargs) =>
-					{
-						(Device as IBrightable).DecreaseBrightness();
-						state.Text = Device.ToString().Replace(" ", "&nbsp;");
-					};
-					PhControls.Controls.Add(b);
-				}
+				DisplayIHaveThermostat(tblPropertiesTable);
+				DisplayIBrightable(tblPropertiesTable);
 			}
 			else
 			{
@@ -115,6 +58,100 @@ namespace Homework1
 				err.Text = "Для данного элемента управления не задано конкретное устройство";
 				PhControls.Controls.Add(err);
 			}
+		}
+
+		protected void DisplayIBrightable(Table destination)
+		{
+			if (Device is IBrightable)
+			{
+				IBrightable dev = Device as IBrightable;
+				TableCell td;
+				Button b;
+				TableRow tr = new TableRow();
+				
+				td = new TableCell();
+				td.Text = "Яркость";
+				tr.Cells.Add(td);
+
+				td = new TableCell();
+				td.Text = dev.Brightness.ToString();
+				tr.Cells.Add(td);
+
+				td = new TableCell();
+				{
+					b = new Button();
+					b.Text = "+";
+					b.ID = "btnBrightnessInc";
+					b.Click += (senderCtrl, eargs) =>
+					{
+						dev.IncreaseBrightness();
+						Server.Transfer(Request.Path);
+					};
+					td.Controls.Add(b);
+
+					b = new Button();
+					b.Text = "-";
+					b.ID = "btnBrightnessDec";
+					b.Click += (senderCtrl, eargs) =>
+					{
+						dev.DecreaseBrightness();
+						Server.Transfer(Request.Path);
+					};
+					td.Controls.Add(b);
+				}
+				tr.Cells.Add(td);
+
+				destination.Rows.Add(tr);
+			}
+			else
+			{ }
+		}
+
+		protected void DisplayIHaveThermostat(Table destination)
+		{
+			if (Device is IHaveThermostat)
+			{
+				IHaveThermostat dev = Device as IHaveThermostat;
+				TableCell td;
+				Button b;
+				TableRow tr = new TableRow();
+
+				td = new TableCell();
+				td.Text = "Температура";
+				tr.Cells.Add(td);
+
+				td = new TableCell();
+				td.Text = dev.Temperature.ToString();
+				tr.Cells.Add(td);
+
+				td = new TableCell();
+				{
+					b = new Button();
+					b.Text = "+";
+					b.ID = "btnTemperatureInc";
+					b.Click += (senderCtrl, eargs) =>
+					{
+						dev.IncreaseTemperature();
+						Server.Transfer(Request.Path);
+					};
+					td.Controls.Add(b);
+
+					b = new Button();
+					b.Text = "-";
+					b.ID = "btnTemperatureDec";
+					b.Click += (senderCtrl, eargs) =>
+					{
+						dev.DecreaseTemperature();
+						Server.Transfer(Request.Path);
+					};
+					td.Controls.Add(b);
+				}
+				tr.Cells.Add(td);
+
+				destination.Rows.Add(tr);
+			}
+			else
+			{ }
 		}
 	}
 }
