@@ -23,12 +23,11 @@ namespace Homework1
 				state.Text = Device.ToString().Replace(" ", "&nbsp;");
 				PhControls.Controls.Add(state);
 
-				b = null;
+				b = new Button();
+				b.ID = "btnChangeStatus";
 				switch (Device.State)
 				{
 					case EPowerState.On:
-						b = new Button();
-						b.ID = "btnOff";
 						b.Text = "Выключить";
 						b.Click += (senderCtrl, eargs) =>
 						{
@@ -38,8 +37,6 @@ namespace Homework1
 						};
 						break;
 					case EPowerState.Off:
-						b = new Button();
-						b.ID = "btnOn";
 						b.Text = "Включить";
 						b.Click += (senderCtrl, eargs) =>
 						{
@@ -51,8 +48,6 @@ namespace Homework1
 					case EPowerState.Broken:
 						if (Device is IRepareable)
 						{
-							b = new Button();
-							b.ID = "btnRepare";
 							b.Text = "Починить";
 							b.Click += (senderCtrl, eargs) =>
 							{
@@ -63,7 +58,7 @@ namespace Homework1
 						}
 						break;
 				}
-				if (b != null)
+				if (b.Text != "")
 				{
 					PhControls.Controls.Add(b);
 				}
