@@ -1,0 +1,44 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+body {
+	background-color: grey;
+	margin: 0 auto;
+	width: 800px;
+}
+.deviceBody {
+	width: 180px;
+	height: 200px;
+	background-color: white;
+    border-color: black;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+}
+.btnRepare{
+	float: left;
+	visibility: hidden;
+}
+.btnPowerState{
+	float: right;
+}
+.lblName {
+	float: left;
+	text-align: center;
+	width: 60px;
+}
+.devIcon {
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+}
+.propertiesTable {
+	width: 100%;
+	border-collapse: collapse;
+}
+.propertiesTable td {
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+}
