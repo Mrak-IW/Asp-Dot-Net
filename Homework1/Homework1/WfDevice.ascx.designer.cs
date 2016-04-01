@@ -31,13 +31,13 @@ namespace Homework1 {
         protected global::System.Web.UI.WebControls.Label LblId;
         
         /// <summary>
-        /// btnChangeState элемент управления.
+        /// btnPowerState элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnChangeState;
+        protected global::System.Web.UI.WebControls.Button btnPowerState;
         
         /// <summary>
         /// PhIcon элемент управления.
@@ -56,14 +56,5 @@ namespace Homework1 {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table tblPropertiesTable;
-        
-        /// <summary>
-        /// PhControls элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PhControls;
     }
 }

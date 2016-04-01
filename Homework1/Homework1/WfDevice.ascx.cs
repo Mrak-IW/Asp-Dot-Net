@@ -47,10 +47,9 @@ namespace Homework1
 			//Это было заменено на универсальный алгоритм с рефлексией (смотреть выше)
 			//Теперь можно сюда не лазать, если поменяется шаблон контрола
 			//LblId = FindControl("LblId") as Label;
-			//btnChangeState = FindControl("btnChangeState") as Button;
+			//btnPowerState = FindControl("btnPowerState") as Button;
 			//imgDevIcon = FindControl("imgDevIcon") as Image;
 			//tblPropertiesTable = FindControl("tblPropertiesTable") as Table;
-			//PhControls = FindControl("PhControls") as PlaceHolder;
 		}
 
 		protected void BuildControlMarkup()
@@ -61,12 +60,11 @@ namespace Homework1
 				DisplayIcon();
 				DisplayIHaveThermostat(tblPropertiesTable);
 				DisplayIBrightable(tblPropertiesTable);
+				DisplayIOpenCloseable(tblPropertiesTable);
 			}
 			else
 			{
-				Label err = new Label();
-				err.Text = "Для данного элемента управления не задано конкретное устройство";
-				PhControls.Controls.Add(err);
+				LblId.Text = "Для данного элемента управления не задано конкретное устройство";
 			}
 		}
 
@@ -76,7 +74,7 @@ namespace Homework1
 
 			LblId.Text = Device.DeviceType + " \"" + Device.Name + "\"";
 
-			b = btnChangeState;
+			b = btnPowerState;
 			switch (Device.State)
 			{
 				case EPowerState.On:
@@ -210,6 +208,39 @@ namespace Homework1
 			}
 			else
 			{ }
+		}
+
+		protected void DisplayIOpenCloseable(Table destination)
+		{
+			if (Device is IOpenCloseable)
+			{
+				IOpenCloseable dev = Device as IOpenCloseable;
+				TableCell td;
+				Button b;
+				TableRow tr = new TableRow();
+
+				td = new TableCell();
+				td.Text = dev.IsOpened ? "Открыто" : "Закрыто";
+				td.Attributes["colspan"] = "2";
+				tr.Cells.Add(td);
+
+				td = new TableCell();
+				{
+					b = new Button();
+					b.Text = dev.IsOpened ? "Закрыть" : "Открыть";
+					b.ID = "btnOpenClose";
+					b.Click += (senderCtrl, eargs) =>
+					{
+						dev.IsOpened = !dev.IsOpened;
+						ResetSubControls(templatePath);
+						BuildControlMarkup();
+					};
+					td.Controls.Add(b);
+				}
+				tr.Cells.Add(td);
+
+				destination.Rows.Add(tr);
+			}
 		}
 	}
 }
