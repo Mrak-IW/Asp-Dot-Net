@@ -40,13 +40,13 @@ namespace Homework1 {
         protected global::System.Web.UI.WebControls.Button btnChangeState;
         
         /// <summary>
-        /// imgDevIcon элемент управления.
+        /// PhIcon элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgDevIcon;
+        protected global::System.Web.UI.WebControls.PlaceHolder PhIcon;
         
         /// <summary>
         /// tblPropertiesTable элемент управления.

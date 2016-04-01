@@ -10,7 +10,7 @@
 		<asp:Button ID="btnChangeState" runat="server" Text="ON/OFF" />
 	</div>
 	<div class="devIcon">
-		<asp:Image ID="imgDevIcon" runat="server" />
+		<asp:PlaceHolder ID="PhIcon" runat="server"></asp:PlaceHolder>
 	</div>
 	<asp:Table ID="tblPropertiesTable" class="propertiesTable" runat="server"></asp:Table>
 	
