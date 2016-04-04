@@ -10,25 +10,16 @@
 namespace Homework1 {
     
     
-    public partial class Default {
+    public partial class WfAddDevice {
         
         /// <summary>
-        /// form1 элемент управления.
+        /// ddlDeviceType элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// lblDeviceCount элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDeviceCount;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDeviceType;
         
         /// <summary>
         /// btnAddDevice элемент управления.
@@ -40,12 +31,21 @@ namespace Homework1 {
         protected global::System.Web.UI.WebControls.Button btnAddDevice;
         
         /// <summary>
-        /// PhDevices элемент управления.
+        /// PhIcon элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PhDevices;
+        protected global::System.Web.UI.WebControls.PlaceHolder PhIcon;
+        
+        /// <summary>
+        /// tblPropertiesTable элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblPropertiesTable;
     }
 }

@@ -22,35 +22,43 @@ namespace Homework1
 
 		protected void ResetSubControls(string formPath)
 		{
-			Type thisType = this.GetType();
-
 			Controls.Clear();
 			Control tmp = LoadControl(formPath);
 			foreach (Control c in tmp.Controls)
 			{
 				Controls.Add(c);
-				if (c is Panel)
-				{
-					foreach (Control innerCtrl in c.Controls)
-					{
-						if (innerCtrl.ID != null)
-						{
-							FieldInfo fi = thisType.GetField(innerCtrl.ID, BindingFlags.Instance | BindingFlags.NonPublic);
-							if (fi != null)
-							{
-								fi.SetValue(this, innerCtrl);
-							}
-						}
-					}
-				}
 			}
-			//Это было заменено на универсальный алгоритм с рефлексией (смотреть выше)
+			GetControlLinks(Controls);
+			//Это было заменено на универсальный алгоритм с рефлексией
 			//Теперь можно сюда не лазать, если поменяется шаблон контрола
 			//LblId = FindControl("LblId") as Label;
 			//btnPowerState = FindControl("btnPowerState") as Button;
 			//imgDevIcon = FindControl("imgDevIcon") as Image;
 			//tblPropertiesTable = FindControl("tblPropertiesTable") as Table;
 		}
+
+		protected void GetControlLinks(ControlCollection controls)
+		{
+			Type thisType = this.GetType();
+
+			foreach (Control ctrl in controls)
+			{
+				if (ctrl.ID != null)
+				{
+					FieldInfo fi = thisType.GetField(ctrl.ID, BindingFlags.Instance | BindingFlags.NonPublic);
+					if (fi != null)
+					{
+						fi.SetValue(this, ctrl);
+					}
+				}
+
+				if (ctrl.Controls != null && ctrl.Controls.Count > 0)
+				{
+					GetControlLinks(ctrl.Controls);
+				}
+			}
+		}
+
 
 		protected void BuildControlMarkup()
 		{

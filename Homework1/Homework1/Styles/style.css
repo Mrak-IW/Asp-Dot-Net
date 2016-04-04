@@ -1,63 +1,75 @@
 * {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 body {
-    background-color: grey;
-    margin: 0 auto;
-    width: 800px;
+	background-color: grey;
+	margin: 0 auto;
+	width: 800px;
 }
 
 .deviceBody {
-    width: 180px;
-    height: 220px;
-    background-color: khaki;
-    border-color: black;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 1px;
-    margin: 1px;
-    float: left;
+	width: 180px;
+	height: 220px;
+	background-color: khaki;
+	border-color: black;
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 1px;
+	margin: 1px;
+	float: left;
 }
 
 .btnRepare {
-    float: left;
-    visibility: hidden;
+	float: left;
+	visibility: hidden;
 }
 
 .btnPowerState {
-    float: right;
-    border-top-right-radius: 10px;
+	float: right;
+	border-top-right-radius: 10px;
 }
 
 .topLine {
-    float: left;
-    width: 100%;
-    background-color: darkolivegreen;
-    color: lightgrey;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+	float: left;
+	width: 100%;
+	background-color: darkolivegreen;
+	color: lightgrey;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
 }
 
-    .topLine .lblID {
-        padding: 5px 10px;
-        float: left;
-    }
+	.topLine .lblID {
+		padding: 5px 10px;
+		float: left;
+	}
 
 .devIcon {
-    width: 100%;
-    text-align: center;
-    margin: 0 auto;
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
 }
 
 .propertiesTable {
-    width: 100%;
-    border-collapse: collapse;
+	width: 100%;
+	border-collapse: collapse;
 }
 
-    .propertiesTable td {
-        border-width: 1px;
-        border-color: black;
-        border-style: solid;
-    }
+	.propertiesTable td {
+		border-width: 1px;
+		border-color: black;
+		border-style: solid;
+	}
+
+.frmAddDevice {
+	width: 250px;
+	height: 220px;
+	background-color: khaki;
+	border-color: black;
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 1px;
+	margin: 0 auto;
+	position: fixed;
+}

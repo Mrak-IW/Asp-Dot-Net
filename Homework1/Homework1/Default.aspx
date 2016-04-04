@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Homework1.Default" %>
 <%@ Register Src="~/WfDevice.ascx" TagName="dev" TagPrefix="sh" %>
+<%@ Register Src="~/WfAddDevice.ascx" TagName="devAdd" TagPrefix="sh" %>
 
 <!DOCTYPE html>
 
@@ -12,6 +13,10 @@
 <body>
     <form id="form1" runat="server">
     <div>
+		<div class="header">
+			<asp:Label ID="lblDeviceCount" runat="server" Text="lblDeviceCount"></asp:Label>
+			<asp:Button ID="btnAddDevice" runat="server" Text="Добавить устройство" />
+		</div>
 		<asp:PlaceHolder ID="PhDevices" runat="server"></asp:PlaceHolder>
     </div>
     </form>

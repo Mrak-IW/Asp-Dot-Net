@@ -44,7 +44,14 @@ namespace Homework1
 				c.Device = dev;
 				PhDevices.Controls.Add(c);
 			}
-			
+
+			lblDeviceCount.Text = string.Format("Устройств в системе: {0}", sh.Count);
+			btnAddDevice.Click += btnAddDevice_OnClick;
+		}
+
+		protected void btnAddDevice_OnClick(object sender, EventArgs e)
+		{
+			PhDevices.Controls.Add(new WfAddDevice().LoadControl("~/WfAddDevice.ascx"));
 		}
 	}
 }
