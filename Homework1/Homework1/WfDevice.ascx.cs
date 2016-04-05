@@ -1,5 +1,5 @@
-﻿using HomeWork2.SmartHouseDir.Enums;
-using HomeWork2.SmartHouseDir.Interfaces;
+﻿using HomeWorkSmartHouse.SmartHouseDir.Enums;
+using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +24,9 @@ namespace Homework1
 		{
 			Controls.Clear();
 			Control tmp = LoadControl(formPath);
-			foreach (Control c in tmp.Controls)
+			while (tmp.Controls.Count != 0)
 			{
-				Controls.Add(c);
+				Controls.Add(tmp.Controls[0]);
 			}
 			GetControlLinks(Controls);
 			//Это было заменено на универсальный алгоритм с рефлексией

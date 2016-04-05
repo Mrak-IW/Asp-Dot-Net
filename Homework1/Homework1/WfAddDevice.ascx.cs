@@ -1,5 +1,5 @@
-﻿using HomeWork2.SmartHouseDir.Enums;
-using HomeWork2.SmartHouseDir.Interfaces;
+﻿using HomeWorkSmartHouse.SmartHouseDir.Enums;
+using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,27 +12,40 @@ namespace Homework1
 {
 	public partial class WfAddDevice : System.Web.UI.UserControl
 	{
-		public ISmartDevice Device { get; set; }
+		public ISmartHouse SmartHouse { get; set; }
 		public string templatePath = "~/WfAddDevice.ascx";
+		public string DevType { get; set; }
+
+		public WfAddDevice()
+		{ }
+
+		public WfAddDevice(string devType)
+		{
+			DevType = devType;
+		}
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			ddlDeviceType.SelectedIndexChanged += (senderCtrl, eventArgs) =>
+			if (IsPostBack)
 			{
-				ResetSubControls(templatePath);
-				BuildControlMarkup();
-			};
+				btnAddDevice.Click += btnAddDevice_OnClick;
+			}
 
 			BuildControlMarkup();
+		}
+
+		protected void btnAddDevice_OnClick(object sender, EventArgs e)
+		{
+
 		}
 
 		protected void ResetSubControls(string formPath)
 		{
 			Controls.Clear();
 			Control tmp = LoadControl(formPath);
-			foreach (Control c in tmp.Controls)
+			while (tmp.Controls.Count != 0)
 			{
-				Controls.Add(c);
+				Controls.Add(tmp.Controls[0]);
 			}
 			GetControlLinks(Controls);
 			//Это было заменено на универсальный алгоритм с рефлексией
@@ -67,26 +80,29 @@ namespace Homework1
 
 		protected void BuildControlMarkup()
 		{
-			//Assembly ass = Assembly.Load("HomeWork2");   //Да, я в курсе, как это звучит :-)
-			//Type[] types = ass.GetTypes();
-			//Type type = types.Where(item => item.Name == ddlDeviceType.SelectedValue).FirstOrDefault() as Type;
+			Assembly ass = Assembly.Load("HomeWork2");   //Да, я в курсе, как это звучит :-)
+			Type[] types = ass.GetTypes();
+			Type type = types.Where(item => item.Name == DevType).FirstOrDefault() as Type;
 
 			DisplayISmartDevice(tblPropertiesTable);
 			DisplayIcon();
-			//DisplayIHaveThermostat(tblPropertiesTable);
-			//DisplayIBrightable(tblPropertiesTable);
-			//DisplayIOpenCloseable(tblPropertiesTable);
-			switch (ddlDeviceType.SelectedValue)
+			
+			if (type.GetInterface("IBrightable") != null)
 			{
-				case "Fridge":
-					break;
-				case "SmartLamp":
-					DisplayIBrightable(tblPropertiesTable);
-					break;
-				case "Clock":
-					break;
-				default:
-					break;
+				DisplayIBrightable(tblPropertiesTable);
+			}
+			if (type.GetInterface("IHaveThermostat") != null)
+			{
+				DisplayIHaveThermostat(tblPropertiesTable);
+			}
+			if (type.GetInterface("IHaveClock") != null)
+			{
+			}
+			if (type.GetInterface("IOpenCloseable") != null)
+			{
+			}
+			if (type.GetInterface("IRepearable") != null)
+			{
 			}
 		}
 
@@ -118,127 +134,84 @@ namespace Homework1
 
 		protected void DisplayIBrightable(Table destination)
 		{
-			if (Device is IBrightable)
-			{
-				IBrightable dev = Device as IBrightable;
-				TableCell td;
-				TableRow tr = new TableRow();
-				TextBox tb;
+			TableCell td;
+			TextBox tb;
+			TableRow tr;
 
-				td = new TableCell();
-				td.Text = "Яркость min";
-				tr.Cells.Add(td);
+			tr = new TableRow();
 
-				td = new TableCell();
-				tb = new TextBox();
-				tb.ID = "tbBrightnessMin";
-				tb.Attributes["placeholder"] = "0";
-				td.Controls.Add(tb);
+			td = new TableCell();
+			td.Text = "Яркость min";
+			tr.Cells.Add(td);
 
-				tr.Cells.Add(td);
+			td = new TableCell();
+			tb = new TextBox();
+			tb.ID = "tbBrightnessMin";
+			tb.TextMode = TextBoxMode.Number;
+			tb.Attributes["placeholder"] = "0";
+			td.Controls.Add(tb);
 
-				destination.Rows.Add(tr);
+			tr.Cells.Add(td);
 
-				td = new TableCell();
-				td.Text = "Яркость max";
-				tr.Cells.Add(td);
+			destination.Rows.Add(tr);
 
-				td = new TableCell();
-				tb = new TextBox();
-				tb.ID = "tbBrightnessMax";
-				tb.Attributes["placeholder"] = "100";
-				td.Controls.Add(tb);
+			tr = new TableRow();
 
-				tr.Cells.Add(td);
+			td = new TableCell();
+			td.Text = "Яркость max";
+			tr.Cells.Add(td);
 
-				destination.Rows.Add(tr);
-			}
-			else
-			{ }
+			td = new TableCell();
+			tb = new TextBox();
+			tb.ID = "tbBrightnessMax";
+			tb.TextMode = TextBoxMode.Number;
+			tb.Attributes["placeholder"] = "100";
+			td.Controls.Add(tb);
+
+			tr.Cells.Add(td);
+
+			destination.Rows.Add(tr);
 		}
 
-		//protected void DisplayIHaveThermostat(Table destination)
-		//{
-		//	if (Device is IHaveThermostat)
-		//	{
-		//		IHaveThermostat dev = Device as IHaveThermostat;
-		//		TableCell td;
-		//		Button b;
-		//		TableRow tr = new TableRow();
+		protected void DisplayIHaveThermostat(Table destination)
+		{
+			TableCell td;
+			TextBox tb;
+			TableRow tr;
 
-		//		td = new TableCell();
-		//		td.Text = "Температура";
-		//		tr.Cells.Add(td);
+			tr = new TableRow();
 
-		//		td = new TableCell();
-		//		td.Text = dev.Temperature.ToString();
-		//		tr.Cells.Add(td);
+			td = new TableCell();
+			td.Text = "Температура min";
+			tr.Cells.Add(td);
 
-		//		td = new TableCell();
-		//		{
-		//			b = new Button();
-		//			b.Text = "+";
-		//			b.ID = "btnTemperatureInc";
-		//			b.Attributes["title"] = "Max = " + dev.TempMax;
-		//			b.Click += (senderCtrl, eargs) =>
-		//			{
-		//				dev.IncreaseTemperature();
-		//				ResetSubControls(templatePath);
-		//				BuildControlMarkup();
-		//			};
-		//			td.Controls.Add(b);
+			td = new TableCell();
+			tb = new TextBox();
+			tb.ID = "tbTemperatureMin";
+			tb.TextMode = TextBoxMode.Number;
+			tb.Attributes["placeholder"] = "-273";
+			td.Controls.Add(tb);
 
-		//			b = new Button();
-		//			b.Text = "-";
-		//			b.ID = "btnTemperatureDec";
-		//			b.Attributes["title"] = "Min = " + dev.TempMin;
-		//			b.Click += (senderCtrl, eargs) =>
-		//			{
-		//				dev.DecreaseTemperature();
-		//				ResetSubControls(templatePath);
-		//				BuildControlMarkup();
-		//			};
-		//			td.Controls.Add(b);
-		//		}
-		//		tr.Cells.Add(td);
+			tr.Cells.Add(td);
 
-		//		destination.Rows.Add(tr);
-		//	}
-		//	else
-		//	{ }
-		//}
+			destination.Rows.Add(tr);
 
-		//protected void DisplayIOpenCloseable(Table destination)
-		//{
-		//	if (Device is IOpenCloseable)
-		//	{
-		//		IOpenCloseable dev = Device as IOpenCloseable;
-		//		TableCell td;
-		//		Button b;
-		//		TableRow tr = new TableRow();
+			tr = new TableRow();
 
-		//		td = new TableCell();
-		//		td.Text = dev.IsOpened ? "Открыто" : "Закрыто";
-		//		td.Attributes["colspan"] = "2";
-		//		tr.Cells.Add(td);
+			td = new TableCell();
+			td.Text = "Температура max";
+			tr.Cells.Add(td);
 
-		//		td = new TableCell();
-		//		{
-		//			b = new Button();
-		//			b.Text = dev.IsOpened ? "Закрыть" : "Открыть";
-		//			b.ID = "btnOpenClose";
-		//			b.Click += (senderCtrl, eargs) =>
-		//			{
-		//				dev.IsOpened = !dev.IsOpened;
-		//				ResetSubControls(templatePath);
-		//				BuildControlMarkup();
-		//			};
-		//			td.Controls.Add(b);
-		//		}
-		//		tr.Cells.Add(td);
+			td = new TableCell();
+			tb = new TextBox();
+			tb.ID = "tbTemperatureMax";
+			tb.TextMode = TextBoxMode.Number;
+			tb.Attributes["placeholder"] = "10";
+			td.Controls.Add(tb);
 
-		//		destination.Rows.Add(tr);
-		//	}
-		//}
+			tr.Cells.Add(td);
+
+			destination.Rows.Add(tr);
+		}
 	}
 }

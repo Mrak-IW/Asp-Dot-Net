@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using HomeWork2.SmartHouseDir.Classes;
-using HomeWork2.SmartHouseDir.Enums;
-using HomeWork2.SmartHouseDir.Interfaces;
-using HomeWork2.SmartHouseDir.Classes.InternalParts;
+using HomeWorkSmartHouse.SmartHouseDir.Classes;
+using HomeWorkSmartHouse.SmartHouseDir.Enums;
+using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
+using HomeWorkSmartHouse.SmartHouseDir.Classes.InternalParts;
 
 namespace Homework1
 {
@@ -51,7 +51,10 @@ namespace Homework1
 
 		protected void btnAddDevice_OnClick(object sender, EventArgs e)
 		{
-			PhDevices.Controls.Add(new WfAddDevice().LoadControl("~/WfAddDevice.ascx"));
+			WfAddDevice form = Page.LoadControl("~/WfAddDevice.ascx") as WfAddDevice;
+			form.DevType = ddlDeviceType.SelectedValue;
+			form.SmartHouse = sh;
+			PhDevices.Controls.Add(form);
 		}
 	}
 }

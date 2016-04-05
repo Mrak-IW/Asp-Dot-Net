@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homework1", "Homework1\Homework1.csproj", "{2671452D-5D41-42EF-9EDA-5D34EED7DBC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWork2", "..\..\..\2. Основы языка C# и платформы .Net\Repository\HomeWork\Projects\HomeWork2\HomeWork2.csproj", "{1BD48987-751A-4CD3-B74E-B5423528B8C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHouse", "SmartHouse\SmartHouse.csproj", "{1BD48987-751A-4CD3-B74E-B5423528B8C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

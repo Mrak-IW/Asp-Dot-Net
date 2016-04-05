@@ -13,15 +13,6 @@ namespace Homework1 {
     public partial class WfAddDevice {
         
         /// <summary>
-        /// ddlDeviceType элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDeviceType;
-        
-        /// <summary>
         /// btnAddDevice элемент управления.
         /// </summary>
         /// <remarks>

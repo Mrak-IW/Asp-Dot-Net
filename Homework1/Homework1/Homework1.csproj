@@ -107,9 +107,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\2. Основы языка C# и платформы .Net\Repository\HomeWork\Projects\HomeWork2\HomeWork2.csproj">
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SmartHouse\SmartHouse.csproj">
       <Project>{1bd48987-751a-4cd3-b74e-b5423528b8c8}</Project>
-      <Name>HomeWork2</Name>
+      <Name>SmartHouse</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

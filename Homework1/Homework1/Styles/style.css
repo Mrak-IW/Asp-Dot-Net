@@ -63,8 +63,7 @@ body {
 	}
 
 .frmAddDevice {
-	width: 250px;
-	height: 220px;
+	width: 300px;
 	background-color: khaki;
 	border-color: black;
 	border-radius: 10px;
