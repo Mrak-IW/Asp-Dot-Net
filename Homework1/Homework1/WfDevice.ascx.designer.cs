@@ -49,12 +49,12 @@ namespace Homework1 {
         protected global::System.Web.UI.WebControls.PlaceHolder PhIcon;
         
         /// <summary>
-        /// tblPropertiesTable элемент управления.
+        /// pnlProperties элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblPropertiesTable;
+        protected global::System.Web.UI.WebControls.Panel pnlProperties;
     }
 }

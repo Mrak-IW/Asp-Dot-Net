@@ -9,5 +9,5 @@
 	<div class="devIcon">
 		<asp:PlaceHolder ID="PhIcon" runat="server"></asp:PlaceHolder>
 	</div>
-	<asp:Table ID="tblPropertiesTable" class="propertiesTable" runat="server"></asp:Table>
+	<asp:Panel ID="pnlProperties" CssClass="propertiesPanel" runat="server"></asp:Panel>
 </asp:Panel>

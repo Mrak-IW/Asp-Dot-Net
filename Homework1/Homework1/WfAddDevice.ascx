@@ -7,6 +7,7 @@
 					<div class="topLine">
 						<asp:Button ID="btnAddDevice" Text="Добавить" runat="server" />
 						<asp:Label ID="lblDevType" Text="&lt;тип&gt;" runat="server"></asp:Label>
+						<asp:Button ID="btnClose" Text="X" CssClass="btnClose" runat="server" />
 					</div>
 					<div class="devIcon">
 						<asp:PlaceHolder ID="PhIcon" runat="server"></asp:PlaceHolder>

@@ -11,7 +11,7 @@ body {
 
 .deviceBody {
 	width: 180px;
-	height: 220px;
+	height: 240px;
 	background-color: khaki;
 	border-color: black;
 	border-radius: 10px;
@@ -26,7 +26,7 @@ body {
 	visibility: hidden;
 }
 
-.btnPowerState {
+.btnPowerState, .btnClose {
 	float: right;
 	border-top-right-radius: 10px;
 }
@@ -43,6 +43,7 @@ body {
 	.topLine .lblID {
 		padding: 5px 10px;
 		float: left;
+		max-width: 130px;
 	}
 
 .devIcon {
@@ -51,15 +52,23 @@ body {
 	margin: 0 auto;
 }
 
-.propertiesTable {
+.propertiesPanel {
 	width: 100%;
-	border-collapse: collapse;
 }
 
-	.propertiesTable td {
+	.propertiesPanel div {
 		border-width: 1px;
 		border-color: black;
 		border-style: solid;
+		border-radius: 5px;
+		margin: 1px 3px;
+		padding: 2px;
+		color: lightgray;
+		background-color: darkolivegreen;
+	}
+
+	.propertiesPanel span {
+		padding: 2px;
 	}
 
 .frmAddDevice {

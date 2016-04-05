@@ -34,7 +34,7 @@ namespace Homework1
 			//LblId = FindControl("LblId") as Label;
 			//btnPowerState = FindControl("btnPowerState") as Button;
 			//imgDevIcon = FindControl("imgDevIcon") as Image;
-			//tblPropertiesTable = FindControl("tblPropertiesTable") as Table;
+			//pnlProperties = FindControl("pnlProperties") as Table;
 		}
 
 		protected void GetControlLinks(ControlCollection controls)
@@ -66,9 +66,10 @@ namespace Homework1
 			{
 				DisplayISmartDevice();
 				DisplayIcon();
-				DisplayIHaveThermostat(tblPropertiesTable);
-				DisplayIBrightable(tblPropertiesTable);
-				DisplayIOpenCloseable(tblPropertiesTable);
+				DisplayIHaveThermostat(pnlProperties);
+				DisplayIBrightable(pnlProperties);
+				DisplayIOpenCloseable(pnlProperties);
+				DisplayRemoveButton(pnlProperties);
 			}
 			else
 			{
@@ -80,9 +81,10 @@ namespace Homework1
 		{
 			Button b;
 
-			LblId.Text = Device.DeviceType + " \"" + Device.Name + "\"";
+			LblId.Text = Device.DeviceType + "<br /> \"" + Device.Name + "\"";
 
 			b = btnPowerState;
+			b.ID = "btnPower" + Device.Name;
 			switch (Device.State)
 			{
 				case EPowerState.On:
@@ -108,36 +110,48 @@ namespace Homework1
 			}
 		}
 
+
 		protected void DisplayIcon()
 		{
 			Image icon = new Image();
-			icon.ID = "imgDevIcon";
+			icon.ID = "imgDevIcon" + Device.Name;
 			icon.ImageUrl = "Images/lampIcon.png";
 			PhIcon.Controls.Add(icon);
 		}
 
-		protected void DisplayIBrightable(Table destination)
+		protected void DisplayRemoveButton(Control destination)
+		{
+			Button b;
+			Panel tr = new Panel();
+
+			b = new Button();
+			b.Text = "Удалить";
+			b.ID = "btnRemove" + Device.Name;
+			b.Click += (senderCtrl, eargs) =>
+			{
+				Device.Parent.RemoveDevice(Device.Name);
+				Parent.Controls.Remove(this);
+			};
+
+			tr.Controls.Add(b);
+
+			destination.Controls.Add(tr);
+		}
+
+		protected void DisplayIBrightable(Control destination)
 		{
 			if (Device is IBrightable)
 			{
 				IBrightable dev = Device as IBrightable;
-				TableCell td;
+				Label td;
 				Button b;
-				TableRow tr = new TableRow();
+				Panel tr = new Panel();
 
-				td = new TableCell();
-				td.Text = "Яркость";
-				tr.Cells.Add(td);
-
-				td = new TableCell();
-				td.Text = dev.Brightness.ToString();
-				tr.Cells.Add(td);
-
-				td = new TableCell();
+				td = new Label();
 				{
 					b = new Button();
 					b.Text = "+";
-					b.ID = "btnBrightnessInc";
+					b.ID = "btnBrightnessInc" + Device.Name;
 					b.Attributes["title"] = "Max = " + dev.BrightnessMax;
 					b.Click += (senderCtrl, eargs) =>
 					{
@@ -149,7 +163,7 @@ namespace Homework1
 
 					b = new Button();
 					b.Text = "-";
-					b.ID = "btnBrightnessDec";
+					b.ID = "btnBrightnessDec" + Device.Name;
 					b.Attributes["title"] = "Min = " + dev.BrightnessMin;
 					b.Click += (senderCtrl, eargs) =>
 					{
@@ -159,36 +173,36 @@ namespace Homework1
 					};
 					td.Controls.Add(b);
 				}
-				tr.Cells.Add(td);
+				tr.Controls.Add(td);
 
-				destination.Rows.Add(tr);
+				td = new Label();
+				td.Text = "Яркость";
+				tr.Controls.Add(td);
+
+				td = new Label();
+				td.Text = dev.Brightness.ToString();
+				tr.Controls.Add(td);
+
+				destination.Controls.Add(tr);
 			}
 			else
 			{ }
 		}
 
-		protected void DisplayIHaveThermostat(Table destination)
+		protected void DisplayIHaveThermostat(Control destination)
 		{
 			if (Device is IHaveThermostat)
 			{
 				IHaveThermostat dev = Device as IHaveThermostat;
-				TableCell td;
+				Label td;
 				Button b;
-				TableRow tr = new TableRow();
+				Panel tr = new Panel();
 
-				td = new TableCell();
-				td.Text = "Температура";
-				tr.Cells.Add(td);
-
-				td = new TableCell();
-				td.Text = dev.Temperature.ToString();
-				tr.Cells.Add(td);
-
-				td = new TableCell();
+				td = new Label();
 				{
 					b = new Button();
 					b.Text = "+";
-					b.ID = "btnTemperatureInc";
+					b.ID = "btnTemperatureInc" + Device.Name;
 					b.Attributes["title"] = "Max = " + dev.TempMax;
 					b.Click += (senderCtrl, eargs) =>
 					{
@@ -200,7 +214,7 @@ namespace Homework1
 
 					b = new Button();
 					b.Text = "-";
-					b.ID = "btnTemperatureDec";
+					b.ID = "btnTemperatureDec" + Device.Name;
 					b.Attributes["title"] = "Min = " + dev.TempMin;
 					b.Click += (senderCtrl, eargs) =>
 					{
@@ -210,33 +224,36 @@ namespace Homework1
 					};
 					td.Controls.Add(b);
 				}
-				tr.Cells.Add(td);
+				tr.Controls.Add(td);
 
-				destination.Rows.Add(tr);
+				td = new Label();
+				td.Text = "Температура";
+				tr.Controls.Add(td);
+
+				td = new Label();
+				td.Text = dev.Temperature.ToString();
+				tr.Controls.Add(td);
+
+				destination.Controls.Add(tr);
 			}
 			else
 			{ }
 		}
 
-		protected void DisplayIOpenCloseable(Table destination)
+		protected void DisplayIOpenCloseable(Control destination)
 		{
 			if (Device is IOpenCloseable)
 			{
 				IOpenCloseable dev = Device as IOpenCloseable;
-				TableCell td;
+				Label td;
 				Button b;
-				TableRow tr = new TableRow();
+				Panel tr = new Panel();
 
-				td = new TableCell();
-				td.Text = dev.IsOpened ? "Открыто" : "Закрыто";
-				td.Attributes["colspan"] = "2";
-				tr.Cells.Add(td);
-
-				td = new TableCell();
+				td = new Label();
 				{
 					b = new Button();
 					b.Text = dev.IsOpened ? "Закрыть" : "Открыть";
-					b.ID = "btnOpenClose";
+					b.ID = "btnOpenClose" + Device.Name;
 					b.Click += (senderCtrl, eargs) =>
 					{
 						dev.IsOpened = !dev.IsOpened;
@@ -245,9 +262,14 @@ namespace Homework1
 					};
 					td.Controls.Add(b);
 				}
-				tr.Cells.Add(td);
+				tr.Controls.Add(td);
 
-				destination.Rows.Add(tr);
+				td = new Label();
+				td.Text = dev.IsOpened ? "Открыто" : "Закрыто";
+				td.Attributes["colspan"] = "2";
+				tr.Controls.Add(td);
+
+				destination.Controls.Add(tr);
 			}
 		}
 	}

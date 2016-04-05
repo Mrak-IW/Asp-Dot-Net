@@ -16,7 +16,7 @@
 		<div>
 			<div class="header">
 				<asp:Label ID="lblDeviceCount" runat="server" Text="lblDeviceCount"></asp:Label>
-				<asp:DropDownList ID="ddlDeviceType" runat="server" AutoPostBack="true">
+				<asp:DropDownList ID="ddlDeviceType" runat="server">
 					<asp:ListItem Value="Fridge">Холодильник</asp:ListItem>
 					<asp:ListItem Value="SmartLamp">Лампа</asp:ListItem>
 					<asp:ListItem Value="Clock">Часы</asp:ListItem>

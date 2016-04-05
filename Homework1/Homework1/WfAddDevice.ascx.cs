@@ -38,6 +38,13 @@ namespace Homework1
 			BuildControlMarkup();
 
 			btnAddDevice.Click += btnAddDevice_OnClick;
+			btnClose.Click += btnClose_OnClick;
+		}
+
+		protected void btnClose_OnClick(object sender, EventArgs e)
+		{
+			Session["showAddDevice"] = null;
+			ParentForm.RefreshControls();
 		}
 
 		protected void btnAddDevice_OnClick(object sender, EventArgs e)
@@ -114,7 +121,7 @@ namespace Homework1
 					SmartHouse.AddDevice(new Clock(name));
 					break;
 			}
-			Session["SmartHouse"] = SmartHouse;
+			//Session["SmartHouse"] = SmartHouse;
 			Session["showAddDevice"] = null;
 			ParentForm.RefreshControls();
 		}
