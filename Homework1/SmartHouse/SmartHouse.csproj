@@ -7,7 +7,7 @@
     <ProjectGuid>{1BD48987-751A-4CD3-B74E-B5423528B8C8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SmartHouse</RootNamespace>
+    <RootNamespace>HomeWorkSmartHouse</RootNamespace>
     <AssemblyName>SmartHouse</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -16,6 +16,11 @@ namespace Homework1
 		SmartHouse sh;
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			if (!IsPostBack)
+			{
+				Session["showAddDevice"] = null;
+			}
+
 			if (Session["SmartHouse"] == null)
 			{
 				sh = new SmartHouse();
@@ -38,6 +43,12 @@ namespace Homework1
 				sh = Session["SmartHouse"] as SmartHouse;
 			}
 
+			RefreshControls();
+		}
+
+		public void RefreshControls()
+		{
+			PhDevices.Controls.Clear();
 			foreach (ISmartDevice dev in sh)
 			{
 				WfDevice c = Page.LoadControl("~/WfDevice.ascx") as WfDevice;
@@ -47,14 +58,31 @@ namespace Homework1
 
 			lblDeviceCount.Text = string.Format("Устройств в системе: {0}", sh.Count);
 			btnAddDevice.Click += btnAddDevice_OnClick;
+
+			bool? show = Session["showAddDevice"] as bool?;
+			if (show != null && show == true)
+			{
+				ShowAddDevice();
+			}
 		}
 
 		protected void btnAddDevice_OnClick(object sender, EventArgs e)
 		{
-			WfAddDevice form = Page.LoadControl("~/WfAddDevice.ascx") as WfAddDevice;
-			form.DevType = ddlDeviceType.SelectedValue;
-			form.SmartHouse = sh;
-			PhDevices.Controls.Add(form);
+			ShowAddDevice();
+			Session["showAddDevice"] = true;
+		}
+
+		protected void ShowAddDevice()
+		{
+			if (FindControl("frmCreateDevice") == null)
+			{
+				WfAddDevice form = Page.LoadControl("~/WfAddDevice.ascx") as WfAddDevice;
+				form.DevType = ddlDeviceType.SelectedValue;
+				form.SmartHouse = sh;
+				form.ParentForm = this;
+				form.ID = "frmCreateDevice";
+				PhDevices.Controls.Add(form);
+			}
 		}
 	}
 }

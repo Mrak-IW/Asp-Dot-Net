@@ -1,4 +1,6 @@
-﻿using HomeWorkSmartHouse.SmartHouseDir.Enums;
+﻿using HomeWorkSmartHouse.SmartHouseDir.Classes;
+using HomeWorkSmartHouse.SmartHouseDir.Classes.InternalParts;
+using HomeWorkSmartHouse.SmartHouseDir.Enums;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,14 @@ namespace Homework1
 {
 	public partial class WfAddDevice : System.Web.UI.UserControl
 	{
+		private const string idTempMax = "tbTemperatureMax";
+		private const string idTempMin = "tbTemperatureMin";
+		private const string idBrightMax = "tbBrightnessMax";
+		private const string idBrightMin = "tbBrightnessMin";
+		private const string idName = "tbName";
+
 		public ISmartHouse SmartHouse { get; set; }
+		public Default ParentForm { get; set; }
 		public string templatePath = "~/WfAddDevice.ascx";
 		public string DevType { get; set; }
 
@@ -26,67 +35,102 @@ namespace Homework1
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (IsPostBack)
-			{
-				btnAddDevice.Click += btnAddDevice_OnClick;
-			}
-
 			BuildControlMarkup();
+
+			btnAddDevice.Click += btnAddDevice_OnClick;
 		}
 
 		protected void btnAddDevice_OnClick(object sender, EventArgs e)
 		{
+			string name;
 
-		}
+			name = (FindControl(idName) as TextBox).Text;
 
-		protected void ResetSubControls(string formPath)
-		{
-			Controls.Clear();
-			Control tmp = LoadControl(formPath);
-			while (tmp.Controls.Count != 0)
+			//TODO: Вот где-то здесь какая-то верификация должна быть. Наверное.
+			switch (DevType)
 			{
-				Controls.Add(tmp.Controls[0]);
-			}
-			GetControlLinks(Controls);
-			//Это было заменено на универсальный алгоритм с рефлексией
-			//Теперь можно сюда не лазать, если поменяется шаблон контрола
-			//LblId = FindControl("LblId") as Label;
-			//btnPowerState = FindControl("btnPowerState") as Button;
-			//imgDevIcon = FindControl("imgDevIcon") as Image;
-			//tblPropertiesTable = FindControl("tblPropertiesTable") as Table;
-		}
-
-		protected void GetControlLinks(ControlCollection controls)
-		{
-			Type thisType = this.GetType();
-
-			foreach (Control ctrl in controls)
-			{
-				if (ctrl.ID != null)
-				{
-					FieldInfo fi = thisType.GetField(ctrl.ID, BindingFlags.Instance | BindingFlags.NonPublic);
-					if (fi != null)
+				case "Fridge":
 					{
-						fi.SetValue(this, ctrl);
-					}
-				}
+						int min, max, step;
+						TextBox tbMin = FindControl(idTempMin) as TextBox;
+						TextBox tbMax = FindControl(idTempMax) as TextBox;
 
-				if (ctrl.Controls != null && ctrl.Controls.Count > 0)
-				{
-					GetControlLinks(ctrl.Controls);
-				}
+						if (!int.TryParse(tbMax.Text, out max))
+						{
+							int.TryParse(tbMax.Attributes["placeholder"], out max);
+						}
+						if (!int.TryParse(tbMin.Text, out min))
+						{
+							int.TryParse(tbMin.Attributes["placeholder"], out min);
+						}
+						step = (max - min) / 5;
+						if (step == 0)
+						{
+							step = 1;
+						}
+						if (step < 0)
+						{
+							step = -step;
+						}
+						Dimmer d = new Dimmer(max, min, step);
+
+						ISmartDevice dev = new Fridge(name, d);
+
+						SmartHouse.AddDevice(dev);
+					}
+					break;
+				case "SmartLamp":
+					{
+						int min, max, step;
+
+						TextBox tbMin = FindControl(idBrightMin) as TextBox;
+						TextBox tbMax = FindControl(idBrightMax) as TextBox;
+
+						if (!int.TryParse(tbMax.Text, out max))
+						{
+							int.TryParse(tbMax.Attributes["placeholder"], out max);
+						}
+						if (!int.TryParse(tbMin.Text, out min))
+						{
+							int.TryParse(tbMin.Attributes["placeholder"], out min);
+						}
+						step = (max - min) / 10;
+						if (step == 0)
+						{
+							step = 1;
+						}
+						if (step < 0)
+						{
+							step = -step;
+						}
+						Dimmer d = new Dimmer(max, min, step);
+
+						ISmartDevice dev = new SmartLamp(name, d);
+
+						SmartHouse.AddDevice(dev);
+					}
+					break;
+				case "Clock":
+					SmartHouse.AddDevice(new Clock(name));
+					break;
 			}
+			Session["SmartHouse"] = SmartHouse;
+			Session["showAddDevice"] = null;
+			ParentForm.RefreshControls();
 		}
 
 		protected void BuildControlMarkup()
 		{
-			Assembly ass = Assembly.Load("HomeWork2");   //Да, я в курсе, как это звучит :-)
+			Assembly ass = Assembly.Load("SmartHouse");   //Да, я в курсе, как это звучит :-)
 			Type[] types = ass.GetTypes();
 			Type type = types.Where(item => item.Name == DevType).FirstOrDefault() as Type;
+			FieldInfo fDevType = type.GetField("devType", BindingFlags.NonPublic | BindingFlags.Static);
+			string devTypeName = fDevType.GetValue(null) as string;
 
+			lblDevType.Text = devTypeName;
 			DisplayISmartDevice(tblPropertiesTable);
 			DisplayIcon();
-			
+
 			if (type.GetInterface("IBrightable") != null)
 			{
 				DisplayIBrightable(tblPropertiesTable);
@@ -116,8 +160,9 @@ namespace Homework1
 
 			td = new TableCell();
 			TextBox tb = new TextBox();
-			tb.ID = "tbName";
+			tb.ID = idName;
 			tb.Attributes["placeholder"] = "Ввести имя";
+			tb.EnableViewState = true;
 			td.Controls.Add(tb);
 			tr.Controls.Add(td);
 
@@ -146,9 +191,12 @@ namespace Homework1
 
 			td = new TableCell();
 			tb = new TextBox();
-			tb.ID = "tbBrightnessMin";
+			tb.ID = idBrightMin;
 			tb.TextMode = TextBoxMode.Number;
 			tb.Attributes["placeholder"] = "0";
+			tb.Attributes["min"] = "0";
+			tb.Attributes["max"] = "200";
+			tb.EnableViewState = true;
 			td.Controls.Add(tb);
 
 			tr.Cells.Add(td);
@@ -163,9 +211,12 @@ namespace Homework1
 
 			td = new TableCell();
 			tb = new TextBox();
-			tb.ID = "tbBrightnessMax";
+			tb.ID = idBrightMax;
 			tb.TextMode = TextBoxMode.Number;
 			tb.Attributes["placeholder"] = "100";
+			tb.Attributes["min"] = "0";
+			tb.Attributes["max"] = "200";
+			tb.EnableViewState = true;
 			td.Controls.Add(tb);
 
 			tr.Cells.Add(td);
@@ -187,9 +238,11 @@ namespace Homework1
 
 			td = new TableCell();
 			tb = new TextBox();
-			tb.ID = "tbTemperatureMin";
+			tb.ID = idTempMin;
 			tb.TextMode = TextBoxMode.Number;
 			tb.Attributes["placeholder"] = "-273";
+			tb.Attributes["min"] = "-273";
+			tb.EnableViewState = true;
 			td.Controls.Add(tb);
 
 			tr.Cells.Add(td);
@@ -204,9 +257,11 @@ namespace Homework1
 
 			td = new TableCell();
 			tb = new TextBox();
-			tb.ID = "tbTemperatureMax";
+			tb.ID = idTempMax;
 			tb.TextMode = TextBoxMode.Number;
 			tb.Attributes["placeholder"] = "10";
+			tb.Attributes["min"] = "-273";
+			tb.EnableViewState = true;
 			td.Controls.Add(tb);
 
 			tr.Cells.Add(td);
