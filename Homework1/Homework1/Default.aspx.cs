@@ -24,13 +24,13 @@ namespace Homework1
 			if (Session["SmartHouse"] == null)
 			{
 				sh = new SmartHouse();
-				//sh.AddDevice(new SmartLamp("l1", new Dimmer(100, 10, 10)));
-				//sh.AddDevice(new SmartLamp("l2", new Dimmer(100, 10, 15)));
-				//sh.AddDevice(new Fridge("fr", new Dimmer(0, -5, 1)));
-				//sh.AddDevice(new Clock("clk"));
-				//sh["fr"].On();
-				//sh["clk"].On();
-				//(sh["fr"] as IHaveThermostat).Temperature= (sh["fr"] as IHaveThermostat).TempMin;
+				sh.AddDevice(new SmartLamp("l1", new Dimmer(100, 10, 10)));
+				sh.AddDevice(new SmartLamp("l2", new Dimmer(100, 10, 15)));
+				sh.AddDevice(new Fridge("fr1", new Dimmer(0, -5, 1)));
+				sh.AddDevice(new Clock("clk1"));
+				sh["fr1"].On();
+				sh["clk1"].On();
+				(sh["fr1"] as IHaveThermostat).Temperature = (sh["fr1"] as IHaveThermostat).TempMin;
 
 				Session.Add("SmartHouse", sh);
 			}
