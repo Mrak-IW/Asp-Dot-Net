@@ -3,15 +3,26 @@
 	margin: 0;
 }
 
+@font-face {
+	font-family: militaryFont;
+	src: url('../Fonts/Capture_it.ttf');
+	font-weight: bold;
+}
+
 body {
 	background-color: grey;
 	margin: 0 auto;
 	width: 800px;
+	font-family: militaryFont;
+}
+
+input[type="button"], input[type="submit"] {
+	height: 25px;
 }
 
 .deviceBody {
-	width: 180px;
-	height: 260px;
+	width: 190px;
+	height: 285px;
 	background-color: khaki;
 	border-color: black;
 	border-radius: 10px;
@@ -65,10 +76,17 @@ body {
 		padding: 2px;
 		color: lightgray;
 		background-color: darkolivegreen;
+		height: 25px;
 	}
 
 	.propertiesPanel span {
 		padding: 2px;
+	}
+
+	.propertiesPanel .value {
+		text-align: center;
+		display: inline-block;
+		width: 20px;
 	}
 
 .frmAddDevice {

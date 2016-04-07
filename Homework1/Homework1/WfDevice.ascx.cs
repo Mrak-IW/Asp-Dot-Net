@@ -147,41 +147,40 @@ namespace Homework1
 				Button b;
 				Panel tr = new Panel();
 
-				td = new Label();
+				b = new Button();
+				b.Text = "-";
+				b.ID = "btnBrightnessDec" + Device.Name;
+				b.Attributes["title"] = "Min = " + dev.BrightnessMin;
+				b.Click += (senderCtrl, eargs) =>
 				{
-					b = new Button();
-					b.Text = "+";
-					b.ID = "btnBrightnessInc" + Device.Name;
-					b.Attributes["title"] = "Max = " + dev.BrightnessMax;
-					b.Click += (senderCtrl, eargs) =>
-					{
-						dev.IncreaseBrightness();
-						ResetSubControls(templatePath);
-						BuildControlMarkup();
-					};
-					td.Controls.Add(b);
+					dev.DecreaseBrightness();
+					ResetSubControls(templatePath);
+					BuildControlMarkup();
+				};
+				tr.Controls.Add(b);
 
-					b = new Button();
-					b.Text = "-";
-					b.ID = "btnBrightnessDec" + Device.Name;
-					b.Attributes["title"] = "Min = " + dev.BrightnessMin;
-					b.Click += (senderCtrl, eargs) =>
-					{
-						dev.DecreaseBrightness();
-						ResetSubControls(templatePath);
-						BuildControlMarkup();
-					};
-					td.Controls.Add(b);
-				}
+				td = new Label();
+				td.CssClass = "value";
+				td.Text = dev.Brightness.ToString();
 				tr.Controls.Add(td);
+
+				b = new Button();
+				b.Text = "+";
+				b.ID = "btnBrightnessInc" + Device.Name;
+				b.Attributes["title"] = "Max = " + dev.BrightnessMax;
+				b.Click += (senderCtrl, eargs) =>
+				{
+					dev.IncreaseBrightness();
+					ResetSubControls(templatePath);
+					BuildControlMarkup();
+				};
+				tr.Controls.Add(b);
 
 				td = new Label();
 				td.Text = "Яркость";
 				tr.Controls.Add(td);
 
-				td = new Label();
-				td.Text = dev.Brightness.ToString();
-				tr.Controls.Add(td);
+
 
 				destination.Controls.Add(tr);
 			}
@@ -198,41 +197,40 @@ namespace Homework1
 				Button b;
 				Panel tr = new Panel();
 
-				td = new Label();
+				b = new Button();
+				b.Text = "-";
+				b.ID = "btnTemperatureDec" + Device.Name;
+				b.Attributes["title"] = "Min = " + dev.TempMin;
+				b.Click += (senderCtrl, eargs) =>
 				{
-					b = new Button();
-					b.Text = "+";
-					b.ID = "btnTemperatureInc" + Device.Name;
-					b.Attributes["title"] = "Max = " + dev.TempMax;
-					b.Click += (senderCtrl, eargs) =>
-					{
-						dev.IncreaseTemperature();
-						ResetSubControls(templatePath);
-						BuildControlMarkup();
-					};
-					td.Controls.Add(b);
+					dev.DecreaseTemperature();
+					ResetSubControls(templatePath);
+					BuildControlMarkup();
+				};
+				tr.Controls.Add(b);
 
-					b = new Button();
-					b.Text = "-";
-					b.ID = "btnTemperatureDec" + Device.Name;
-					b.Attributes["title"] = "Min = " + dev.TempMin;
-					b.Click += (senderCtrl, eargs) =>
-					{
-						dev.DecreaseTemperature();
-						ResetSubControls(templatePath);
-						BuildControlMarkup();
-					};
-					td.Controls.Add(b);
-				}
+				td = new Label();
+				td.CssClass = "value";
+				td.Text = dev.Temperature.ToString();
 				tr.Controls.Add(td);
+
+				b = new Button();
+				b.Text = "+";
+				b.ID = "btnTemperatureInc" + Device.Name;
+				b.Attributes["title"] = "Max = " + dev.TempMax;
+				b.Click += (senderCtrl, eargs) =>
+				{
+					dev.IncreaseTemperature();
+					ResetSubControls(templatePath);
+					BuildControlMarkup();
+				};
+				tr.Controls.Add(b);
 
 				td = new Label();
 				td.Text = "Температура";
 				tr.Controls.Add(td);
 
-				td = new Label();
-				td.Text = dev.Temperature.ToString();
-				tr.Controls.Add(td);
+
 
 				destination.Controls.Add(tr);
 			}
