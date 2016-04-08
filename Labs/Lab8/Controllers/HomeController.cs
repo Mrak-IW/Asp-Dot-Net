@@ -71,7 +71,7 @@ namespace Lab8.Controllers
 			}
 			else
 			{
-				result = string.Format("Передайте в контроллер массив в формате: http://localhost:49963/home/printarray?arr[0]=кот&arr[1]=пёс&arr[2]=скунс");
+				result = string.Format("Передайте в контроллер массив в <a href=\"/home/printarray?arr[0]=кот&arr[1]=пёс&arr[2]=скунс\">формате</a>");
 			}
 
 			return result;

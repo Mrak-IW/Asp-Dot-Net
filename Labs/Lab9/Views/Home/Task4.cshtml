@@ -1,0 +1,13 @@
+﻿
+@{
+	ViewBag.Title = "Task4";
+}
+
+<h2>@ViewBag.Title</h2>
+<p>Вы кликнули в сессию @ViewBag.s раз</p>
+<p>Вы жмякнули куку @ViewBag.c раз</p>
+<form formaction="/home/task4">
+	<button type="submit" name="method" value="session">Кликнуть в сессию</button>
+	<button type="submit" name="method" value="cookie">Жмякнуть куку</button>
+</form>
+
