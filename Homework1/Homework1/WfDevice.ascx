@@ -4,7 +4,7 @@
 		<div class="lblID">
 			<asp:Label ID="LblId" runat="server" Text="ID"></asp:Label>
 		</div>
-		<asp:Button ID="btnPowerState" CssClass="btnPowerState" runat="server" Text="ON/OFF" />
+		<asp:ImageButton ID="btnPowerState" ImageUrl="~/Images/btnRoundDark.png" CssClass="btnPowerState" AlternateText="ON/OFF"  runat="server" />
 	</div>
 	<div class="devIcon">
 		<asp:PlaceHolder ID="PhIcon" runat="server"></asp:PlaceHolder>

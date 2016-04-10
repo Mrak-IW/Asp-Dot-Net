@@ -79,7 +79,7 @@ namespace Homework1
 
 		protected void DisplayISmartDevice()
 		{
-			Button b;
+			ImageButton b;
 
 			LblId.Text = Device.DeviceType + "<br /> \"" + Device.Name + "\"";
 
@@ -88,18 +88,25 @@ namespace Homework1
 			switch (Device.State)
 			{
 				case EPowerState.On:
-					b.Text = "On";
-					b.Attributes.Add("title", "выключить");
+					b.ToolTip = "Выключить";
+					b.ImageUrl = "~/Images/btnRoundLight.png";
+					b.Attributes.Add("onmouseover", "this.src='Images/btnRoundLightPush.png';");
+					b.Attributes.Add("onmouseout", "this.src='Images/btnRoundLight.png';");
+
 					b.Click += (senderCtrl, eargs) =>
 					{
 						Device.Off();
 						ResetSubControls(templatePath);
 						BuildControlMarkup();
 					};
+					
 					break;
 				case EPowerState.Off:
-					b.Text = "Off";
-					b.Attributes.Add("title", "включить");
+					b.ToolTip = "Включить";
+					b.ImageUrl = "~/Images/btnRoundDark.png";
+					b.Attributes.Add("onmouseover", "this.src='Images/btnRoundDarkPush.png';");
+					b.Attributes.Add("onmouseout", "this.src='Images/btnRoundDark.png';");
+
 					b.Click += (senderCtrl, eargs) =>
 					{
 						Device.On();

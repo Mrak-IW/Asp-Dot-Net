@@ -37,7 +37,7 @@ input[type="button"], input[type="submit"] {
 	visibility: hidden;
 }
 
-.btnPowerState, .btnClose {
+.btnClose {
 	float: right;
 	border-top-right-radius: 10px;
 }
@@ -55,6 +55,11 @@ input[type="button"], input[type="submit"] {
 		padding: 5px 10px;
 		float: left;
 		max-width: 130px;
+	}
+
+	.topLine .btnPowerState {
+		float: right;
+		margin: 13px 6px;
 	}
 
 .devIcon {
