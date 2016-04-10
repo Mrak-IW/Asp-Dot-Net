@@ -151,13 +151,18 @@ namespace Homework1
 			{
 				IBrightable dev = Device as IBrightable;
 				Label td;
-				Button b;
+				ImageButton b;
 				Panel tr = new Panel();
 
-				b = new Button();
-				b.Text = "-";
+				b = new ImageButton();
 				b.ID = "btnBrightnessDec" + Device.Name;
-				b.Attributes["title"] = "Min = " + dev.BrightnessMin;
+				b.ToolTip = "Min = " + dev.BrightnessMin;
+				b.CssClass = "btnArrow";
+
+				b.ImageUrl = "~/Images/btnArrowLeftDark.png";
+				b.Attributes.Add("onmouseover", "this.src='Images/btnArrowLeftLight.png';");
+				b.Attributes.Add("onmouseout", "this.src='Images/btnArrowLeftDark.png';");
+
 				b.Click += (senderCtrl, eargs) =>
 				{
 					dev.DecreaseBrightness();
@@ -166,15 +171,24 @@ namespace Homework1
 				};
 				tr.Controls.Add(b);
 
+				//================
+
 				td = new Label();
 				td.CssClass = "value";
 				td.Text = dev.Brightness.ToString();
 				tr.Controls.Add(td);
 
-				b = new Button();
-				b.Text = "+";
+				//================
+
+				b = new ImageButton();
 				b.ID = "btnBrightnessInc" + Device.Name;
-				b.Attributes["title"] = "Max = " + dev.BrightnessMax;
+				b.ToolTip = "Max = " + dev.BrightnessMax;
+				b.CssClass = "btnArrow";
+
+				b.ImageUrl = "~/Images/btnArrowRightDark.png";
+				b.Attributes.Add("onmouseover", "this.src='Images/btnArrowRightLight.png';");
+				b.Attributes.Add("onmouseout", "this.src='Images/btnArrowRightDark.png';");
+				
 				b.Click += (senderCtrl, eargs) =>
 				{
 					dev.IncreaseBrightness();
@@ -186,8 +200,6 @@ namespace Homework1
 				td = new Label();
 				td.Text = "Яркость";
 				tr.Controls.Add(td);
-
-
 
 				destination.Controls.Add(tr);
 			}
@@ -201,13 +213,18 @@ namespace Homework1
 			{
 				IHaveThermostat dev = Device as IHaveThermostat;
 				Label td;
-				Button b;
+				ImageButton b;
 				Panel tr = new Panel();
 
-				b = new Button();
-				b.Text = "-";
+				b = new ImageButton();
+				b.CssClass = "btnArrow";
 				b.ID = "btnTemperatureDec" + Device.Name;
 				b.Attributes["title"] = "Min = " + dev.TempMin;
+
+				b.ImageUrl = "~/Images/btnArrowLeftDark.png";
+				b.Attributes.Add("onmouseover", "this.src='Images/btnArrowLeftLight.png';");
+				b.Attributes.Add("onmouseout", "this.src='Images/btnArrowLeftDark.png';");
+				
 				b.Click += (senderCtrl, eargs) =>
 				{
 					dev.DecreaseTemperature();
@@ -221,10 +238,15 @@ namespace Homework1
 				td.Text = dev.Temperature.ToString();
 				tr.Controls.Add(td);
 
-				b = new Button();
-				b.Text = "+";
+				b = new ImageButton();
 				b.ID = "btnTemperatureInc" + Device.Name;
 				b.Attributes["title"] = "Max = " + dev.TempMax;
+				b.CssClass = "btnArrow";
+
+				b.ImageUrl = "~/Images/btnArrowRightDark.png";
+				b.Attributes.Add("onmouseover", "this.src='Images/btnArrowRightLight.png';");
+				b.Attributes.Add("onmouseout", "this.src='Images/btnArrowRightDark.png';");
+
 				b.Click += (senderCtrl, eargs) =>
 				{
 					dev.IncreaseTemperature();
@@ -236,8 +258,6 @@ namespace Homework1
 				td = new Label();
 				td.Text = "Температура";
 				tr.Controls.Add(td);
-
-
 
 				destination.Controls.Add(tr);
 			}

@@ -85,13 +85,20 @@ input[type="button"], input[type="submit"] {
 	}
 
 	.propertiesPanel span {
-		padding: 2px;
+		float: left;
+		margin: 2px 0;
+		padding-left: 3px;
+		display: block;
 	}
 
 	.propertiesPanel .value {
 		text-align: center;
-		display: inline-block;
 		width: 20px;
+	}
+
+	.propertiesPanel .btnArrow {
+		margin: 2px 6px;
+		float: left;
 	}
 
 .frmAddDevice {
