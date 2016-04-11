@@ -72,7 +72,7 @@ namespace Homework1
 		{
 			if (FindControl("frmCreateDevice") == null)
 			{
-				WfAddDevice form = Page.LoadControl("~/WfAddDevice.ascx") as WfAddDevice;
+				WfAddDevice form = Page.LoadControl("~/Controls/WfAddDevice.ascx") as WfAddDevice;
 				form.DevType = ddlDeviceType.SelectedValue;
 				form.SmartHouse = sh;
 				form.ParentForm = this;

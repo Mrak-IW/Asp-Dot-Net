@@ -17,6 +17,7 @@ namespace Homework1
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			this.ID = "devCard" + Device.Name;
 			BuildControlMarkup();
 		}
 

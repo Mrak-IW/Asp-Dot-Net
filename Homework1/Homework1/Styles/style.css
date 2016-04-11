@@ -59,7 +59,7 @@ input[type="button"], input[type="submit"] {
 
 .deviceBody {
 	width: 190px;
-	height: 285px;
+	/*height: 285px;*/
 	background-color: khaki;
 	border-radius: 10px;
 	margin: 3px;
