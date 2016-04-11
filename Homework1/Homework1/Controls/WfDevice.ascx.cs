@@ -13,7 +13,7 @@ namespace Homework1
 	public partial class WfDevice : System.Web.UI.UserControl
 	{
 		public ISmartDevice Device { get; set; }
-		public string templatePath = "~/WfDevice.ascx";
+		public string templatePath = "~/Controls/WfDevice.ascx";
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -120,9 +120,9 @@ namespace Homework1
 
 		protected void DisplayIcon()
 		{
-			Image icon = new Image();
-			icon.ID = "imgDevIcon" + Device.Name;
-			icon.ImageUrl = "Images/lampIcon.png";
+			Panel icon = new Panel();
+			icon.ID = "devIcon" + Device.Name;
+			icon.CssClass = "devIcon";
 			PhIcon.Controls.Add(icon);
 		}
 

@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Homework1.Default" %>
 
-<%@ Register Src="~/WfDevice.ascx" TagName="dev" TagPrefix="sh" %>
-<%@ Register Src="~/WfAddDevice.ascx" TagName="devAdd" TagPrefix="sh" %>
+<%@ Register Src="~/Controls/WfDevice.ascx" TagName="dev" TagPrefix="sh" %>
+<%@ Register Src="~/Controls/WfAddDevice.ascx" TagName="devAdd" TagPrefix="sh" %>
 
 <!DOCTYPE html>
 

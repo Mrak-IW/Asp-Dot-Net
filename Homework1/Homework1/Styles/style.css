@@ -20,12 +20,12 @@ input[type="button"], input[type="submit"] {
 	height: 25px;
 }
 
-.header, .deviceContainer{
+.header, .deviceContainer {
 	border-style: solid;
-    border-width: 3px;
+	border-width: 3px;
 	border-color: black;
 	float: left;
-	width:100%;
+	width: 100%;
 }
 
 .header, .propertiesPanel div, .topLine {
@@ -50,15 +50,13 @@ input[type="button"], input[type="submit"] {
 }
 
 .header {
-	
 }
 
-	.header>img
-	{
+	.header > img {
 		height: 150px;
 		margin: 5px 15px;
 	}
-	
+
 .deviceBody {
 	width: 190px;
 	height: 285px;
@@ -94,14 +92,22 @@ input[type="button"], input[type="submit"] {
 		margin: 13px 6px;
 	}
 
-.devIcon {
+.devIconContainer {
 	width: 100%;
 	text-align: center;
-	margin: 0 auto;
+	float: left;
+}
+
+.devIcon {
+	width: 150px;
+	height: 130px;	
+	background-color: black;
+	margin: 4px auto 2px auto;
 }
 
 .propertiesPanel {
 	width: 100%;
+	float: left;
 }
 
 	.propertiesPanel div {
@@ -132,7 +138,7 @@ input[type="button"], input[type="submit"] {
 	}
 
 .frmAddDevice {
-	width: 300px;
+	width: 350px;
 	margin: 0 auto;
 }
 

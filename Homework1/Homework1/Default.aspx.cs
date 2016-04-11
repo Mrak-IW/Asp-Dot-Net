@@ -47,7 +47,7 @@ namespace Homework1
 			PhDevices.Controls.Clear();
 			foreach (ISmartDevice dev in sh)
 			{
-				WfDevice c = Page.LoadControl("~/WfDevice.ascx") as WfDevice;
+				WfDevice c = Page.LoadControl("~/Controls/WfDevice.ascx") as WfDevice;
 				c.Device = dev;
 				PhDevices.Controls.Add(c);
 			}
