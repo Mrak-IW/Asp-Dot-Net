@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\background.png" />
     <Content Include="Images\btnArrowLeftDark.png" />
     <Content Include="Images\btnArrowLeftLight.png" />
     <Content Include="Images\btnArrowRightDark.png" />
@@ -75,6 +76,7 @@
     <Content Include="Images\btnRoundLight.png" />
     <Content Include="Images\btnRoundLightPush.png" />
     <Content Include="Images\lampIcon.png" />
+    <Content Include="Images\Logo.png" />
     <Content Include="packages.config" />
     <Content Include="Fonts\Capture_it.ttf" />
     <Content Include="Fonts\dsarmy.ttf" />

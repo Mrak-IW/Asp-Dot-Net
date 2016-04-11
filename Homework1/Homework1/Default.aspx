@@ -13,16 +13,17 @@
 </head>
 <body>
 	<form id="form1" runat="server">
-		<div>
-			<div class="header">
-				<asp:Label ID="lblDeviceCount" runat="server" Text="lblDeviceCount"></asp:Label>
-				<asp:DropDownList ID="ddlDeviceType" runat="server">
-					<asp:ListItem Value="Fridge">Холодильник</asp:ListItem>
-					<asp:ListItem Value="SmartLamp">Лампа</asp:ListItem>
-					<asp:ListItem Value="Clock">Часы</asp:ListItem>
-				</asp:DropDownList>
-				<asp:Button ID="btnAddDevice" runat="server" Text="Добавить устройство" />
-			</div>
+		<div class="header">
+			<img src="./Images/Logo.png" />
+			<asp:Label ID="lblDeviceCount" runat="server" Text="lblDeviceCount"></asp:Label>
+			<asp:DropDownList ID="ddlDeviceType" runat="server">
+				<asp:ListItem Value="Fridge">Холодильник</asp:ListItem>
+				<asp:ListItem Value="SmartLamp">Лампа</asp:ListItem>
+				<asp:ListItem Value="Clock">Часы</asp:ListItem>
+			</asp:DropDownList>
+			<asp:Button ID="btnAddDevice" runat="server" Text="Добавить устройство" />
+		</div>
+		<div class="deviceContainer">
 			<asp:PlaceHolder ID="PhDevices" runat="server"></asp:PlaceHolder>
 		</div>
 	</form>
