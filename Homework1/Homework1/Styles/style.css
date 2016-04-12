@@ -195,11 +195,11 @@ input[type="button"], input[type="submit"] {
 	font-family: militaryFont;
 	font-size: 12pt;
 	padding-left: 25px;
-	background-image: url(/Images/btnRoundDark.png);
+	background-image: url(/Images/btnArrowDownDark.png);
 	background-repeat: no-repeat;
 	background-position: 4px;
 }
 
 	#ddlDeviceType:hover {
-		background-image: url(/Images/btnRoundLight.png);
+		background-image: url(/Images/btnArrowDownLight.png);
 	}

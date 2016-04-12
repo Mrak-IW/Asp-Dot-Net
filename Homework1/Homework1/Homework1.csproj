@@ -71,8 +71,10 @@
     <Content Include="Images\btnArrowLeftLight.png" />
     <Content Include="Images\btnArrowRightDark.png" />
     <Content Include="Images\btnArrowRightLight.png" />
+    <Content Include="Images\btnArrowDownDark.png" />
     <Content Include="Images\btnRoundDark.png" />
     <Content Include="Images\btnRoundDarkPush.png" />
+    <Content Include="Images\btnArrowDownLight.png" />
     <Content Include="Images\btnRoundLight.png" />
     <Content Include="Images\btnRoundLightPush.png" />
     <Content Include="Images\lampIcon.png" />
