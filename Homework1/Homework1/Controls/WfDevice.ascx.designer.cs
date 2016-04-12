@@ -40,13 +40,13 @@ namespace Homework1 {
         protected global::System.Web.UI.WebControls.ImageButton btnPowerState;
         
         /// <summary>
-        /// PhIcon элемент управления.
+        /// phIcon элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PhIcon;
+        protected global::System.Web.UI.WebControls.PlaceHolder phIcon;
         
         /// <summary>
         /// pnlProperties элемент управления.
@@ -56,5 +56,14 @@ namespace Homework1 {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlProperties;
+        
+        /// <summary>
+        /// phSpacers элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phSpacers;
     }
 }

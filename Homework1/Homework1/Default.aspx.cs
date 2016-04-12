@@ -40,6 +40,9 @@ namespace Homework1
 			}
 
 			RefreshControls();
+
+			btnAddDevice.Attributes.Add("onmouseover", "this.src='Images/btnRoundLight.png';");
+			btnAddDevice.Attributes.Add("onmouseout", "this.src='Images/btnRoundDark.png';");
 		}
 
 		public void RefreshControls()
@@ -52,7 +55,7 @@ namespace Homework1
 				PhDevices.Controls.Add(c);
 			}
 
-			lblDeviceCount.Text = string.Format("Устройств в системе: {0}", sh.Count);
+			lblDeviceCount.Text = string.Format("Устройств в системе: {0}<br />Добавить ещё одно:", sh.Count);
 			btnAddDevice.Click += btnAddDevice_OnClick;
 
 			bool? show = Session["showAddDevice"] as bool?;

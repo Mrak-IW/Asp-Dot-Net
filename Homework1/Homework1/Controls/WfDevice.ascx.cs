@@ -100,7 +100,7 @@ namespace Homework1
 						ResetSubControls(templatePath);
 						BuildControlMarkup();
 					};
-					
+
 					break;
 				case EPowerState.Off:
 					b.ToolTip = "Включить";
@@ -124,17 +124,24 @@ namespace Homework1
 			Panel icon = new Panel();
 			icon.ID = "devIcon" + Device.Name;
 			icon.CssClass = "devIcon";
-			PhIcon.Controls.Add(icon);
+			phIcon.Controls.Add(icon);
 		}
 
 		protected void DisplayRemoveButton(Control destination)
 		{
-			Button b;
+			ImageButton b;
 			Panel tr = new Panel();
 
-			b = new Button();
-			b.Text = "Удалить";
+			b = new ImageButton();
+			b.ToolTip = "Выкинуть в окно";
 			b.ID = "btnRemove" + Device.Name;
+			b.CssClass = "btnSwitch";
+
+			b.ImageUrl = "~/Images/btnRoundDark.png";
+			b.Attributes.Add("onmouseover", "this.src='Images/btnRoundLight.png';");
+			b.Attributes.Add("onmouseout", "this.src='Images/btnRoundDark.png';");
+			b.Attributes.Add("onmousedown", "this.src='Images/btnRoundLightPush.png';");
+
 			b.Click += (senderCtrl, eargs) =>
 			{
 				Device.Parent.RemoveDevice(Device.Name);
@@ -142,6 +149,11 @@ namespace Homework1
 			};
 
 			tr.Controls.Add(b);
+
+			Label l = new Label();
+			l.Text = "Удалить";
+			l.Attributes["colspan"] = "2";
+			tr.Controls.Add(l);
 
 			destination.Controls.Add(tr);
 		}
@@ -189,7 +201,7 @@ namespace Homework1
 				b.ImageUrl = "~/Images/btnArrowRightDark.png";
 				b.Attributes.Add("onmouseover", "this.src='Images/btnArrowRightLight.png';");
 				b.Attributes.Add("onmouseout", "this.src='Images/btnArrowRightDark.png';");
-				
+
 				b.Click += (senderCtrl, eargs) =>
 				{
 					dev.IncreaseBrightness();
@@ -225,7 +237,7 @@ namespace Homework1
 				b.ImageUrl = "~/Images/btnArrowLeftDark.png";
 				b.Attributes.Add("onmouseover", "this.src='Images/btnArrowLeftLight.png';");
 				b.Attributes.Add("onmouseout", "this.src='Images/btnArrowLeftDark.png';");
-				
+
 				b.Click += (senderCtrl, eargs) =>
 				{
 					dev.DecreaseTemperature();
@@ -272,23 +284,27 @@ namespace Homework1
 			{
 				IOpenCloseable dev = Device as IOpenCloseable;
 				Label td;
-				Button b;
+				ImageButton b;
 				Panel tr = new Panel();
 
-				td = new Label();
+				b = new ImageButton();
+				b.ToolTip = dev.IsOpened ? "Закрыть" : "Открыть";
+				b.ID = "btnOpenClose" + Device.Name;
+				b.CssClass = "btnSwitch";
+
+				b.ImageUrl = "~/Images/btnRoundDark.png";
+				b.Attributes.Add("onmouseover", "this.src='Images/btnRoundLight.png';");
+				b.Attributes.Add("onmouseout", "this.src='Images/btnRoundDark.png';");
+				b.Attributes.Add("onmousedown", "this.src='Images/btnRoundLightPush.png';");
+
+				b.Click += (senderCtrl, eargs) =>
 				{
-					b = new Button();
-					b.Text = dev.IsOpened ? "Закрыть" : "Открыть";
-					b.ID = "btnOpenClose" + Device.Name;
-					b.Click += (senderCtrl, eargs) =>
-					{
-						dev.IsOpened = !dev.IsOpened;
-						ResetSubControls(templatePath);
-						BuildControlMarkup();
-					};
-					td.Controls.Add(b);
-				}
-				tr.Controls.Add(td);
+					dev.IsOpened = !dev.IsOpened;
+					ResetSubControls(templatePath);
+					BuildControlMarkup();
+				};
+				tr.Controls.Add(b);
+
 
 				td = new Label();
 				td.Text = dev.IsOpened ? "Открыто" : "Закрыто";
@@ -297,6 +313,8 @@ namespace Homework1
 
 				destination.Controls.Add(tr);
 			}
+			else
+			{ }
 		}
 	}
 }

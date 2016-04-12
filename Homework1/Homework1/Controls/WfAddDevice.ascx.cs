@@ -178,9 +178,9 @@ namespace Homework1
 
 		protected void DisplayIcon()
 		{
-			Image icon = new Image();
+			Panel icon = new Panel();
 			icon.ID = "imgDevIcon";
-			icon.ImageUrl = "Images/lampIcon.png";
+			//icon.ImageUrl = "Images/lampIcon.png";
 			PhIcon.Controls.Add(icon);
 		}
 
