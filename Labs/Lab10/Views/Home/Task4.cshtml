@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Task4";
+}
+
+<h2>Task4</h2>
+<a href="Task4Partial1?message=Первое частичное View">Контроллер первого частичного View</a>
+@{
+	Html.RenderPartial("Task4Partial1", "Первое частичное View");
+}
+@Html.Partial("Task4Partial2", "Второе частичное View")
+

@@ -1,0 +1,14 @@
+﻿@model int[]
+@{
+    ViewBag.Title = "Task2_typed";
+}
+
+<h2>Task2_typed</h2>
+<a href="Task2?border1=10&border2=15&typedView=false">Посмотреть нетипизированное View</a><br />
+<ul>
+	@foreach (int i in Model)
+	{
+		<li>@i</li>
+	}
+</ul>
+

@@ -1,0 +1,13 @@
+﻿
+@{
+	ViewBag.Title = "Task2";
+}
+
+<h2>Task2</h2>
+<a href="Task2?border1=-5&border2=0&typedView=true">Посмотреть типизированное View</a><br />
+<ul>
+	@foreach (int i in ViewBag.arr)
+	{
+		<li>@i</li>
+	}
+</ul>
