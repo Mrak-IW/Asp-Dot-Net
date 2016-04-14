@@ -80,19 +80,18 @@ namespace Homework1
 
 		protected void DisplayISmartDevice()
 		{
-			ImageButton b;
+			Button b;
 
 			LblId.Text = Device.DeviceType + "<br /> \"" + Device.Name + "\"";
 
 			b = btnPowerState;
 			b.ID = "btnPower" + Device.Name;
+			b.CssClass = "btnPower";
 			switch (Device.State)
 			{
 				case EPowerState.On:
 					b.ToolTip = "Выключить";
-					b.ImageUrl = "~/Images/btnRoundLight.png";
-					b.Attributes.Add("onmouseover", "this.src='Images/btnRoundLightPush.png';");
-					b.Attributes.Add("onmouseout", "this.src='Images/btnRoundLight.png';");
+					b.Attributes.Add("state", "on");
 
 					b.Click += (senderCtrl, eargs) =>
 					{
@@ -104,9 +103,7 @@ namespace Homework1
 					break;
 				case EPowerState.Off:
 					b.ToolTip = "Включить";
-					b.ImageUrl = "~/Images/btnRoundDark.png";
-					b.Attributes.Add("onmouseover", "this.src='Images/btnRoundDarkPush.png';");
-					b.Attributes.Add("onmouseout", "this.src='Images/btnRoundDark.png';");
+					b.Attributes.Add("state", "off");
 
 					b.Click += (senderCtrl, eargs) =>
 					{
@@ -129,18 +126,13 @@ namespace Homework1
 
 		protected void DisplayRemoveButton(Control destination)
 		{
-			ImageButton b;
+			Button b;
 			Panel tr = new Panel();
 
-			b = new ImageButton();
+			b = new Button();
 			b.ToolTip = "Выкинуть в окно";
 			b.ID = "btnRemove" + Device.Name;
 			b.CssClass = "btnSwitch";
-
-			b.ImageUrl = "~/Images/btnRoundDark.png";
-			b.Attributes.Add("onmouseover", "this.src='Images/btnRoundLight.png';");
-			b.Attributes.Add("onmouseout", "this.src='Images/btnRoundDark.png';");
-			b.Attributes.Add("onmousedown", "this.src='Images/btnRoundLightPush.png';");
 
 			b.Click += (senderCtrl, eargs) =>
 			{
@@ -164,17 +156,13 @@ namespace Homework1
 			{
 				IBrightable dev = Device as IBrightable;
 				Label td;
-				ImageButton b;
+				Button b;
 				Panel tr = new Panel();
 
-				b = new ImageButton();
+				b = new Button();
 				b.ID = "btnBrightnessDec" + Device.Name;
 				b.ToolTip = "Min = " + dev.BrightnessMin;
-				b.CssClass = "btnArrow";
-
-				b.ImageUrl = "~/Images/btnArrowLeftDark.png";
-				b.Attributes.Add("onmouseover", "this.src='Images/btnArrowLeftLight.png';");
-				b.Attributes.Add("onmouseout", "this.src='Images/btnArrowLeftDark.png';");
+				b.CssClass = "btnArrow btnArrowLeft";
 
 				b.Click += (senderCtrl, eargs) =>
 				{
@@ -193,14 +181,10 @@ namespace Homework1
 
 				//================
 
-				b = new ImageButton();
+				b = new Button();
 				b.ID = "btnBrightnessInc" + Device.Name;
 				b.ToolTip = "Max = " + dev.BrightnessMax;
-				b.CssClass = "btnArrow";
-
-				b.ImageUrl = "~/Images/btnArrowRightDark.png";
-				b.Attributes.Add("onmouseover", "this.src='Images/btnArrowRightLight.png';");
-				b.Attributes.Add("onmouseout", "this.src='Images/btnArrowRightDark.png';");
+				b.CssClass = "btnArrow btnArrowRight";
 
 				b.Click += (senderCtrl, eargs) =>
 				{
@@ -226,17 +210,13 @@ namespace Homework1
 			{
 				IHaveThermostat dev = Device as IHaveThermostat;
 				Label td;
-				ImageButton b;
+				Button b;
 				Panel tr = new Panel();
 
-				b = new ImageButton();
-				b.CssClass = "btnArrow";
+				b = new Button();
 				b.ID = "btnTemperatureDec" + Device.Name;
 				b.Attributes["title"] = "Min = " + dev.TempMin;
-
-				b.ImageUrl = "~/Images/btnArrowLeftDark.png";
-				b.Attributes.Add("onmouseover", "this.src='Images/btnArrowLeftLight.png';");
-				b.Attributes.Add("onmouseout", "this.src='Images/btnArrowLeftDark.png';");
+				b.CssClass = "btnArrow btnArrowLeft";
 
 				b.Click += (senderCtrl, eargs) =>
 				{
@@ -251,14 +231,10 @@ namespace Homework1
 				td.Text = dev.Temperature.ToString();
 				tr.Controls.Add(td);
 
-				b = new ImageButton();
+				b = new Button();
 				b.ID = "btnTemperatureInc" + Device.Name;
 				b.Attributes["title"] = "Max = " + dev.TempMax;
-				b.CssClass = "btnArrow";
-
-				b.ImageUrl = "~/Images/btnArrowRightDark.png";
-				b.Attributes.Add("onmouseover", "this.src='Images/btnArrowRightLight.png';");
-				b.Attributes.Add("onmouseout", "this.src='Images/btnArrowRightDark.png';");
+				b.CssClass = "btnArrow btnArrowRight";
 
 				b.Click += (senderCtrl, eargs) =>
 				{
@@ -284,18 +260,13 @@ namespace Homework1
 			{
 				IOpenCloseable dev = Device as IOpenCloseable;
 				Label td;
-				ImageButton b;
+				Button b;
 				Panel tr = new Panel();
 
-				b = new ImageButton();
+				b = new Button();
 				b.ToolTip = dev.IsOpened ? "Закрыть" : "Открыть";
 				b.ID = "btnOpenClose" + Device.Name;
 				b.CssClass = "btnSwitch";
-
-				b.ImageUrl = "~/Images/btnRoundDark.png";
-				b.Attributes.Add("onmouseover", "this.src='Images/btnRoundLight.png';");
-				b.Attributes.Add("onmouseout", "this.src='Images/btnRoundDark.png';");
-				b.Attributes.Add("onmousedown", "this.src='Images/btnRoundLightPush.png';");
 
 				b.Click += (senderCtrl, eargs) =>
 				{

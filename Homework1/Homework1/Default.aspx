@@ -23,8 +23,8 @@
 					<asp:ListItem Value="Clock">Часы</asp:ListItem>
 				</asp:DropDownList><br />
 				<div id="addDevice">
-					<asp:ImageButton ID="btnAddDevice" runat="server" ImageUrl="Images/btnRoundDark.png" ToolTip="Добавить устройство" />
-					Добавить устройство
+					<asp:Button ID="btnAddDevice" CssClass="btnSwitch" runat="server" ToolTip="Добавить устройство" />
+					<label for="btnAddDevice">Добавить устройство</label>
 				</div>
 			</div>
 		</div>

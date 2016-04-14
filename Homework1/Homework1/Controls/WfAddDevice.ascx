@@ -5,9 +5,11 @@
 			<td>
 				<div class="frmAddDevice">
 					<div class="topLine">
-						<asp:Button ID="btnAddDevice" Text="Добавить" runat="server" />
+						<asp:Button ID="btnAddDevice" CssClass="btnSwitch" Text="" runat="server" />
+						<span>Добавить</span>
 						<asp:Label ID="lblDevType" Text="&lt;тип&gt;" runat="server"></asp:Label>
-						<asp:Button ID="btnClose" Text="X" CssClass="btnClose" runat="server" />
+						<asp:Button ID="btnClose" CssClass="btnSwitch btnClose" Text="" runat="server" />
+						<asp:Label ID="lblClose" CssClass="lblClose" Text="Закрыть" runat="server"></asp:Label>
 					</div>
 					<div class="devIcon">
 						<asp:PlaceHolder ID="PhIcon" runat="server"></asp:PlaceHolder>

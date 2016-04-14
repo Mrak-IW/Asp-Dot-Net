@@ -40,9 +40,6 @@ namespace Homework1
 			}
 
 			RefreshControls();
-
-			btnAddDevice.Attributes.Add("onmouseover", "this.src='Images/btnRoundLight.png';");
-			btnAddDevice.Attributes.Add("onmouseout", "this.src='Images/btnRoundDark.png';");
 		}
 
 		public void RefreshControls()

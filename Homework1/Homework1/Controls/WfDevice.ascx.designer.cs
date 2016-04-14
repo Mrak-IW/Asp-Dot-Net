@@ -37,7 +37,7 @@ namespace Homework1 {
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnPowerState;
+        protected global::System.Web.UI.WebControls.Button btnPowerState;
         
         /// <summary>
         /// phIcon элемент управления.

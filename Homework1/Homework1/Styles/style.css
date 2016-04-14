@@ -16,10 +16,6 @@ body {
 	font-family: militaryFont;
 }
 
-input[type="button"], input[type="submit"] {
-	height: 25px;
-}
-
 #headerControls, #logo {
 	float: left;
 }
@@ -41,7 +37,7 @@ input[type="button"], input[type="submit"] {
 	width: 100%;
 }
 
-.header, .propertiesPanel div, .topLine {
+.header, .propertiesPanel div, .topLine{
 	background-color: darkolivegreen;
 	color: lightgray;
 	border-top-right-radius: 10px;
@@ -66,10 +62,6 @@ input[type="button"], input[type="submit"] {
 	margin: 4px;
 }
 
-#btnAddDevice {
-	margin-bottom: -4px;
-}
-
 .deviceContainer {
 	width: 200px;
 	height: 300px;
@@ -84,30 +76,25 @@ input[type="button"], input[type="submit"] {
 	float: left;
 }
 
-.btnClose {
-	float: right;
-	border-top-right-radius: 10px;
-}
-
-.btnSwitch {
-	float: left;
-	margin: 2px 5px;
-}
-
 .topLine {
 	float: left;
 	width: 100%;
 }
 
-	.topLine .lblID {
-		padding: 5px 10px;
+	.topLine > span {
+		display: block;
+		margin: 2px;
 		float: left;
-		max-width: 130px;
 	}
 
-	.topLine .btnPowerState {
+	.topLine .lblID {
+		padding: 5px 10px;
+		max-width: 130px;
+		float: left;
+	}
+
+	.topLine .lblClose {
 		float: right;
-		margin: 13px 6px;
 	}
 
 .devIconContainer {
@@ -203,4 +190,82 @@ input[type="button"], input[type="submit"] {
 
 	#ddlDeviceType:hover {
 		background-image: url(/Images/btnArrowDownLight.png);
+	}
+
+
+/*Кнопки*/
+
+input[type="button"], input[type="submit"] {
+	height: 20px;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border-style: none;
+	background-color: inherit;
+	background-repeat: no-repeat;
+}
+
+.btnPower {
+	width: 20px;
+	float: right;
+	margin: 12px 10px 15px 5px;
+	background-image: url('/Images/btnRoundDark.png');
+}
+
+	.btnPower:hover {
+		width: 20px;
+		float: right;
+		margin: 12px 10px 15px 5px;
+		background-image: url('/Images/btnRoundDarkPush.png');
+	}
+
+	.btnPower[state="on"] {
+		background-image: url('/Images/btnRoundLight.png');
+	}
+
+		.btnPower[state="on"]:hover {
+			background-image: url('/Images/btnRoundLightPush.png');
+		}
+
+.btnSwitch {
+	width: 20px;
+	float: left;
+	margin: 2px 5px;
+	background-image: url('/Images/btnRoundDark.png');
+}
+
+	.btnSwitch:hover {
+		background-image: url('/Images/btnRoundLight.png');
+	}
+
+	.btnSwitch:active {
+		background-image: url('/Images/btnRoundLightPush.png');
+	}
+
+#btnAddDevice {
+	margin: 0 8px 0 1px;
+}
+
+.btnClose {
+	float: right;
+}
+
+.btnArrow {
+	width: 10px;
+}
+
+.btnArrowRight {
+	background-image: url(/Images/btnArrowRightDark.png);
+}
+
+	.btnArrowRight:hover {
+		background-image: url(/Images/btnArrowRightLight.png);
+	}
+
+.btnArrowLeft {
+	background-image: url(/Images/btnArrowLeftDark.png);
+}
+
+	.btnArrowLeft:hover {
+		background-image: url(/Images/btnArrowLeftLight.png);
 	}
