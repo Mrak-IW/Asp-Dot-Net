@@ -5,11 +5,8 @@
 			<td>
 				<div class="frmAddDevice">
 					<div class="topLine">
-						<asp:Button ID="btnAddDevice" CssClass="btnSwitch" Text="" runat="server" />
-						<label for="<%= btnAddDevice.UniqueID %>""><span>Добавить</span></label>
-						<asp:Label ID="lblDevType" Text="&lt;тип&gt;" runat="server"></asp:Label>
-						<asp:Button ID="btnClose" CssClass="btnSwitch btnClose" Text="" runat="server" />
-						<label for="<%= btnAddDevice.UniqueID %>""><span class="lblClose">Закрыть</span></label>
+						<asp:Button ID="btnAddDevice" CssClass="btnSwitch" Text="Добавить устройство" runat="server" />
+						<asp:Button ID="btnClose" CssClass="btnSwitch btnClose" Text="Закрыть" runat="server" />
 					</div>
 					<div class="devIcon">
 						<asp:PlaceHolder ID="PhIcon" runat="server"></asp:PlaceHolder>

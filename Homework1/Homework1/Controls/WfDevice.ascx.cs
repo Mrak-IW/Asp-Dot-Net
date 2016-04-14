@@ -130,6 +130,7 @@ namespace Homework1
 			Panel tr = new Panel();
 
 			b = new Button();
+			b.Text = "Удалить";
 			b.ToolTip = "Выкинуть в окно";
 			b.ID = "btnRemove" + Device.Name;
 			b.CssClass = "btnSwitch";
@@ -141,11 +142,6 @@ namespace Homework1
 			};
 
 			tr.Controls.Add(b);
-
-			Label l = new Label();
-			l.Text = "Удалить";
-			l.Attributes["colspan"] = "2";
-			tr.Controls.Add(l);
 
 			destination.Controls.Add(tr);
 		}
@@ -265,6 +261,7 @@ namespace Homework1
 
 				b = new Button();
 				b.ToolTip = dev.IsOpened ? "Закрыть" : "Открыть";
+				b.Text = dev.IsOpened ? "Открыто" : "Закрыто";
 				b.ID = "btnOpenClose" + Device.Name;
 				b.CssClass = "btnSwitch";
 
@@ -275,12 +272,6 @@ namespace Homework1
 					BuildControlMarkup();
 				};
 				tr.Controls.Add(b);
-
-
-				td = new Label();
-				td.Text = dev.IsOpened ? "Открыто" : "Закрыто";
-				td.Attributes["colspan"] = "2";
-				tr.Controls.Add(td);
 
 				destination.Controls.Add(tr);
 			}

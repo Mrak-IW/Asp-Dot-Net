@@ -22,10 +22,7 @@
 					<asp:ListItem Value="SmartLamp">Лампа</asp:ListItem>
 					<asp:ListItem Value="Clock">Часы</asp:ListItem>
 				</asp:DropDownList><br />
-				<div id="addDevice">
-					<asp:Button ID="btnAddDevice" CssClass="btnSwitch" runat="server" ToolTip="Добавить устройство" />
-					<label for="btnAddDevice">Добавить устройство</label>
-				</div>
+				<asp:Button ID="btnAddDevice" CssClass="btnSwitch" runat="server" Text="Добавить устройство" ToolTip="Добавить устройство" />
 			</div>
 		</div>
 		<div class="devicePanel">

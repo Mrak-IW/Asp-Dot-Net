@@ -1,12 +1,12 @@
-* {
-	padding: 0;
-	margin: 0;
-}
-
 @font-face {
 	font-family: militaryFont;
 	src: url('../Fonts/Capture_it.ttf');
 	font-weight: bold;
+}
+
+* {
+	padding: 0;
+	margin: 0;
 }
 
 body {
@@ -37,7 +37,7 @@ body {
 	width: 100%;
 }
 
-.header, .propertiesPanel div, .topLine{
+.header, .propertiesPanel div, .topLine {
 	background-color: darkolivegreen;
 	color: lightgray;
 	border-top-right-radius: 10px;
@@ -56,10 +56,6 @@ body {
 	background-image: url('../Images/background.png');
 	border-radius: 0 0 10px 10px;
 	border-top-style: none;
-}
-
-#addDevice {
-	margin: 4px;
 }
 
 .deviceContainer {
@@ -203,6 +199,9 @@ input[type="button"], input[type="submit"] {
 	border-style: none;
 	background-color: inherit;
 	background-repeat: no-repeat;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
 }
 
 .btnPower {
@@ -228,9 +227,10 @@ input[type="button"], input[type="submit"] {
 		}
 
 .btnSwitch {
-	width: 20px;
+	width: auto;
 	float: left;
 	margin: 2px 5px;
+	padding-left: 25px;
 	background-image: url('/Images/btnRoundDark.png');
 }
 
@@ -243,11 +243,16 @@ input[type="button"], input[type="submit"] {
 	}
 
 #btnAddDevice {
-	margin: 0 8px 0 1px;
+	margin: 5px;
+	padding-left: 28px;
 }
 
 .btnClose {
 	float: right;
+	width: auto;
+	padding-right: 20px;
+	padding-left: 0;
+	background-position: right;
 }
 
 .btnArrow {
