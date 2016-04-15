@@ -121,6 +121,22 @@ namespace Homework1
 			Panel icon = new Panel();
 			icon.ID = "devIcon" + Device.Name;
 			icon.CssClass = "devIcon";
+			icon.Attributes["devtype"] = Device.GetType().Name;
+
+			if (Device.State == EPowerState.On)
+			{
+				icon.Attributes["on"] = "on";
+			}
+
+			if (Device is IOpenCloseable)
+			{
+				IOpenCloseable ioc = Device as IOpenCloseable;
+				if (ioc.IsOpened)
+				{
+					icon.Attributes["open"] = "open";
+				}
+			}
+
 			phIcon.Controls.Add(icon);
 		}
 
@@ -255,7 +271,6 @@ namespace Homework1
 			if (Device is IOpenCloseable)
 			{
 				IOpenCloseable dev = Device as IOpenCloseable;
-				Label td;
 				Button b;
 				Panel tr = new Panel();
 

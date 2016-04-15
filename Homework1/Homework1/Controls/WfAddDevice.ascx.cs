@@ -177,6 +177,7 @@ namespace Homework1
 			Panel icon = new Panel();
 			icon.ID = "devIcon";
 			icon.CssClass = "devIcon";
+			icon.Attributes["devtype"] = DevType;
 			phIcon.Controls.Add(icon);
 		}
 
