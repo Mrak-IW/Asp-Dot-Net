@@ -1,6 +1,7 @@
-﻿using HomeWorkSmartHouse.SmartHouseDir.Classes;
-using HomeWorkSmartHouse.SmartHouseDir.Classes.InternalParts;
-using HomeWorkSmartHouse.SmartHouseDir.Enums;
+﻿//using HomeWorkSmartHouse.SmartHouseDir.Classes;
+//using HomeWorkSmartHouse.SmartHouseDir.Classes.InternalParts;
+//using HomeWorkSmartHouse.SmartHouseDir.Enums;
+using Homework1.Classes;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,10 @@ namespace Homework1
 	{
 		private const string idTempMax = "tbTemperatureMax";
 		private const string idTempMin = "tbTemperatureMin";
+		private const string idTempStep = "tbTemperatureStep";
 		private const string idBrightMax = "tbBrightnessMax";
 		private const string idBrightMin = "tbBrightnessMin";
+		private const string idBrightStep = "tbBrightnessStep";
 		private const string idName = "tbName";
 
 		public ISmartHouse SmartHouse { get; set; }
@@ -49,79 +52,74 @@ namespace Homework1
 
 		protected void btnAddDevice_OnClick(object sender, EventArgs e)
 		{
+			ISmartHouseCreator shc = Manufacture.GetManufacture(Assembly.Load("SmartHouse"));
+
 			string name;
 
 			name = (FindControl(idName) as TextBox).Text;
 
+			ISmartDevice dev = shc.CreateDevice(DevType, name);
+
 			//TODO: Вот где-то здесь какая-то верификация должна быть. Наверное.
-			switch (DevType)
+
+			if (dev is IHaveThermostat)
 			{
-				case "Fridge":
-					{
-						int min, max, step;
-						TextBox tbMin = FindControl(idTempMin) as TextBox;
-						TextBox tbMax = FindControl(idTempMax) as TextBox;
+				int min, max, step;
+				IHaveThermostat iterm = dev as IHaveThermostat;
 
-						if (!int.TryParse(tbMax.Text, out max))
-						{
-							int.TryParse(tbMax.Attributes["placeholder"], out max);
-						}
-						if (!int.TryParse(tbMin.Text, out min))
-						{
-							int.TryParse(tbMin.Attributes["placeholder"], out min);
-						}
-						step = (max - min) / 5;
-						if (step == 0)
-						{
-							step = 1;
-						}
-						if (step < 0)
-						{
-							step = -step;
-						}
-						Dimmer d = new Dimmer(max, min, step);
+				TextBox tbMin = FindControl(idTempMin) as TextBox;
+				TextBox tbMax = FindControl(idTempMax) as TextBox;
+				TextBox tbStep = FindControl(idTempStep) as TextBox;
 
-						ISmartDevice dev = new Fridge(name, d);
+				if (!int.TryParse(tbMax.Text, out max))
+				{
+					int.TryParse(tbMax.Attributes["placeholder"], out max);
+				}
+				if (!int.TryParse(tbMin.Text, out min))
+				{
+					int.TryParse(tbMin.Attributes["placeholder"], out min);
+				}
+				if (!int.TryParse(tbStep.Text, out step))
+				{
+					int.TryParse(tbStep.Attributes["placeholder"], out step);
+				}
 
-						SmartHouse.AddDevice(dev);
-					}
-					break;
-				case "SmartLamp":
-					{
-						int min, max, step;
-
-						TextBox tbMin = FindControl(idBrightMin) as TextBox;
-						TextBox tbMax = FindControl(idBrightMax) as TextBox;
-
-						if (!int.TryParse(tbMax.Text, out max))
-						{
-							int.TryParse(tbMax.Attributes["placeholder"], out max);
-						}
-						if (!int.TryParse(tbMin.Text, out min))
-						{
-							int.TryParse(tbMin.Attributes["placeholder"], out min);
-						}
-						step = (max - min) / 10;
-						if (step == 0)
-						{
-							step = 1;
-						}
-						if (step < 0)
-						{
-							step = -step;
-						}
-						Dimmer d = new Dimmer(max, min, step);
-
-						ISmartDevice dev = new SmartLamp(name, d);
-
-						SmartHouse.AddDevice(dev);
-					}
-					break;
-				case "Clock":
-					SmartHouse.AddDevice(new Clock(name));
-					break;
+				iterm.TempMax = max;
+				iterm.TempMin = min;
+				iterm.TempStep = step;
+				iterm.Temperature = max;
 			}
-			//Session["SmartHouse"] = SmartHouse;
+
+			if (dev is IBrightable)
+			{
+				int min, max, step;
+				IBrightable ibri = dev as IBrightable;
+
+				TextBox tbMin = FindControl(idTempMin) as TextBox;
+				TextBox tbMax = FindControl(idTempMax) as TextBox;
+				TextBox tbStep = FindControl(idTempStep) as TextBox;
+
+				if (!int.TryParse(tbMax.Text, out max))
+				{
+					int.TryParse(tbMax.Attributes["placeholder"], out max);
+				}
+				if (!int.TryParse(tbMin.Text, out min))
+				{
+					int.TryParse(tbMin.Attributes["placeholder"], out min);
+				}
+				if (!int.TryParse(tbStep.Text, out step))
+				{
+					int.TryParse(tbStep.Attributes["placeholder"], out step);
+				}
+
+				ibri.BrightnessMax = max;
+				ibri.BrightnessMin = min;
+				ibri.BrightnessStep = step;
+				ibri.Brightness = max;
+			}
+
+			SmartHouse.AddDevice(dev);
+
 			Session["showAddDevice"] = null;
 			ParentForm.RefreshControls();
 		}
@@ -135,16 +133,16 @@ namespace Homework1
 			string devTypeName = fDevType.GetValue(null) as string;
 
 			btnAddDevice.Text = "Добавить " + devTypeName;
-			DisplayISmartDevice(tblPropertiesTable);
+			DisplayISmartDevice(pnlPropertiesTable);
 			DisplayIcon();
 
 			if (type.GetInterface("IBrightable") != null)
 			{
-				DisplayIBrightable(tblPropertiesTable);
+				DisplayIBrightable(pnlPropertiesTable);
 			}
 			if (type.GetInterface("IHaveThermostat") != null)
 			{
-				DisplayIHaveThermostat(tblPropertiesTable);
+				DisplayIHaveThermostat(pnlPropertiesTable);
 			}
 			if (type.GetInterface("IHaveClock") != null)
 			{
@@ -157,46 +155,44 @@ namespace Homework1
 			}
 		}
 
-		protected void DisplayISmartDevice(Table destination)
+		protected void DisplayISmartDevice(Panel destination)
 		{
-			TableCell td;
-			TableRow tr = new TableRow();
-			td = new TableCell();
-			td.Text = "Имя устройства";
-			tr.Controls.Add(td);
+			Label span;
+			Panel div = new Panel();
+			span = new Label();
+			span.Text = "Имя устройства";
+			div.Controls.Add(span);
 
-			td = new TableCell();
 			TextBox tb = new TextBox();
 			tb.ID = idName;
 			tb.Attributes["placeholder"] = "Ввести имя";
 			tb.EnableViewState = true;
-			td.Controls.Add(tb);
-			tr.Controls.Add(td);
+			div.Controls.Add(tb);
 
-			destination.Controls.Add(tr);
+			destination.Controls.Add(div);
 		}
 
 		protected void DisplayIcon()
 		{
 			Panel icon = new Panel();
-			icon.ID = "imgDevIcon";
-			//icon.ImageUrl = "Images/lampIcon.png";
-			PhIcon.Controls.Add(icon);
+			icon.ID = "devIcon";
+			icon.CssClass = "devIcon";
+			phIcon.Controls.Add(icon);
 		}
 
-		protected void DisplayIBrightable(Table destination)
+		protected void DisplayIBrightable(Panel destination)
 		{
-			TableCell td;
+			Label span;
 			TextBox tb;
-			TableRow tr;
+			Panel div;
 
-			tr = new TableRow();
+			//min яркости
+			div = new Panel();
 
-			td = new TableCell();
-			td.Text = "Яркость min";
-			tr.Cells.Add(td);
+			span = new Label();
+			span.Text = "Яркость min";
+			div.Controls.Add(span);
 
-			td = new TableCell();
 			tb = new TextBox();
 			tb.ID = idBrightMin;
 			tb.TextMode = TextBoxMode.Number;
@@ -204,19 +200,17 @@ namespace Homework1
 			tb.Attributes["min"] = "0";
 			tb.Attributes["max"] = "200";
 			tb.EnableViewState = true;
-			td.Controls.Add(tb);
+			div.Controls.Add(tb);
 
-			tr.Cells.Add(td);
+			destination.Controls.Add(div);
 
-			destination.Rows.Add(tr);
+			//max яркости
+			div = new Panel();
 
-			tr = new TableRow();
+			span = new Label();
+			span.Text = "Яркость max";
+			div.Controls.Add(span);
 
-			td = new TableCell();
-			td.Text = "Яркость max";
-			tr.Cells.Add(td);
-
-			td = new TableCell();
 			tb = new TextBox();
 			tb.ID = idBrightMax;
 			tb.TextMode = TextBoxMode.Number;
@@ -224,56 +218,89 @@ namespace Homework1
 			tb.Attributes["min"] = "0";
 			tb.Attributes["max"] = "200";
 			tb.EnableViewState = true;
-			td.Controls.Add(tb);
 
-			tr.Cells.Add(td);
+			div.Controls.Add(tb);
 
-			destination.Rows.Add(tr);
+			destination.Controls.Add(div);
+
+			//Шаг яркости
+			div = new Panel();
+
+			span = new Label();
+			span.Text = "Шаг яркости";
+			div.Controls.Add(span);
+
+			tb = new TextBox();
+			tb.ID = idBrightStep;
+			tb.TextMode = TextBoxMode.Number;
+			tb.Attributes["placeholder"] = "10";
+			tb.Attributes["min"] = "0";
+			tb.Attributes["max"] = "200";
+			tb.EnableViewState = true;
+
+			div.Controls.Add(tb);
+
+			destination.Controls.Add(div);
 		}
 
-		protected void DisplayIHaveThermostat(Table destination)
+		protected void DisplayIHaveThermostat(Panel destination)
 		{
-			TableCell td;
+			Label span;
 			TextBox tb;
-			TableRow tr;
+			Panel div;
 
-			tr = new TableRow();
+			//min температуры
+			div = new Panel();
 
-			td = new TableCell();
-			td.Text = "Температура min";
-			tr.Cells.Add(td);
+			span = new Label();
+			span.Text = "Температура min";
+			div.Controls.Add(span);
 
-			td = new TableCell();
 			tb = new TextBox();
 			tb.ID = idTempMin;
 			tb.TextMode = TextBoxMode.Number;
 			tb.Attributes["placeholder"] = "-273";
 			tb.Attributes["min"] = "-273";
 			tb.EnableViewState = true;
-			td.Controls.Add(tb);
+			div.Controls.Add(tb);
 
-			tr.Cells.Add(td);
+			destination.Controls.Add(div);
 
-			destination.Rows.Add(tr);
+			//max температуры
+			div = new Panel();
 
-			tr = new TableRow();
+			span = new Label();
+			span.Text = "Температура max";
+			div.Controls.Add(span);
 
-			td = new TableCell();
-			td.Text = "Температура max";
-			tr.Cells.Add(td);
-
-			td = new TableCell();
 			tb = new TextBox();
 			tb.ID = idTempMax;
 			tb.TextMode = TextBoxMode.Number;
 			tb.Attributes["placeholder"] = "10";
 			tb.Attributes["min"] = "-273";
 			tb.EnableViewState = true;
-			td.Controls.Add(tb);
 
-			tr.Cells.Add(td);
+			div.Controls.Add(tb);
 
-			destination.Rows.Add(tr);
+			destination.Controls.Add(div);
+
+			//Шаг температуры
+			div = new Panel();
+
+			span = new Label();
+			span.Text = "Шаг температуры";
+			div.Controls.Add(span);
+
+			tb = new TextBox();
+			tb.ID = idTempStep;
+			tb.TextMode = TextBoxMode.Number;
+			tb.Attributes["placeholder"] = "10";
+			tb.Attributes["min"] = "0";
+			tb.EnableViewState = true;
+
+			div.Controls.Add(tb);
+
+			destination.Controls.Add(div);
 		}
 	}
 }

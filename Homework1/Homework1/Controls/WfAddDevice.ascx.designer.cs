@@ -31,21 +31,21 @@ namespace Homework1 {
         protected global::System.Web.UI.WebControls.Button btnClose;
         
         /// <summary>
-        /// PhIcon элемент управления.
+        /// phIcon элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PhIcon;
+        protected global::System.Web.UI.WebControls.PlaceHolder phIcon;
         
         /// <summary>
-        /// tblPropertiesTable элемент управления.
+        /// pnlPropertiesTable элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblPropertiesTable;
+        protected global::System.Web.UI.WebControls.Panel pnlPropertiesTable;
     }
 }

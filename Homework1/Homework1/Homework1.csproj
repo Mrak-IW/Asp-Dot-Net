@@ -97,6 +97,7 @@
     <Content Include="Controls\WfDevice.ascx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Manufacture.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

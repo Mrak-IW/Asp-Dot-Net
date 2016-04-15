@@ -8,10 +8,10 @@
 						<asp:Button ID="btnAddDevice" CssClass="btnSwitch" Text="Добавить устройство" runat="server" />
 						<asp:Button ID="btnClose" CssClass="btnSwitch btnClose" Text="Закрыть" runat="server" />
 					</div>
-					<div class="devIcon">
-						<asp:PlaceHolder ID="PhIcon" runat="server"></asp:PlaceHolder>
+					<div class="devIconContainer">
+						<asp:PlaceHolder ID="phIcon" runat="server"></asp:PlaceHolder>
 					</div>
-					<asp:Table ID="tblPropertiesTable" CssClass="propertiesTable" runat="server"></asp:Table>
+					<asp:Panel ID="pnlPropertiesTable" CssClass="propertiesPanel" runat="server"></asp:Panel>
 				</div>
 			</td>
 		</tr>

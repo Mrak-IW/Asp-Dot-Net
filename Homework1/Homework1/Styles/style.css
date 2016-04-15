@@ -67,7 +67,7 @@ body {
 .devicePanel {
 	background-image: url('../Images/background.png');
 	border-radius: 0 0 10px 10px;
-	border-top-style:none;
+	border-top-style: none;
 }
 
 .deviceContainer {
@@ -151,10 +151,18 @@ body {
 .frmAddDevice {
 	width: 350px;
 	margin: 0 auto;
+	overflow: hidden;
 }
 
-	.frmAddDevice td {
+	.frmAddDevice .propertiesPanel input {
+		float: right;
+		font-family: militaryFont;
+		margin-right: 2px;
+		font-size: 12pt;
+		width: 170px;
 		padding-left: 5px;
+		border-radius: 5px;
+		background-color: khaki;
 	}
 
 .overlay {

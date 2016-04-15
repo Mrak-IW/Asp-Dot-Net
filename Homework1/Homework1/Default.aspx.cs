@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using HomeWorkSmartHouse.SmartHouseDir.Classes;
-using HomeWorkSmartHouse.SmartHouseDir.Enums;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
-using HomeWorkSmartHouse.SmartHouseDir.Classes.InternalParts;
+using Homework1.Classes;
+using System.Reflection;
 
 namespace Homework1
 {
 	public partial class Default : System.Web.UI.Page
 	{
-		SmartHouse sh;
+		private ISmartHouse sh;
+
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			ISmartHouseCreator shc = Manufacture.GetManufacture(Assembly.Load("SmartHouse"));
+
 			if (!IsPostBack)
 			{
 				Session["showAddDevice"] = null;
@@ -23,20 +21,50 @@ namespace Homework1
 
 			if (Session["SmartHouse"] == null)
 			{
-				sh = new SmartHouse();
-				sh.AddDevice(new SmartLamp("l1", new Dimmer(100, 10, 10)));
-				sh.AddDevice(new SmartLamp("l2", new Dimmer(100, 10, 15)));
-				sh.AddDevice(new Fridge("fr1", new Dimmer(0, -5, 1)));
-				sh.AddDevice(new Clock("clk1"));
-				sh["fr1"].On();
-				sh["clk1"].On();
-				(sh["fr1"] as IHaveThermostat).Temperature = (sh["fr1"] as IHaveThermostat).TempMin;
+				ISmartDevice dev;
+				IBrightable ibri;
+				IHaveThermostat iterm;
+
+				sh = shc.CreateSmartHouse();
+
+				dev = shc.CreateDevice("SmartLamp", "l1");
+
+				ibri = dev as IBrightable;
+				ibri.BrightnessMax = 100;
+				ibri.BrightnessMin = 10;
+				ibri.BrightnessStep = 10;
+				ibri.Brightness = ibri.BrightnessMax;
+				sh.AddDevice(dev);
+
+				dev = shc.CreateDevice("SmartLamp", "l2");
+
+				ibri = dev as IBrightable;
+				ibri.BrightnessMax = 100;
+				ibri.BrightnessMin = 10;
+				ibri.BrightnessStep = 15;
+				ibri.Brightness = ibri.BrightnessMax;
+				sh.AddDevice(dev);
+
+				dev = shc.CreateDevice("Fridge", "fr1");
+
+				iterm = dev as IHaveThermostat;
+				iterm.TempMax = 0;
+				iterm.TempMin = -5;
+				iterm.TempStep = 1;
+				dev.On();
+				iterm.DecreaseTemperature();
+				sh.AddDevice(dev);
+
+				dev = shc.CreateDevice("Clock", "clk1");
+
+				dev.On();
+				sh.AddDevice(dev);
 
 				Session.Add("SmartHouse", sh);
 			}
 			else
 			{
-				sh = Session["SmartHouse"] as SmartHouse;
+				sh = Session["SmartHouse"] as ISmartHouse;
 			}
 
 			RefreshControls();
