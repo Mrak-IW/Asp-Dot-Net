@@ -14,8 +14,6 @@ body {
 	margin: 0 auto;
 	width: 800px;
 	font-family: militaryFont;
-	border-style: solid;
-	border-width: 2px;
 }
 
 #headerControls, #logo {
@@ -55,7 +53,7 @@ body {
 	float: left;
 	border-top-style: solid;
 	border-color: black;
-	border-width: 2px;
+	border-width: 3px;
 }
 
 .frmAddDevice, .deviceBody {
@@ -87,6 +85,7 @@ body {
 .topLine {
 	float: left;
 	width: 100%;
+	border-radius: 10px 10px 0 0;
 }
 
 	.topLine span {
