@@ -124,12 +124,11 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SmartHouse\SmartHouse.csproj">
+    <ProjectReference Include="..\..\SmartHouse\SmartHouse.csproj">
       <Project>{1bd48987-751a-4cd3-b74e-b5423528b8c8}</Project>
       <Name>SmartHouse</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

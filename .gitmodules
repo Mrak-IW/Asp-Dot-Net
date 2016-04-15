@@ -1,0 +1,3 @@
+[submodule "SmartHouse"]
+	path = SmartHouse
+	url = https://github.com/Mrak-IW/SmartHouse
