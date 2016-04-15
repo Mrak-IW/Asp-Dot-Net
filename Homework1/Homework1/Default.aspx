@@ -24,6 +24,7 @@
 				</asp:DropDownList><br />
 				<asp:Button ID="btnAddDevice" CssClass="btnSwitch" runat="server" Text="Добавить устройство" ToolTip="Добавить устройство" />
 			</div>
+			<div class="headerBorder"></div>
 		</div>
 		<div class="devicePanel">
 			<asp:PlaceHolder ID="PhDevices" runat="server"></asp:PlaceHolder>

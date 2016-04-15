@@ -14,6 +14,8 @@ body {
 	margin: 0 auto;
 	width: 800px;
 	font-family: militaryFont;
+	border-style: solid;
+	border-width: 2px;
 }
 
 #headerControls, #logo {
@@ -40,8 +42,20 @@ body {
 .header, .propertiesPanel div, .topLine {
 	background-color: darkolivegreen;
 	color: lightgray;
-	border-top-right-radius: 10px;
-	border-top-left-radius: 10px;
+}
+
+.header {
+	border-radius: 10px 10px 0 0;
+}
+
+.headerBorder {
+	width: 100%;
+	height: 10px;
+	background-image: url(/Images/border.png);
+	float: left;
+	border-top-style: solid;
+	border-color: black;
+	border-width: 2px;
 }
 
 .frmAddDevice, .deviceBody {
@@ -55,7 +69,7 @@ body {
 .devicePanel {
 	background-image: url('../Images/background.png');
 	border-radius: 0 0 10px 10px;
-	border-top-style: none;
+	border-top-style:none;
 }
 
 .deviceContainer {
@@ -66,8 +80,6 @@ body {
 
 .deviceBody {
 	width: auto;
-	background-color: khaki;
-	border-radius: 10px;
 	margin: 3px;
 	float: left;
 }
