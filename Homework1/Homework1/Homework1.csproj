@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="Styles\devicons.css" />
     <Content Include="Styles\style.css" />
     <Content Include="Web.config" />
     <Content Include="Controls\WfAddDevice.ascx" />
