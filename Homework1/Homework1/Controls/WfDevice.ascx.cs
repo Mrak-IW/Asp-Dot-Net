@@ -170,7 +170,7 @@ namespace Homework1
 			{
 				IHaveClock iclk = Device as IHaveClock;
 				Label time = new Label();
-				time.Text = string.Format("{0} {1}", iclk.Time.Hour, iclk.Time.Minute);
+				time.Text = string.Format("{0:D2} {1:D2}", iclk.Time.Hour, iclk.Time.Minute);
 				destination.Controls.Add(time);
 			}
 		}

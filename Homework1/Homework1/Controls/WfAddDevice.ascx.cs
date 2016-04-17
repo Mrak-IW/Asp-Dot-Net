@@ -166,7 +166,6 @@ namespace Homework1
 			TextBox tb = new TextBox();
 			tb.ID = idName;
 			tb.Attributes["placeholder"] = "Ввести имя";
-			tb.EnableViewState = true;
 			div.Controls.Add(tb);
 
 			destination.Controls.Add(div);
@@ -200,7 +199,6 @@ namespace Homework1
 			tb.Attributes["placeholder"] = "0";
 			tb.Attributes["min"] = "0";
 			tb.Attributes["max"] = "200";
-			tb.EnableViewState = true;
 			div.Controls.Add(tb);
 
 			destination.Controls.Add(div);
@@ -218,8 +216,6 @@ namespace Homework1
 			tb.Attributes["placeholder"] = "100";
 			tb.Attributes["min"] = "0";
 			tb.Attributes["max"] = "200";
-			tb.EnableViewState = true;
-
 			div.Controls.Add(tb);
 
 			destination.Controls.Add(div);
@@ -237,8 +233,6 @@ namespace Homework1
 			tb.Attributes["placeholder"] = "10";
 			tb.Attributes["min"] = "0";
 			tb.Attributes["max"] = "200";
-			tb.EnableViewState = true;
-
 			div.Controls.Add(tb);
 
 			destination.Controls.Add(div);
@@ -262,7 +256,6 @@ namespace Homework1
 			tb.TextMode = TextBoxMode.Number;
 			tb.Attributes["placeholder"] = "-273";
 			tb.Attributes["min"] = "-273";
-			tb.EnableViewState = true;
 			div.Controls.Add(tb);
 
 			destination.Controls.Add(div);
@@ -279,8 +272,6 @@ namespace Homework1
 			tb.TextMode = TextBoxMode.Number;
 			tb.Attributes["placeholder"] = "10";
 			tb.Attributes["min"] = "-273";
-			tb.EnableViewState = true;
-
 			div.Controls.Add(tb);
 
 			destination.Controls.Add(div);
@@ -297,8 +288,6 @@ namespace Homework1
 			tb.TextMode = TextBoxMode.Number;
 			tb.Attributes["placeholder"] = "10";
 			tb.Attributes["min"] = "0";
-			tb.EnableViewState = true;
-
 			div.Controls.Add(tb);
 
 			destination.Controls.Add(div);
