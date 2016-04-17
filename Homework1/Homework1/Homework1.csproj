@@ -77,6 +77,12 @@
     <Content Include="Images\btnArrowDownLight.png" />
     <Content Include="Images\btnRoundLight.png" />
     <Content Include="Images\btnRoundLightPush.png" />
+    <Content Include="Images\iconClock.png" />
+    <Content Include="Images\iconClockOn.png" />
+    <Content Include="Images\iconFridge.png" />
+    <Content Include="Images\iconFridgeOpen.png" />
+    <Content Include="Images\iconSmartLamp.png" />
+    <Content Include="Images\IconSmartLampOn.png" />
     <Content Include="Images\lampIcon.png" />
     <Content Include="Images\Logo.png" />
     <Content Include="packages.config" />

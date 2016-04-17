@@ -138,6 +138,8 @@ namespace Homework1
 			}
 
 			phIcon.Controls.Add(icon);
+
+			DisplayIHaveClock(icon);
 		}
 
 		protected void DisplayRemoveButton(Control destination)
@@ -160,6 +162,17 @@ namespace Homework1
 			tr.Controls.Add(b);
 
 			destination.Controls.Add(tr);
+		}
+
+		protected void DisplayIHaveClock(Control destination)
+		{
+			if (Device.State == EPowerState.On && Device is IHaveClock)
+			{
+				IHaveClock iclk = Device as IHaveClock;
+				Label time = new Label();
+				time.Text = string.Format("{0} {1}", iclk.Time.Hour, iclk.Time.Minute);
+				destination.Controls.Add(time);
+			}
 		}
 
 		protected void DisplayIBrightable(Control destination)
