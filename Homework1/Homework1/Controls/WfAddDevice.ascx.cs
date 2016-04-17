@@ -56,7 +56,7 @@ namespace Homework1
 
 			string name;
 
-			name = (FindControl(idName) as TextBox).Text;
+			name = (FindControl(idName) as TextBox).Text.ToLower();
 
 			ISmartDevice dev = shc.CreateDevice(DevType, name);
 
@@ -95,9 +95,9 @@ namespace Homework1
 				int min, max, step;
 				IBrightable ibri = dev as IBrightable;
 
-				TextBox tbMin = FindControl(idTempMin) as TextBox;
-				TextBox tbMax = FindControl(idTempMax) as TextBox;
-				TextBox tbStep = FindControl(idTempStep) as TextBox;
+				TextBox tbMin = FindControl(idBrightMin) as TextBox;
+				TextBox tbMax = FindControl(idBrightMax) as TextBox;
+				TextBox tbStep = FindControl(idBrightStep) as TextBox;
 
 				if (!int.TryParse(tbMax.Text, out max))
 				{

@@ -3,19 +3,23 @@ using System.Web.UI;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using Homework1.Classes;
 using System.Reflection;
+using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace Homework1
 {
 	public partial class Default : System.Web.UI.Page
 	{
 		private ISmartHouse sh;
+		Assembly modelAssembly = Assembly.Load("SmartHouse");
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			ISmartHouseCreator shc = Manufacture.GetManufacture(Assembly.Load("SmartHouse"));
+			ISmartHouseCreator shc = Manufacture.GetManufacture(modelAssembly);
 
 			if (!IsPostBack)
 			{
+				CreateDeviceTypeDropDownList();
 				Session["showAddDevice"] = null;
 			}
 
@@ -66,8 +70,32 @@ namespace Homework1
 			{
 				sh = Session["SmartHouse"] as ISmartHouse;
 			}
-
+			
 			RefreshControls();
+		}
+
+		public void CreateDeviceTypeDropDownList()
+		{
+			ListItem li;
+			ISmartDevice dev;
+
+			var devTypes = from t in modelAssembly.GetTypes()
+						   where t.GetInterfaces().Contains(typeof(ISmartDevice)) && !t.IsAbstract
+						   select t;
+
+			foreach (var type in devTypes)
+			{
+				
+				object[] constructorParams = new object[1];
+				constructorParams[0] = "dummy";
+				dev = Activator.CreateInstance(type, constructorParams) as ISmartDevice;
+
+				li = new ListItem();
+				li.Value = type.Name;
+				li.Text = dev.DeviceType;
+
+				ddlDeviceType.Items.Add(li);
+			}
 		}
 
 		public void RefreshControls()

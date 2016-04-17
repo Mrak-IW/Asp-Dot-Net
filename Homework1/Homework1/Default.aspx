@@ -18,10 +18,8 @@
 			<img id="logo" src="./Images/Logo.png" />
 			<div id="headerControls">
 				<asp:Label ID="lblDeviceCount" runat="server" Text="lblDeviceCount"></asp:Label><br />
-				<asp:DropDownList ID="ddlDeviceType" runat="server">
-					<asp:ListItem Value="Fridge">Холодильник</asp:ListItem>
-					<asp:ListItem Value="SmartLamp">Лампа</asp:ListItem>
-					<asp:ListItem Value="Clock">Часы</asp:ListItem>
+				<asp:DropDownList ID="ddlDeviceType" runat="server" EnableViewState="true">
+
 				</asp:DropDownList><br />
 				<asp:Button ID="btnAddDevice" CssClass="btnSwitch" runat="server" Text="Добавить устройство" ToolTip="Добавить устройство" />
 			</div>
