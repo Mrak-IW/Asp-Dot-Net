@@ -1,0 +1,28 @@
+﻿@using Lab11.Helpers;
+@model int[]
+@helper CreateListStringHelper(int[] list)
+{
+	if (list != null)
+	{
+		<ul>
+			@foreach (int item in list)
+			{
+				<li>@item.ToString()</li>
+			}
+		</ul>
+	}
+	else
+	{
+		<a href="?arr=1&arr=2&arr=3">Жмяк сюда</a>
+	}
+}
+@{
+	ViewBag.Title = "Task1";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@CreateListStringHelper(Model)
+<br />
+@Html.CreateList(Model)
+
