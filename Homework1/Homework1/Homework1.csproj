@@ -48,6 +48,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SmartHouse, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\SmartHouse.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -85,6 +89,7 @@
     <Content Include="Images\IconSmartLampOn.png" />
     <Content Include="Images\lampIcon.png" />
     <Content Include="Images\Logo.png" />
+    <Content Include="Libraries\SmartHouse.dll" />
     <Content Include="packages.config" />
     <Content Include="Fonts\Capture_it.ttf" />
     <Content Include="Fonts\dsarmy.ttf" />
@@ -130,12 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\SmartHouse\SmartHouse.csproj">
-      <Project>{1bd48987-751a-4cd3-b74e-b5423528b8c8}</Project>
-      <Name>SmartHouse</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
