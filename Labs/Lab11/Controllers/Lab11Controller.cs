@@ -12,5 +12,24 @@ namespace Lab11.Controllers
 		{
 			return View(arr);
 		}
+
+		[HttpGet]
+		public ActionResult Task2()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult Task2(int dummy = 0)
+		{
+			List<string> result = new List<string>();
+
+			foreach (var p in Request.Form)
+			{
+				result.Add(p + " = " + Request.Form[p.ToString()]);
+			}
+
+			return View(result);
+		}
 	}
 }

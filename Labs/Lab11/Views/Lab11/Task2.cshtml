@@ -1,0 +1,51 @@
+﻿@model IEnumerable<string>
+@{
+	ViewBag.Title = "Task2";
+}
+@helper CreateListStringHelper(IEnumerable<string> list)
+{
+	if (list != null)
+	{
+		<ul>
+			@foreach (string item in list)
+			{
+				<li>@item.ToString()</li>
+			}
+		</ul>
+	}
+	else
+	{
+		<a href="?arr=1&arr=2&arr=3">Жмяк сюда</a>
+	}
+}
+
+<h2>Task2_test</h2>
+@CreateListStringHelper(Model)<br />
+@using (Html.BeginForm())
+{
+	<div>
+		@Html.Label("login", "Логин:")<br />
+		@Html.TextBox("login")<br />
+		@Html.Label("password", "Пароль:")<br />
+		@Html.Password("password")<br />
+		@Html.Label("passwordRepeat", "Повторите пароль:")<br />
+		@Html.Password("passwordRepeat")<br />
+		@Html.Label("age", "Ваш возраст:")<br />
+		@Html.TextBox("age", null, new { type = "number", min = "0", max = "200" })<br />
+
+		@Html.RadioButton("sex", "male", new { id = "male" })
+		@Html.Label("male", "Мужской")<br />
+
+		@Html.RadioButton("sex", "female", new { id = "female" })
+		@Html.Label("female", "Женский")<br />
+
+		@Html.CheckBox("havePet")
+		@Html.Label("havePet", "Есть домашнее животное")<br />
+
+		@Html.DropDownList("mainland",
+	   new SelectList(new string[] { "Евразия", "Африка", "Северная Америка", "Южная Америка", "Австралия", "Антарктида", "Атлантида" }),
+	   "Материк")<br />
+		<input type="submit" value="Зарегистрироваться" />
+	</div>
+}
+
