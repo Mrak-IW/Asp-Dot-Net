@@ -83,6 +83,11 @@ namespace Homework1
 			Button b;
 
 			LblId.Text = Device.DeviceType + "<br /> \"" + Device.Name + "\"";
+			PnlMain.Attributes["devtype"] = Device.GetType().Name;
+			if (Device.State == EPowerState.On)
+			{
+				PnlMain.Attributes["on"] = "on";
+			}
 
 			b = btnPowerState;
 			b.ID = "btnPower" + Device.Name;
@@ -91,7 +96,6 @@ namespace Homework1
 			{
 				case EPowerState.On:
 					b.ToolTip = "Выключить";
-					b.Attributes.Add("state", "on");
 
 					b.Click += (senderCtrl, eargs) =>
 					{
@@ -103,7 +107,6 @@ namespace Homework1
 					break;
 				case EPowerState.Off:
 					b.ToolTip = "Включить";
-					b.Attributes.Add("state", "off");
 
 					b.Click += (senderCtrl, eargs) =>
 					{
@@ -121,21 +124,6 @@ namespace Homework1
 			Panel icon = new Panel();
 			icon.ID = "devIcon" + Device.Name;
 			icon.CssClass = "devIcon";
-			icon.Attributes["devtype"] = Device.GetType().Name;
-
-			if (Device.State == EPowerState.On)
-			{
-				icon.Attributes["on"] = "on";
-			}
-
-			if (Device is IOpenCloseable)
-			{
-				IOpenCloseable ioc = Device as IOpenCloseable;
-				if (ioc.IsOpened)
-				{
-					icon.Attributes["open"] = "open";
-				}
-			}
 
 			phIcon.Controls.Add(icon);
 
@@ -302,6 +290,11 @@ namespace Homework1
 				tr.Controls.Add(b);
 
 				destination.Controls.Add(tr);
+
+				if (dev.IsOpened)
+				{
+					PnlMain.Attributes["open"] = "open";
+				}
 			}
 			else
 			{ }

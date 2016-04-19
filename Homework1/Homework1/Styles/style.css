@@ -236,11 +236,11 @@ input[type="button"], input[type="submit"] {
 		background-image: url('/Images/btnRoundDarkPush.png');
 	}
 
-	.btnPower[state="on"] {
+	[on] .btnPower {
 		background-image: url('/Images/btnRoundLight.png');
 	}
 
-		.btnPower[state="on"]:hover {
+		[on] .btnPower:hover {
 			background-image: url('/Images/btnRoundLightPush.png');
 		}
 
