@@ -1,0 +1,22 @@
+﻿@using Lab12.Models
+@model ViewInfo
+@{
+    ViewBag.Title = "Lab12";
+}
+
+<h2>@ViewBag.Title</h2>
+<h3>@Model.routeName</h3>
+<p>@(Model.someText ?? "Текст не передан")</p>
+<a href="/Lab12-Index/test">/Lab12-Index/test</a><br />
+<a href="/Lab12/Index/test">/Lab12/Index/test</a><br />
+<a href="/Lab12/">/Lab12/</a><br />
+<a href="/Lab12">/Lab12</a><br />
+<a href="~/Content/iconFridgeOpen.png">Посмотреть картинку</a><br />
+<a href="/MySite/Lab12~Index">/MySite/Lab12~Index</a><br />
+<a href="/Main/Run">/Main/Run</a><br />
+<a href="/Task7">/Task7</a><br />
+<a href="/Lab12/Task9/параметр1/параметр2">/Lab12/Task8/параметр1/параметр2</a><br />
+<a href="/Lab12/Task9/параметр1/параметр2/параметр3">/Lab12/Task9/параметр1/параметр2/параметр3</a><br />
+<a href="/NewLab12">/NewLab12</a><br />
+<a href="/Lab12-Index/forbidden">/Lab12-Index/forbidden</a><br />
+<a href="/Lab12-Index/notForbidden">/Lab12-Index/notForbidden</a><br />
