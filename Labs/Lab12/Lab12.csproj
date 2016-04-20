@@ -120,6 +120,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\MyNewArea\Controllers\HomeController.cs" />
+    <Compile Include="Areas\MyNewArea\MyNewAreaAreaRegistration.cs" />
     <Compile Include="Controllers\Lab12Controller.cs" />
     <Compile Include="Controllers\NewLab12Controller.cs" />
     <Compile Include="Global.asax.cs">
@@ -138,6 +140,10 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\MyNewArea\Views\web.config" />
+    <Content Include="Areas\MyNewArea\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\MyNewArea\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\MyNewArea\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -165,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\MyNewArea\Models\" />
     <Folder Include="Views\PrefixLab12\" />
   </ItemGroup>
   <ItemGroup>

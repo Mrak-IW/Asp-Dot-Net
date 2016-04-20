@@ -1,7 +1,19 @@
 ﻿@using Lab12.Models
 @model ViewInfo
+@helper CreateListStringHelper(IEnumerable<string> list)
+{
+	if (list != null)
+	{
+		<ul>
+			@foreach (string item in list)
+			{
+				<li>@item.ToString()</li>
+			}
+		</ul>
+	}
+}
 @{
-    ViewBag.Title = "Lab12";
+	ViewBag.Title = "Lab12";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -20,3 +32,9 @@
 <a href="/NewLab12">/NewLab12</a><br />
 <a href="/Lab12-Index/forbidden">/Lab12-Index/forbidden</a><br />
 <a href="/Lab12-Index/notForbidden">/Lab12-Index/notForbidden</a><br />
+<hr />
+@Html.ActionLink("Ссылка1", "Index", new { parameter = "Ссылка 1"}, new { @class = "link1"})<br />
+@Html.ActionLink("Ссылка на другой контроллер", "SuperAction", "NewLab12", new { parameter = "Ссылка на другой контроллер", param1 = "Параметр1", param2 = "Параметр2" }, null)<br />
+@Html.ActionLink("Ссылка на другую область", "Index", new { area = "MyNewArea", controller = "Home"})
+<hr />
+@CreateListStringHelper(ViewBag.ParamList)
