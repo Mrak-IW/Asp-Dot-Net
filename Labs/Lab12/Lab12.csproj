@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\MyNewArea\Controllers\HomeController.cs" />
+    <Compile Include="Areas\MyNewArea\Controllers\Lab12Controller.cs" />
     <Compile Include="Areas\MyNewArea\MyNewAreaAreaRegistration.cs" />
     <Compile Include="Controllers\Lab12Controller.cs" />
     <Compile Include="Controllers\NewLab12Controller.cs" />
@@ -172,6 +173,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\MyNewArea\Models\" />
+    <Folder Include="Areas\MyNewArea\Views\Lab12\" />
     <Folder Include="Views\PrefixLab12\" />
   </ItemGroup>
   <ItemGroup>
