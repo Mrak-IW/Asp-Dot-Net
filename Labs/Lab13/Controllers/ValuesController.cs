@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Lab13.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace Lab13.Controllers
@@ -72,6 +74,43 @@ namespace Lab13.Controllers
 		// DELETE api/values/5
 		public void Delete(int id)
 		{
+		}
+
+		[Route("api/values/Task8/{count}")]
+		public IHttpActionResult GetTask8(int count)
+		{
+			string[] arr = new string[count];
+			for (int i = 0; i < arr.Length; i++)
+			{
+				arr[i] = i.ToString();
+			}
+			return new Task8ActionResult(arr);
+		}
+
+		[HttpGet]
+		[Route("api/values/Task9/set/{value}")]
+		public HttpResponseMessage Task9SetCookie(string value)
+		{
+			CookieHeaderValue cookie = new CookieHeaderValue("kuka", value); // Имя куки - id, значение - value
+			cookie.Expires = DateTimeOffset.Now.AddDays(1); // Время действия куки -1 день
+			cookie.Path = "/"; // Виртуальный путь куки на стороне клиента
+			HttpResponseMessage response = Request.CreateResponse<string>(HttpStatusCode.OK, "kuka установлена");
+			response.Headers.AddCookies(new CookieHeaderValue[] { cookie });
+			return response;
+		}
+
+		[HttpGet]
+		[Route("api/values/Task9/get")]
+		public dynamic Task9GetCookie()
+		{
+			string cookieName = "kuka";
+			string cookieValue = "";
+			CookieHeaderValue cookie = Request.Headers.GetCookies(cookieName).FirstOrDefault();
+			if (cookie != null)
+			{
+				cookieValue = cookie[cookieName].Value;
+			}
+			return new { name = cookieName, value = cookieValue };
 		}
 	}
 }
