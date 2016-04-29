@@ -1,0 +1,57 @@
+﻿@helper CreateList(IDictionary<int, string> dict)
+{
+	if (dict != null)
+	{
+		<ul>
+			@foreach (var item in dict)
+			{
+				<li>@item.Key : @item.Value</li>
+			}
+		</ul>
+	}
+	else
+	{
+		<span>Список не передан</span>
+	}
+}
+
+<h1>Lab14.Ajax</h1>
+<input type="text" id="id" placeholder="ID записи" />
+<input type="text" id="text" placeholder="Текст записи" />
+<input type="button" id="GetAll" value="GetAll" />
+<input type="button" id="Get" value="Get" />
+<input type="button" id="Post" value="Post" title="Добавить запись" />
+<input type="button" id="Put" value="Put" title="Обновить или создать запись" />
+<input type="button" id="Delete" value="Delete" />
+<br />
+<div id="resultContainer"></div>
+
+<script>
+	$(function () {
+		$("#GetAll").click(function () {
+			$.get("/api/values",
+				function (data) {
+					$("#resultContainer").load("/Home/Select", { list: data });
+				}
+			);
+		});
+
+		$("#Get").click(function () {
+			$.get("/api/values",
+				{ id: $("#id").val() },
+				function (data) {
+					$("#resultContainer").load("/Home/Select", { list: data, id: $("#id").val() });
+				}
+			);
+		});
+
+		$("#Post").click(function () {
+			$.post("/api/values",
+				{ "": $("#text").val() },
+				function (data) {
+					$("#resultContainer").html(data);
+				}
+			);
+		});
+	});
+</script>

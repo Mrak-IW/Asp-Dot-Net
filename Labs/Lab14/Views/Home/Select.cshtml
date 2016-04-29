@@ -1,0 +1,21 @@
+﻿@model string[]
+@helper CreateList(string[] strarr)
+{
+	if (strarr != null)
+	{
+		int id = (ViewBag.id != null ? ViewBag.id : 0);
+		<ol start="@id">
+			@foreach (var item in strarr)
+			{
+				<li>@item</li>
+			}
+		</ol>
+	}
+	else
+	{
+		<span>Список не передан</span>
+	}
+}
+
+@CreateList(Model)
+
