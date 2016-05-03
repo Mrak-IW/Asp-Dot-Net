@@ -53,5 +53,39 @@
 				}
 			);
 		});
+
+		$("#Put").click(function () {
+			$.ajax({
+				url: "/api/values/" + $("#id").val(),
+				data: { "": $("#text").val() },
+				type: "PUT",
+				statusCode: {
+					200: function() {
+						$("#resultContainer").html("Запись изменена");
+					},
+					201: function () {
+						$("#resultContainer").html("Запись добавлена");
+					},
+					405: function () {
+						$("#resultContainer").html("Запрос некорректен");
+					}
+				}
+			});
+		});
+
+		$("#Delete").click(function () {
+			$.ajax({
+				url: "/api/values/" + $("#id").val(),
+				type: "DELETE",
+				statusCode: {
+					200: function () {
+						$("#resultContainer").html("Запись удалена");
+					},
+					404: function () {
+						$("#resultContainer").html("Такая запись отсутствует");
+					}
+				}
+			});
+		});
 	});
 </script>

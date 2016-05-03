@@ -62,22 +62,51 @@ namespace Lab14.Controllers
 		}
 
 		// PUT api/values/5
-		public void Put(int id, [FromBody]string value)
+		public HttpResponseMessage Put(int id, [FromBody]string value)
 		{
+			HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.BadRequest);
 
-			List<string> storage = LoadStorage(XmlFileName);
-			storage[id] = value;
+			if (value != null && id >= 0)
+			{
+				List<string> storage = LoadStorage(XmlFileName);
+				if (id < storage.Count)
+				{
+					storage[id] = value;
+					response = new HttpResponseMessage(HttpStatusCode.OK);
+				}
+				else
+				{
+					storage.Add(value);
+					response = new HttpResponseMessage(HttpStatusCode.Created);
+				}
+				SaveStorage(XmlFileName, storage);
+			}
 
-			SaveStorage(XmlFileName, storage);
+			return response;
 		}
 
 		// DELETE api/values/5
-		public void Delete(int id)
+		public HttpResponseMessage Delete(int id)
 		{
-			List<string> storage = LoadStorage(XmlFileName);
-			storage.RemoveAt(id);
+			HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.BadRequest);
 
-			SaveStorage(XmlFileName, storage);
+			if (id >= 0)
+			{
+				List<string> storage = LoadStorage(XmlFileName);
+
+				if (id < storage.Count)
+				{
+					storage.RemoveAt(id);
+					SaveStorage(XmlFileName, storage);
+					response = new HttpResponseMessage(HttpStatusCode.OK);
+				}
+				else
+				{
+					response = new HttpResponseMessage(HttpStatusCode.NotFound);
+				}
+			}
+
+			return response;
 		}
 
 		private List<string> LoadStorage(string filename)
@@ -108,10 +137,17 @@ namespace Lab14.Controllers
 			bool result = false;
 			XmlSerializer xs = new XmlSerializer(typeof(List<string>));
 
+			FileInfo fi = new FileInfo(filename);
+			if (fi.Exists)
+			{
+				fi.Delete();
+			}
+
 			using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
 			{
 				if (fs != null)
 				{
+					
 					xs.Serialize(fs, storage);
 					fs.Flush();
 					result = true;
