@@ -1,0 +1,40 @@
+﻿[devtype="SmartLamp"] .devIcon {
+	background-image: url(./Images/iconSmartLamp.png);
+}
+
+[devtype="SmartLamp"][on] .devIcon {
+	background-image: url(./Images/iconSmartLampOn.png);
+}
+
+[devtype="Fridge"] .devIcon {
+	background-image: url(./Images/iconFridge.png);
+}
+
+[devtype="Fridge"][open] .devIcon {
+	background-image: url(./Images/iconFridgeOpen.png);
+}
+
+[devtype="Fridge"][open][on] .devIcon {
+}
+
+[devtype="Fridge"][on] .devIcon {
+}
+
+[devtype="Clock"] .devIcon {
+	background-image: url(./Images/iconClock.png);
+}
+
+[devtype="Clock"][on] .devIcon {
+	background-image: url(./Images/iconClockOn.png);
+}
+
+[devtype="Clock"] .devIcon span {
+	display: block;
+	font-family: Courier New;
+	font-size: 30pt;
+	padding-top: 42px;
+	padding-left: 10px;
+	color: lightcoral;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px black, 1px 1px 10px red;
+}

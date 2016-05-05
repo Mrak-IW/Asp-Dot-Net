@@ -1,0 +1,17 @@
+﻿@using Homework2.Models
+@model SmartHouseLayout
+
+<div class="header">
+	<img id="logo" src="~/Content/Images/Logo.png">
+	<div id="headerControls">
+		<span id="lblDeviceCount">Устройств в системе: @Model.SmartHouse.Count<br />Добавить ещё одно:</span>
+		<br />
+		@Html.Partial("Parts/DevTypesList", Model.TypesAvailable)
+		<br />
+		<a id="btnAddDevice" href="dummy" title="Добавить устройство" class="btnSwitch">Добавить устройство</a>
+	</div>
+	<div class="headerBorder"></div>
+</div>
+<div class="devicePanel" id="devicePanel">
+
+</div>

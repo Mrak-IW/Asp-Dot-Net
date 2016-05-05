@@ -1,0 +1,296 @@
+@font-face {
+	font-family: militaryFont;
+	src: url('/fonts/Capture_it.ttf');
+	font-weight: bold;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background-color: grey;
+	margin: 0 auto;
+	width: 800px;
+	font-family: militaryFont;
+}
+
+#headerControls, #logo {
+	float: left;
+}
+
+#logo {
+	height: 150px;
+	margin: 10px 15px;
+}
+
+#headerControls {
+	margin-top: 50px;
+}
+
+.header, .devicePanel {
+	border-style: solid;
+	border-width: 3px;
+	border-color: black;
+	float: left;
+	width: 100%;
+}
+
+.header, .propertiesPanel div, .topLine {
+	background-color: darkolivegreen;
+	color: lightgray;
+}
+
+.header {
+	border-radius: 10px 10px 0 0;
+}
+
+.headerBorder {
+	width: 100%;
+	height: 10px;
+	background-image: url(./Images/border.png);
+	float: left;
+	border-top-style: solid;
+	border-color: black;
+	border-width: 3px;
+}
+
+.frmAddDevice, .deviceBody {
+	border-color: black;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 10px;
+	background-color: khaki;
+}
+
+.devicePanel {
+	background-image: url('./Images/background.png');
+	border-radius: 0 0 10px 10px;
+	border-top-style: none;
+	min-height: 300px;
+}
+
+.deviceContainer {
+	width: 200px;
+	height: 300px;
+	float: left;
+}
+
+.deviceBody {
+	width: auto;
+	margin: 3px;
+	float: left;
+}
+
+.topLine {
+	float: left;
+	width: 100%;
+	border-radius: 10px 10px 0 0;
+}
+
+	.topLine span {
+		display: block;
+		margin: 2px;
+		float: left;
+	}
+
+	.topLine .lblID {
+		padding: 5px 10px;
+		max-width: 130px;
+		float: left;
+	}
+
+	.topLine .lblClose {
+		float: right;
+	}
+
+.devIconContainer {
+	width: 100%;
+	text-align: center;
+	float: left;
+}
+
+.devIcon {
+	width: 150px;
+	height: 130px;
+	margin: 4px auto 2px auto;
+}
+
+.propertiesPanel {
+	width: 100%;
+	float: left;
+}
+
+	.propertiesPanel div {
+		border-width: 1px;
+		border-color: black;
+		border-style: solid;
+		border-radius: 5px;
+		margin: 2px 3px;
+		padding: 2px;
+		height: 25px;
+	}
+
+	.propertiesPanel span {
+		float: left;
+		margin: 2px;
+		display: block;
+	}
+
+	.propertiesPanel .value {
+		text-align: center;
+		width: 20px;
+	}
+
+	.propertiesPanel .btnArrow {
+		margin: 2px 6px;
+		float: left;
+	}
+
+.frmAddDevice {
+	width: 350px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+	.frmAddDevice .propertiesPanel input {
+		float: right;
+		font-family: militaryFont;
+		margin-right: 2px;
+		font-size: 12pt;
+		width: 170px;
+		padding-left: 5px;
+		border-radius: 5px;
+		background-color: khaki;
+	}
+
+.overlay {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.7);
+}
+
+	.overlay table {
+		width: 100%;
+		height: 100%;
+		vertical-align: middle;
+	}
+
+#ddlDeviceType, #ddlDeviceType option {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+#ddlDeviceType {
+	height: 30px;
+	width: 100%;
+	background-color: khaki;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 5px;
+	font-family: militaryFont;
+	font-size: 12pt;
+	padding-left: 30px;
+	background-image: url(./Images/btnArrowDownDark.png);
+	background-repeat: no-repeat;
+	background-position: 4px;
+	margin: 5px 0;
+}
+
+	#ddlDeviceType:hover {
+		background-image: url(./Images/btnArrowDownLight.png);
+	}
+
+
+/*Кнопки*/
+
+[name^="btn"], [class^="btn"], [id^="btn"] {
+	height: 20px;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border-style: none;
+	background-color: inherit;
+	background-repeat: no-repeat;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	text-decoration: none;
+}
+
+.btnPower {
+	width: 20px;
+	float: right;
+	margin: 12px 10px 15px 5px;
+	background-image: url('./Images/btnRoundDark.png');
+}
+
+	.btnPower:hover {
+		width: 20px;
+		float: right;
+		margin: 12px 10px 15px 5px;
+		background-image: url('./Images/btnRoundDarkPush.png');
+	}
+
+[on] .btnPower {
+	background-image: url('./Images/btnRoundLight.png');
+}
+
+	[on] .btnPower:hover {
+		background-image: url('./Images/btnRoundLightPush.png');
+	}
+
+.btnSwitch {
+	width: auto;
+	float: left;
+	margin: 2px 5px;
+	padding-left: 25px;
+	background-image: url('./Images/btnRoundDark.png');
+}
+
+	.btnSwitch:hover {
+		background-image: url('./Images/btnRoundLight.png');
+	}
+
+	.btnSwitch:active {
+		background-image: url('./Images/btnRoundLightPush.png');
+	}
+
+#btnAddDevice {
+	margin: 5px;
+	padding-left: 28px;
+}
+
+.btnClose {
+	float: right;
+	width: auto;
+	padding-right: 20px;
+	padding-left: 0;
+	background-position: right;
+}
+
+.btnArrow {
+	width: 10px;
+}
+
+.btnArrowRight {
+	background-image: url(./Images/btnArrowRightDark.png);
+}
+
+	.btnArrowRight:hover {
+		background-image: url(./Images/btnArrowRightLight.png);
+	}
+
+.btnArrowLeft {
+	background-image: url(./Images/btnArrowLeftDark.png);
+}
+
+	.btnArrowLeft:hover {
+		background-image: url(./Images/btnArrowLeftLight.png);
+	}
