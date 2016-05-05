@@ -1,6 +1,6 @@
 ﻿@using Homework2.Models
 @model IList<DevTypesDescription>
-<select name="ddlDeviceType" id="ddlDeviceType">
+<select name="selectDeviceType" id="selectDeviceType">
 	@foreach (var type in Model)
 	{
 		<option value="@type.className">@type.nameTranslation</option>

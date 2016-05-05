@@ -1,5 +1,6 @@
 ﻿using Homework2.Models;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
+using HomeWorkSmartHouse.SmartHouseDir.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,119 @@ namespace Homework2.Controllers
 {
 	public class HomeController : Controller
 	{
+		const string increase = "up";
+		const string decrease = "down";
+
 		Assembly modelAssembly = Assembly.Load("SmartHouse");
 
 		public ActionResult Index()
 		{
-			SmartHouseLayout shl;
-			ViewBag.Title = "Home Page";
+			ViewBag.Title = "Smart House MVC";
 
-			shl = LoadLayout();
+			SmartHouseContext shContext = LoadContext();
 
-			return View(shl as object);
+			return View(shContext as object);
 		}
 
-		private SmartHouseLayout LoadLayout()
+		public ActionResult TogglePower(string id)
+		{
+			ViewBag.Title = "Smart House MVC";
+
+			SmartHouseContext shContext = LoadContext();
+
+			switch(shContext.SmartHouse[id].State)
+			{
+				case EPowerState.On:
+					shContext.SmartHouse[id].State = EPowerState.Off;
+					break;
+				case EPowerState.Off:
+					shContext.SmartHouse[id].State = EPowerState.On;
+					break;
+			}
+
+			return View("Index", shContext as object);
+		}
+
+		public ActionResult ToggleOpenClose(string id)
+		{
+			ViewBag.Title = "Smart House MVC";
+
+			SmartHouseContext shContext = LoadContext();
+
+			ISmartDevice dev = shContext.SmartHouse[id];
+			if (dev is IOpenCloseable)
+			{
+				(dev as IOpenCloseable).IsOpened ^= true;
+			}
+
+			return View("Index", shContext as object);
+		}
+
+		public ActionResult Delete(string id)
+		{
+			ViewBag.Title = "Smart House MVC";
+
+			SmartHouseContext shContext = LoadContext();
+
+			shContext.SmartHouse.RemoveDevice(id);
+
+			return View("Index", shContext as object);
+		}
+
+		public ActionResult AdjustTemperature(string id, string direction)
+		{
+			ViewBag.Title = "Smart House MVC";
+
+			SmartHouseContext shContext = LoadContext();
+
+			ISmartDevice dev = shContext.SmartHouse[id];
+
+			if (dev is IHaveThermostat)
+			{
+				IHaveThermostat thermo = dev as IHaveThermostat;
+				switch (direction)
+				{
+					case increase:
+						thermo.IncreaseTemperature();
+						break;
+					case decrease:
+						thermo.DecreaseTemperature();
+						break;
+				}
+			}
+
+			return View("Index", shContext as object);
+		}
+
+		public ActionResult AdjustBrightness(string id, string direction)
+		{
+			ViewBag.Title = "Smart House MVC";
+
+			SmartHouseContext shContext = LoadContext();
+
+			ISmartDevice dev = shContext.SmartHouse[id];
+
+			if (dev is IBrightable)
+			{
+				IBrightable thermo = dev as IBrightable;
+				switch (direction)
+				{
+					case increase:
+						thermo.IncreaseBrightness();
+						break;
+					case decrease:
+						thermo.DecreaseBrightness();
+						break;
+				}
+			}
+
+			return View("Index", shContext as object);
+		}
+
+		private SmartHouseContext LoadContext()
 		{
 			ISmartHouse sh;
-			SmartHouseLayout shl = new SmartHouseLayout();
+			SmartHouseContext shContext = new SmartHouseContext();
 			ISmartHouseCreator shc = Manufacture.GetManufacture(modelAssembly);
 
 			if (Session["SmartHouse"] == null)
@@ -77,10 +175,10 @@ namespace Homework2.Controllers
 				sh = Session["SmartHouse"] as ISmartHouse;
 			}
 
-			shl.SmartHouse = sh;
-			shl.TypesAvailable = LoadAvailableDevTypes();
+			shContext.SmartHouse = sh;
+			shContext.TypesAvailable = LoadAvailableDevTypes();
 
-			return shl;
+			return shContext;
 		}
 
 		private IList<DevTypesDescription> LoadAvailableDevTypes()

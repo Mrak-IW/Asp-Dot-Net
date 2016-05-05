@@ -165,9 +165,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DeviceCreationContext.cs" />
     <Compile Include="Models\DevTypesDescription.cs" />
     <Compile Include="Models\Manufacture.cs" />
-    <Compile Include="Models\SmartHouseLayout.cs" />
+    <Compile Include="Models\SmartHouseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +246,8 @@
     <Content Include="Views\Home\Parts\IOpenCloseable.cshtml" />
     <Content Include="Views\Home\Parts\IHaveThermostat.cshtml" />
     <Content Include="Views\Home\Parts\IBrightable.cshtml" />
+    <Content Include="Views\Home\Parts\IHaveClock.cshtml" />
+    <Content Include="Views\Home\Parts\CreateDeviceForm.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

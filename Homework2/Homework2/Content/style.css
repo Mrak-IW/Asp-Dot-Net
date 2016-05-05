@@ -180,13 +180,13 @@ body {
 		vertical-align: middle;
 	}
 
-#ddlDeviceType, #ddlDeviceType option {
+#selectDeviceType, #selectDeviceType option {
 	appearance: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }
 
-#ddlDeviceType {
+#selectDeviceType {
 	height: 30px;
 	width: 100%;
 	background-color: khaki;
@@ -203,14 +203,15 @@ body {
 	margin: 5px 0;
 }
 
-	#ddlDeviceType:hover {
+	#selectDeviceType:hover {
 		background-image: url(./Images/btnArrowDownLight.png);
 	}
 
 
 /*Кнопки*/
 
-[name^="btn"], [class^="btn"], [id^="btn"] {
+[name^="btn"], [class^="btn"], [id^="btn"],
+input[type="submit"], input[type="button"] {
 	height: 20px;
 	appearance: none;
 	-webkit-appearance: none;

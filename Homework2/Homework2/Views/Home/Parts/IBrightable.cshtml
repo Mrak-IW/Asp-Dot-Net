@@ -7,9 +7,9 @@
 @if (device != null)
 {
 	<div>
-		<a href="dummy" title="Min = @device.BrightnessMin" class="btnArrow btnArrowLeft"></a>
+		<a href="/Home/AdjustBrightness/@Model.Name/down" title="Min = @device.BrightnessMin" class="btnArrow btnArrowLeft"></a>
 		<span class="value">@device.Brightness</span>
-		<a href="dummy" title="Max = @device.BrightnessMax" class="btnArrow btnArrowRight"></a>
+		<a href="/Home/AdjustBrightness/@Model.Name/up" title="Max = @device.BrightnessMax" class="btnArrow btnArrowRight"></a>
 		<span>Яркость</span>
 	</div>
 }

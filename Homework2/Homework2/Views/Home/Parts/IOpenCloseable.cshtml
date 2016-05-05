@@ -7,7 +7,7 @@
 @if (device != null)
 {
 	<div>
-		<a title="@(device.IsOpened ? "Закрыть" : "Открыть")" class="btnSwitch">
+		<a href="/Home/ToggleOpenClose/@Model.Name" title="@(device.IsOpened ? "Закрыть" : "Открыть")" class="btnSwitch">
 			@(!device.IsOpened ? "Закрыто" : "Открыто")
 		</a>
 	</div>

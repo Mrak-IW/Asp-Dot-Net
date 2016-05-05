@@ -1,6 +1,8 @@
 ﻿@using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 @using HomeWorkSmartHouse.SmartHouseDir.Enums;
+
 @model ISmartDevice
+
 @{
 	bool open = (Model != null) && (Model is IOpenCloseable) && (Model as IOpenCloseable).IsOpened;
 	bool on = (Model != null) && (Model.State == EPowerState.On);
@@ -15,11 +17,11 @@
 			<div class="lblID">
 				@Model.DeviceType<br />@Model.Name
 			</div>
-			<a href="dummy" title="@(on ? "Выключить" : "Включить")" class="btnPower"></a>
+			<a href="/Home/TogglePower/@Model.Name" title="@(on ? "Выключить" : "Включить")" class="btnPower"></a>
 		</div>
 		<div class="devIconContainer">
 			<div class="devIcon">
-
+				@Html.Partial("Parts/IHaveClock", Model)
 			</div>
 		</div>
 		<div id="devCardfr1_pnlProperties" class="propertiesPanel">
@@ -27,7 +29,7 @@
 			@Html.Partial("Parts/IBrightable", Model)
 			@Html.Partial("Parts/IOpenCloseable", Model)
 			<div>
-				<a href="dummy" title="Выкинуть в окно" class="btnSwitch">Удалить</a>
+				<a href="/Home/Delete/@Model.Name" title="Выкинуть в окно" class="btnSwitch">Удалить</a>
 			</div>
 		</div>
 	</div>

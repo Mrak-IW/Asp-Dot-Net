@@ -1,15 +1,17 @@
 ﻿@using Homework2.Models
 @using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
-@model SmartHouseLayout
+@model SmartHouseContext
 
 <div class="header">
 	<img id="logo" src="~/Content/Images/Logo.png">
 	<div id="headerControls">
 		<span id="lblDeviceCount">Устройств в системе: @Model.SmartHouse.Count<br />Добавить ещё одно:</span>
 		<br />
-		@Html.Partial("Parts/DevTypesList", Model.TypesAvailable)
-		<br />
-		<a id="btnAddDevice" href="dummy" title="Добавить устройство" class="btnSwitch">Добавить устройство</a>
+		<form name="frmAddDevice" action="/Home/AddNewDevice">
+			@Html.Partial("Parts/DevTypesList", Model.TypesAvailable)
+			<br />
+			<input type="submit" value="Добавить устройство" id="btnAddDevice" title="Добавить устройство" class="btnSwitch" />
+		</form>
 	</div>
 	<div class="headerBorder"></div>
 </div>

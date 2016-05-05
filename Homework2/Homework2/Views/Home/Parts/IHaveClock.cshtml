@@ -1,0 +1,18 @@
+﻿@using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
+@using HomeWorkSmartHouse.SmartHouseDir.Enums;
+
+@model ISmartDevice
+@{
+	string time = null;
+
+	if (Model.State == EPowerState.On && Model is IHaveClock)
+	{
+		IHaveClock iclk = Model as IHaveClock;
+		time = string.Format("{0:D2} {1:D2}", iclk.Time.Hour, iclk.Time.Minute);
+	}
+}
+
+@if (time != null)
+{
+	<span>@time</span>
+}

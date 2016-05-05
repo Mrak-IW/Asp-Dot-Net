@@ -7,9 +7,9 @@
 @if (device != null)
 {
 	<div>
-		<a href="dummy" class="btnArrow btnArrowLeft" title="Min = @device.TempMin"></a>
+		<a href="/Home/AdjustTemperature/@Model.Name/down" class="btnArrow btnArrowLeft" title="Min = @device.TempMin"></a>
 		<span class="value">@device.Temperature</span>
-		<a href="dummy" class="btnArrow btnArrowRight" title="Max = @device.TempMax"></a>
+		<a href="/Home/AdjustTemperature/@Model.Name/up" class="btnArrow btnArrowRight" title="Max = @device.TempMax"></a>
 		<span>Температура</span>
 	</div>
 }

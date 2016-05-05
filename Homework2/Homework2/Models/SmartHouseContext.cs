@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Homework2.Models
 {
-	public class SmartHouseLayout
+	public class SmartHouseContext
 	{
 		public ISmartHouse SmartHouse { get; set; }
 		public IList<DevTypesDescription> TypesAvailable { get; set; }
