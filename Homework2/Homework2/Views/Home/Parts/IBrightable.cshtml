@@ -1,0 +1,15 @@
+﻿@using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
+@model ISmartDevice
+@{ 
+	IBrightable device = Model as IBrightable;
+}
+
+@if (device != null)
+{
+	<div>
+		<a href="dummy" title="Min = @device.BrightnessMin" class="btnArrow btnArrowLeft"></a>
+		<span class="value">@device.Brightness</span>
+		<a href="dummy" title="Max = @device.BrightnessMax" class="btnArrow btnArrowRight"></a>
+		<span>Яркость</span>
+	</div>
+}

@@ -1,0 +1,34 @@
+﻿@using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
+@using HomeWorkSmartHouse.SmartHouseDir.Enums;
+@model ISmartDevice
+@{
+	bool open = (Model != null) && (Model is IOpenCloseable) && (Model as IOpenCloseable).IsOpened;
+	bool on = (Model != null) && (Model.State == EPowerState.On);
+	string openAttr = open ? "open=\"open\"" : "";
+	string onAttr = on ? "on=\"on\"" : "";
+	string devtype = Model.GetType().Name;
+}
+
+<div class="deviceContainer" id="@(Model.Name)">
+	<div class="deviceBody" devtype="@devtype" @onAttr @openAttr>
+		<div class="topLine">
+			<div class="lblID">
+				@Model.DeviceType<br />@Model.Name
+			</div>
+			<a href="dummy" title="@(on ? "Выключить" : "Включить")" class="btnPower"></a>
+		</div>
+		<div class="devIconContainer">
+			<div class="devIcon">
+
+			</div>
+		</div>
+		<div id="devCardfr1_pnlProperties" class="propertiesPanel">
+			@Html.Partial("Parts/IHaveThermostat", Model)
+			@Html.Partial("Parts/IBrightable", Model)
+			@Html.Partial("Parts/IOpenCloseable", Model)
+			<div>
+				<a href="dummy" title="Выкинуть в окно" class="btnSwitch">Удалить</a>
+			</div>
+		</div>
+	</div>
+</div>

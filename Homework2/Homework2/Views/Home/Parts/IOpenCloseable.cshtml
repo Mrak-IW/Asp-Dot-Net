@@ -1,0 +1,14 @@
+﻿@using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
+@model ISmartDevice
+@{
+	IOpenCloseable device = Model as IOpenCloseable;
+}
+
+@if (device != null)
+{
+	<div>
+		<a title="@(device.IsOpened ? "Закрыть" : "Открыть")" class="btnSwitch">
+			@(!device.IsOpened ? "Закрыто" : "Открыто")
+		</a>
+	</div>
+}

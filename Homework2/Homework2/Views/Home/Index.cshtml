@@ -1,4 +1,5 @@
 ﻿@using Homework2.Models
+@using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 @model SmartHouseLayout
 
 <div class="header">
@@ -13,5 +14,8 @@
 	<div class="headerBorder"></div>
 </div>
 <div class="devicePanel" id="devicePanel">
-
+	@foreach (ISmartDevice dev in Model.SmartHouse)
+	{
+		Html.RenderPartial("Parts/GeneralDevice", dev as object);
+	}
 </div>
