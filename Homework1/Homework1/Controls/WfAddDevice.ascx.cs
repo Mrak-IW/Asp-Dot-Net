@@ -132,6 +132,8 @@ namespace Homework1
 			FieldInfo fDevType = type.GetField("devType", BindingFlags.NonPublic | BindingFlags.Static);
 			string devTypeName = fDevType.GetValue(null) as string;
 
+			frmAddDevice.Attributes["devtype"] = DevType;
+
 			btnAddDevice.Text = "Добавить " + devTypeName;
 			DisplayISmartDevice(pnlPropertiesTable);
 			DisplayIcon();

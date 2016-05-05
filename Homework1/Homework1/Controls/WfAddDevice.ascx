@@ -3,7 +3,7 @@
 	<table>
 		<tr>
 			<td>
-				<div class="frmAddDevice">
+				<div class="frmAddDevice" id="frmAddDevice" runat="server">
 					<div class="topLine">
 						<asp:Button ID="btnAddDevice" CssClass="btnSwitch" Text="Добавить устройство" runat="server" />
 						<asp:Button ID="btnClose" CssClass="btnSwitch btnClose" Text="Закрыть" runat="server" />
