@@ -1,0 +1,35 @@
+﻿@using Homework2.Models.ViewHelpers;
+@using Homework2.Models.Constants;
+
+@model DeviceCreationContext
+
+<div class="overlay">
+	<table>
+		<tbody>
+			<tr>
+				<td>
+					<form name="frmCreateDevice" method="post" action="/Home/CreateDevice">
+						<input type="hidden" name="@CreateDeviceFields.devType" value="@Model.DevType" />
+						<div id="frmAddDevice" class="frmAddDevice" devtype="@Model.DevType">
+							<div class="topLine">
+								<input type="submit" name="btnAddDevice" value="Добавить @Model.DevTypeTranslation" class="btnSwitch">
+								<input type="submit" name="btnClose" formaction="/" value="Закрыть" class="btnSwitch btnClose">
+							</div>
+							<div class="devIconContainer">
+								<div id="devIcon" class="devIcon">
+								</div>
+							</div>
+							<div id="pnlPropertiesTable" class="propertiesPanel">
+								<div>
+									<span>Имя устройства</span><input name="@CreateDeviceFields.name" type="text" placeholder="@CreateDevicePlaceholders.name">
+								</div>
+								@Html.Partial("Parts/CreateDeviceForm/IHaveThermostat", Model)
+								@Html.Partial("Parts/CreateDeviceForm/IBrightable", Model)
+							</div>
+						</div>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

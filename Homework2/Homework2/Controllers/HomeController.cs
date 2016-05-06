@@ -1,38 +1,89 @@
-﻿using Homework2.Models;
-using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
-using HomeWorkSmartHouse.SmartHouseDir.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Homework2.Models;
+using Homework2.Models.Constants;
+using Homework2.Models.ViewHelpers;
+using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
+using HomeWorkSmartHouse.SmartHouseDir.Enums;
 
 namespace Homework2.Controllers
 {
 	public class HomeController : Controller
 	{
-		const string increase = "up";
-		const string decrease = "down";
+		const string title = "Smart House MVC";
 
 		Assembly modelAssembly = Assembly.Load("SmartHouse");
 
 		public ActionResult Index()
 		{
-			ViewBag.Title = "Smart House MVC";
+			ViewBag.Title = title;
 
 			SmartHouseContext shContext = LoadContext();
 
 			return View(shContext as object);
 		}
 
+		public ActionResult ShowCreateDeviceForm(string selectDeviceType)
+		{
+			ViewBag.Title = title;
+
+			SmartHouseContext shContext = LoadContext();
+			DeviceCreationContext dcc = new DeviceCreationContext();
+			ISmartHouseCreator devCreator = Manufacture.GetManufacture(modelAssembly);
+
+			ISmartDevice dev = devCreator.CreateDevice(selectDeviceType, "dummy");
+
+			if (dev != null)
+			{
+				dcc.DevTypeTranslation = dev.DeviceType;
+				dcc.DevType = selectDeviceType;
+				dcc.DevIsBrightable = dev is IBrightable;
+				dcc.DevHasThermostat = dev is IHaveThermostat;
+
+				shContext.DevCreationContext = dcc;
+			}
+
+			return View("Index", shContext as object);
+		}
+
+		public ActionResult CreateDevice()
+		{
+			ViewBag.Title = title;
+
+			SmartHouseContext shContext = LoadContext();
+			ISmartHouseCreator devCreator = Manufacture.GetManufacture(modelAssembly);
+
+			string devType = Request.Params[CreateDeviceFields.devType];
+
+			string devName = Request.Params[CreateDeviceFields.name];
+			if (devName == "" || devName == null)
+			{
+				devName = CreateDevicePlaceholders.name;
+			}
+
+			ISmartDevice dev = devCreator.CreateDevice(devType, devName);
+
+			if (dev != null)
+			{
+				FillIHaveThermostat(dev);
+				FillIBrightable(dev);
+
+				shContext.SmartHouse.AddDevice(dev);
+			}
+			return View("Index", shContext as object);
+		}
+
 		public ActionResult TogglePower(string id)
 		{
-			ViewBag.Title = "Smart House MVC";
+			ViewBag.Title = title;
 
 			SmartHouseContext shContext = LoadContext();
 
-			switch(shContext.SmartHouse[id].State)
+			switch (shContext.SmartHouse[id].State)
 			{
 				case EPowerState.On:
 					shContext.SmartHouse[id].State = EPowerState.Off;
@@ -47,7 +98,7 @@ namespace Homework2.Controllers
 
 		public ActionResult ToggleOpenClose(string id)
 		{
-			ViewBag.Title = "Smart House MVC";
+			ViewBag.Title = title;
 
 			SmartHouseContext shContext = LoadContext();
 
@@ -62,7 +113,7 @@ namespace Homework2.Controllers
 
 		public ActionResult Delete(string id)
 		{
-			ViewBag.Title = "Smart House MVC";
+			ViewBag.Title = title;
 
 			SmartHouseContext shContext = LoadContext();
 
@@ -73,7 +124,7 @@ namespace Homework2.Controllers
 
 		public ActionResult AdjustTemperature(string id, string direction)
 		{
-			ViewBag.Title = "Smart House MVC";
+			ViewBag.Title = title;
 
 			SmartHouseContext shContext = LoadContext();
 
@@ -84,10 +135,10 @@ namespace Homework2.Controllers
 				IHaveThermostat thermo = dev as IHaveThermostat;
 				switch (direction)
 				{
-					case increase:
+					case AdjustDirections.increase:
 						thermo.IncreaseTemperature();
 						break;
-					case decrease:
+					case AdjustDirections.decrease:
 						thermo.DecreaseTemperature();
 						break;
 				}
@@ -98,7 +149,7 @@ namespace Homework2.Controllers
 
 		public ActionResult AdjustBrightness(string id, string direction)
 		{
-			ViewBag.Title = "Smart House MVC";
+			ViewBag.Title = title;
 
 			SmartHouseContext shContext = LoadContext();
 
@@ -109,10 +160,10 @@ namespace Homework2.Controllers
 				IBrightable thermo = dev as IBrightable;
 				switch (direction)
 				{
-					case increase:
+					case AdjustDirections.increase:
 						thermo.IncreaseBrightness();
 						break;
-					case decrease:
+					case AdjustDirections.decrease:
 						thermo.DecreaseBrightness();
 						break;
 				}
@@ -177,6 +228,7 @@ namespace Homework2.Controllers
 
 			shContext.SmartHouse = sh;
 			shContext.TypesAvailable = LoadAvailableDevTypes();
+			shContext.DevCreationContext = null;
 
 			return shContext;
 		}
@@ -204,6 +256,64 @@ namespace Homework2.Controllers
 				result.Add(li);
 			}
 			return result;
+		}
+
+		private void FillIHaveThermostat(ISmartDevice dev)
+		{
+			if (dev is IHaveThermostat)
+			{
+				IHaveThermostat idev = dev as IHaveThermostat;
+
+				int max;
+				int min;
+				int step;
+
+				if (!int.TryParse(Request.Params[CreateDeviceFields.temperatureMax], out max))
+				{
+					max = CreateDevicePlaceholders.temperatureMax;
+				}
+				if (!int.TryParse(Request.Params[CreateDeviceFields.temperatureMin], out min))
+				{
+					min = CreateDevicePlaceholders.temperatureMin;
+				}
+				if (!int.TryParse(Request.Params[CreateDeviceFields.temperatureStep], out step))
+				{
+					step = CreateDevicePlaceholders.temperatureStep;
+				}
+
+				idev.TempMin = min;
+				idev.TempMax = max;
+				idev.TempStep = step;
+			}
+		}
+
+		private void FillIBrightable(ISmartDevice dev)
+		{
+			if (dev is IBrightable)
+			{
+				IBrightable idev = dev as IBrightable;
+
+				int max;
+				int min;
+				int step;
+				
+				if (!int.TryParse(Request.Params[CreateDeviceFields.brightnessMax], out max))
+				{
+					max = CreateDevicePlaceholders.brightnessMax;
+				}
+				if (!int.TryParse(Request.Params[CreateDeviceFields.brightnessMin], out min))
+				{
+					min = CreateDevicePlaceholders.brightnessMin;
+				}
+				if (!int.TryParse(Request.Params[CreateDeviceFields.brightnessStep], out step))
+				{
+					step = CreateDevicePlaceholders.brightnessStep;
+				}
+
+				idev.BrightnessMin = min;
+				idev.BrightnessMax = max;
+				idev.BrightnessStep = step;
+			}
 		}
 	}
 }

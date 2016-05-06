@@ -1,0 +1,17 @@
+﻿@using Homework2.Models.ViewHelpers;
+@using Homework2.Models.Constants;
+
+@model DeviceCreationContext
+
+@if (Model.DevHasThermostat)
+{
+	<div>
+		<span>Температура min</span><input name="tbTemperatureMin" type="number" placeholder="@CreateDevicePlaceholders.temperatureMin" min="-273">
+	</div>
+	<div>
+		<span>Температура max</span><input name="tbTemperatureMax" type="number" placeholder="@CreateDevicePlaceholders.temperatureMax" min="-273">
+	</div>
+	<div>
+		<span>Шаг температуры</span><input name="tbTemperatureStep" type="number" placeholder="@CreateDevicePlaceholders.temperatureStep" min="0">
+	</div>
+}

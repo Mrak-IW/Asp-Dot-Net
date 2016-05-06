@@ -1,13 +1,13 @@
-﻿@using Homework2.Models
+﻿@using Homework2.Models.ViewHelpers;
 @using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 @model SmartHouseContext
 
 <div class="header">
-	<img id="logo" src="~/Content/Images/Logo.png">
+	<a href="/"><img id="logo" src="~/Content/Images/Logo.png"></a>
 	<div id="headerControls">
 		<span id="lblDeviceCount">Устройств в системе: @Model.SmartHouse.Count<br />Добавить ещё одно:</span>
 		<br />
-		<form name="frmAddDevice" action="/Home/AddNewDevice">
+		<form name="frmAddDevice" method="post" action="/Home/ShowCreateDeviceForm">
 			@Html.Partial("Parts/DevTypesList", Model.TypesAvailable)
 			<br />
 			<input type="submit" value="Добавить устройство" id="btnAddDevice" title="Добавить устройство" class="btnSwitch" />
@@ -18,6 +18,10 @@
 <div class="devicePanel" id="devicePanel">
 	@foreach (ISmartDevice dev in Model.SmartHouse)
 	{
-		Html.RenderPartial("Parts/GeneralDevice", dev as object);
+		Html.RenderPartial("Parts/Device/GeneralDevice", dev as object);
 	}
 </div>
+@if (Model.DevCreationContext != null)
+{
+	Html.RenderPartial("Parts/CreateDeviceForm/CreateDeviceForm", Model.DevCreationContext);
+}

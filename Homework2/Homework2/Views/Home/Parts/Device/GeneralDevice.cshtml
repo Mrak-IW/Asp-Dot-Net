@@ -21,13 +21,13 @@
 		</div>
 		<div class="devIconContainer">
 			<div class="devIcon">
-				@Html.Partial("Parts/IHaveClock", Model)
+				@Html.Partial("Parts/Device/IHaveClock", Model)
 			</div>
 		</div>
 		<div id="devCardfr1_pnlProperties" class="propertiesPanel">
-			@Html.Partial("Parts/IHaveThermostat", Model)
-			@Html.Partial("Parts/IBrightable", Model)
-			@Html.Partial("Parts/IOpenCloseable", Model)
+			@Html.Partial("Parts/Device/IHaveThermostat", Model)
+			@Html.Partial("Parts/Device/IBrightable", Model)
+			@Html.Partial("Parts/Device/IOpenCloseable", Model)
 			<div>
 				<a href="/Home/Delete/@Model.Name" title="Выкинуть в окно" class="btnSwitch">Удалить</a>
 			</div>

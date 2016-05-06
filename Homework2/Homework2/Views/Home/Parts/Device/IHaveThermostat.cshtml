@@ -1,0 +1,17 @@
+﻿@using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
+@using Homework2.Models.Constants;
+
+@model ISmartDevice
+@{
+	IHaveThermostat device = Model as IHaveThermostat;
+}
+
+@if (device != null)
+{
+	<div>
+		<a href="/Home/AdjustTemperature/@Model.Name/@AdjustDirections.decrease" class="btnArrow btnArrowLeft" title="Min = @device.TempMin"></a>
+		<span class="value">@device.Temperature</span>
+		<a href="/Home/AdjustTemperature/@Model.Name/@AdjustDirections.increase" class="btnArrow btnArrowRight" title="Max = @device.TempMax"></a>
+		<span>Температура</span>
+	</div>
+}

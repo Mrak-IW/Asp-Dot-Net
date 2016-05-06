@@ -165,10 +165,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DeviceCreationContext.cs" />
-    <Compile Include="Models\DevTypesDescription.cs" />
+    <Compile Include="Models\Constants\CreateDevicePlaceholders.cs" />
+    <Compile Include="Models\ViewHelpers\DeviceCreationContext.cs" />
+    <Compile Include="Models\ViewHelpers\DevTypesDescription.cs" />
     <Compile Include="Models\Manufacture.cs" />
-    <Compile Include="Models\SmartHouseContext.cs" />
+    <Compile Include="Models\ViewHelpers\SmartHouseContext.cs" />
+    <Compile Include="Models\Constants\AdjustDirections.cs" />
+    <Compile Include="Models\Constants\CreateDeviceFields.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -242,12 +245,14 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Parts\DevTypesList.cshtml" />
-    <Content Include="Views\Home\Parts\GeneralDevice.cshtml" />
-    <Content Include="Views\Home\Parts\IOpenCloseable.cshtml" />
-    <Content Include="Views\Home\Parts\IHaveThermostat.cshtml" />
-    <Content Include="Views\Home\Parts\IBrightable.cshtml" />
-    <Content Include="Views\Home\Parts\IHaveClock.cshtml" />
-    <Content Include="Views\Home\Parts\CreateDeviceForm.cshtml" />
+    <Content Include="Views\Home\Parts\Device\GeneralDevice.cshtml" />
+    <Content Include="Views\Home\Parts\Device\IOpenCloseable.cshtml" />
+    <Content Include="Views\Home\Parts\Device\IHaveThermostat.cshtml" />
+    <Content Include="Views\Home\Parts\Device\IBrightable.cshtml" />
+    <Content Include="Views\Home\Parts\Device\IHaveClock.cshtml" />
+    <Content Include="Views\Home\Parts\CreateDeviceForm\CreateDeviceForm.cshtml" />
+    <Content Include="Views\Home\Parts\CreateDeviceForm\IHaveThermostat.cshtml" />
+    <Content Include="Views\Home\Parts\CreateDeviceForm\IBrightable.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

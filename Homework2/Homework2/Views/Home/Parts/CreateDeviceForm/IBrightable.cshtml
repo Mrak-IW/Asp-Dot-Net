@@ -1,0 +1,17 @@
+﻿@using Homework2.Models.ViewHelpers;
+@using Homework2.Models.Constants
+
+@model DeviceCreationContext
+
+@if (Model.DevIsBrightable)
+{
+	<div>
+		<span>Яркость min</span><input name="@CreateDeviceFields.brightnessMin" type="number" placeholder="@CreateDevicePlaceholders.brightnessMin" min="0" max="200">
+	</div>
+	<div>
+		<span>Яркость max</span><input name="@CreateDeviceFields.brightnessMax" type="number" placeholder="@CreateDevicePlaceholders.brightnessMax" min="0" max="200">
+	</div>
+	<div>
+		<span>Шаг яркости</span><input name="@CreateDeviceFields.brightnessStep" type="number" placeholder="@CreateDevicePlaceholders.brightnessStep" min="0" max="200">
+	</div>
+}
