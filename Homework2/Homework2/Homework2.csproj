@@ -190,7 +190,9 @@
     <Content Include="Content\Images\btnRoundLightPush.png" />
     <Content Include="Content\Images\iconClock.png" />
     <Content Include="Content\Images\iconClockOn.png" />
+    <Content Include="Content\Images\iconFridgeOn.png" />
     <Content Include="Content\Images\iconFridge.png" />
+    <Content Include="Content\Images\iconFridgeOpenOn.png" />
     <Content Include="Content\Images\iconFridgeOpen.png" />
     <Content Include="Content\Images\iconSmartLamp.png" />
     <Content Include="Content\Images\IconSmartLampOn.png" />

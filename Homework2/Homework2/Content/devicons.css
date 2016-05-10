@@ -15,9 +15,11 @@
 }
 
 [devtype="Fridge"][open][on] .devIcon {
+	background-image: url(./Images/iconFridgeOpenOn.png);
 }
 
 [devtype="Fridge"][on] .devIcon {
+	background-image: url(./Images/iconFridgeOn.png);
 }
 
 [devtype="Clock"] .devIcon {
