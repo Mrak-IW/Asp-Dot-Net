@@ -165,13 +165,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Views\Constants\CreateDevicePlaceholders.cs" />
+    <Compile Include="Constants\CreateDevicePlaceholders.cs" />
     <Compile Include="Views\ViewHelpers\DeviceCreationContext.cs" />
     <Compile Include="Views\ViewHelpers\DevTypesDescription.cs" />
     <Compile Include="Models\Manufacture.cs" />
     <Compile Include="Views\ViewHelpers\SmartHouseContext.cs" />
-    <Compile Include="Views\Constants\AdjustDirections.cs" />
-    <Compile Include="Views\Constants\CreateDeviceFields.cs" />
+    <Compile Include="Constants\AdjustDirections.cs" />
+    <Compile Include="Constants\CreateDeviceFields.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

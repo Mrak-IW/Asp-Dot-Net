@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Homework2.Views.Constants
+namespace Homework2.Constants
 {
 	public static class AdjustDirections
 	{

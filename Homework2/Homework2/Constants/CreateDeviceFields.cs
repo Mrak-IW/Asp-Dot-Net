@@ -1,4 +1,4 @@
-﻿namespace Homework2.Views.Constants
+﻿namespace Homework2.Constants
 {
 	public static class CreateDeviceFields
 	{
