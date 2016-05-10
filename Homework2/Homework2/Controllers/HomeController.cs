@@ -5,8 +5,8 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Homework2.Models;
-using Homework2.Models.Constants;
-using Homework2.Models.ViewHelpers;
+using Homework2.Views.Constants;
+using Homework2.Views.ViewHelpers;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using HomeWorkSmartHouse.SmartHouseDir.Enums;
 

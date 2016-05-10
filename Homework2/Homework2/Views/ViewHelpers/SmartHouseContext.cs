@@ -1,10 +1,7 @@
 ﻿using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace Homework2.Models.ViewHelpers
+namespace Homework2.Views.ViewHelpers
 {
 	public class SmartHouseContext
 	{
