@@ -11,8 +11,8 @@
 	string devtype = Model.GetType().Name;
 }
 
-<div class="deviceContainer" id="@(Model.Name)">
-	<div class="deviceBody" devtype="@devtype" @onAttr @openAttr>
+<div class="deviceContainer" id="@(Model.Name)" devtype="@devtype" @onAttr @openAttr>
+	<div class="deviceBody">
 		<div class="topLine">
 			<div class="lblID">
 				@Model.DeviceType<br />@Model.Name
@@ -24,12 +24,12 @@
 				@Html.Partial("Parts/Device/IHaveClock", Model)
 			</div>
 		</div>
-		<div id="devCardfr1_pnlProperties" class="propertiesPanel">
+		<div class="propertiesPanel">
 			@Html.Partial("Parts/Device/IHaveThermostat", Model)
 			@Html.Partial("Parts/Device/IBrightable", Model)
 			@Html.Partial("Parts/Device/IOpenCloseable", Model)
 			<div>
-				<a href="/Home/Delete/@Model.Name" title="Выкинуть в окно" class="btnSwitch">Удалить</a>
+				<a href="/Home/Delete/@Model.Name" title="Выкинуть в окно" class="btnSwitch btnDelete">Удалить</a>
 			</div>
 		</div>
 	</div>

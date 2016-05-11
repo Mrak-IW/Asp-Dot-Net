@@ -8,7 +8,7 @@
 
 @if (device != null)
 {
-	<div>
+	<div interface="IHaveThermostat">
 		<a href="/Home/AdjustTemperature/@Model.Name/@AdjustDirections.decrease" class="btnArrow btnArrowLeft" title="Min = @device.TempMin"></a>
 		<span class="value">@device.Temperature</span>
 		<a href="/Home/AdjustTemperature/@Model.Name/@AdjustDirections.increase" class="btnArrow btnArrowRight" title="Max = @device.TempMax"></a>

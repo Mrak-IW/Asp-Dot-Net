@@ -6,7 +6,7 @@
 
 @if (device != null)
 {
-	<div>
+	<div interface="IOpenCloseable">
 		<a href="/Home/ToggleOpenClose/@Model.Name" title="@(device.IsOpened ? "Закрыть" : "Открыть")" class="btnSwitch">
 			@(!device.IsOpened ? "Закрыто" : "Открыто")
 		</a>
