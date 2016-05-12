@@ -19,6 +19,9 @@ namespace Homework2
 				routeTemplate: "api/{controller}/{id}",
 				defaults: new { id = RouteParameter.Optional }
 			);
+
+			//Отключаем вывод в XML
+			config.Formatters.Remove(config.Formatters.XmlFormatter);
 		}
 	}
 }

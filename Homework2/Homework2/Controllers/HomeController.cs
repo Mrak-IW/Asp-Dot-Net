@@ -5,17 +5,17 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Configuration;
+using System.Web.Configuration;
+using System.IO;
+using System.Web.Hosting;
 
+using Homework2.Config;
 using Homework2.Models;
 using Homework2.Constants;
 using Homework2.Views.ViewHelpers;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using HomeWorkSmartHouse.SmartHouseDir.Enums;
-using System.Configuration;
-using System.Web.Configuration;
-using Homework2.Config;
-using System.IO;
-using System.Web.Hosting;
 
 namespace Homework2.Controllers
 {
