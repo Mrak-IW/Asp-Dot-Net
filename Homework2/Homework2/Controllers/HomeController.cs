@@ -4,11 +4,18 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using System.Runtime.Serialization.Formatters.Binary;
+
 using Homework2.Models;
 using Homework2.Constants;
 using Homework2.Views.ViewHelpers;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using HomeWorkSmartHouse.SmartHouseDir.Enums;
+using System.Configuration;
+using System.Web.Configuration;
+using Homework2.Config;
+using System.IO;
+using System.Web.Hosting;
 
 namespace Homework2.Controllers
 {
@@ -74,6 +81,13 @@ namespace Homework2.Controllers
 
 				shContext.SmartHouse.AddDevice(dev);
 			}
+
+			SmartHouseConfig shConfig = GetConfig();
+			if (!shConfig.UseSession)
+			{
+				SaveToStorage(shContext.SmartHouse);
+			}
+
 			return View("Index", shContext as object);
 		}
 
@@ -93,6 +107,12 @@ namespace Homework2.Controllers
 					break;
 			}
 
+			SmartHouseConfig shConfig = GetConfig();
+			if (!shConfig.UseSession)
+			{
+				SaveToStorage(shContext.SmartHouse);
+			}
+
 			return View("Index", shContext as object);
 		}
 
@@ -108,6 +128,12 @@ namespace Homework2.Controllers
 				(dev as IOpenCloseable).IsOpened ^= true;
 			}
 
+			SmartHouseConfig shConfig = GetConfig();
+			if (!shConfig.UseSession)
+			{
+				SaveToStorage(shContext.SmartHouse);
+			}
+
 			return View("Index", shContext as object);
 		}
 
@@ -118,6 +144,12 @@ namespace Homework2.Controllers
 			SmartHouseContext shContext = LoadContext();
 
 			shContext.SmartHouse.RemoveDevice(id);
+
+			SmartHouseConfig shConfig = GetConfig();
+			if (!shConfig.UseSession)
+			{
+				SaveToStorage(shContext.SmartHouse);
+			}
 
 			return View("Index", shContext as object);
 		}
@@ -142,6 +174,12 @@ namespace Homework2.Controllers
 						thermo.DecreaseTemperature();
 						break;
 				}
+			}
+
+			SmartHouseConfig shConfig = GetConfig();
+			if (!shConfig.UseSession)
+			{
+				SaveToStorage(shContext.SmartHouse);
 			}
 
 			return View("Index", shContext as object);
@@ -169,6 +207,12 @@ namespace Homework2.Controllers
 				}
 			}
 
+			SmartHouseConfig shConfig = GetConfig();
+			if (!shConfig.UseSession)
+			{
+				SaveToStorage(shContext.SmartHouse);
+			}
+
 			return View("Index", shContext as object);
 		}
 
@@ -176,54 +220,24 @@ namespace Homework2.Controllers
 		{
 			ISmartHouse sh;
 			SmartHouseContext shContext = new SmartHouseContext();
-			ISmartHouseCreator shc = Manufacture.GetManufacture(modelAssembly);
+			SmartHouseConfig shConfig = GetConfig();
 
-			if (Session["SmartHouse"] == null)
+			if (shConfig.UseSession)
 			{
-				ISmartDevice dev;
-				IBrightable ibri;
-				IHaveThermostat iterm;
-
-				sh = shc.CreateSmartHouse();
-
-				dev = shc.CreateDevice("SmartLamp", "l1");
-
-				ibri = dev as IBrightable;
-				ibri.BrightnessMax = 100;
-				ibri.BrightnessMin = 10;
-				ibri.BrightnessStep = 10;
-				ibri.Brightness = ibri.BrightnessMax;
-				sh.AddDevice(dev);
-
-				dev = shc.CreateDevice("SmartLamp", "l2");
-
-				ibri = dev as IBrightable;
-				ibri.BrightnessMax = 100;
-				ibri.BrightnessMin = 10;
-				ibri.BrightnessStep = 15;
-				ibri.Brightness = ibri.BrightnessMax;
-				sh.AddDevice(dev);
-
-				dev = shc.CreateDevice("Fridge", "fr1");
-
-				iterm = dev as IHaveThermostat;
-				iterm.TempMax = 0;
-				iterm.TempMin = -5;
-				iterm.TempStep = 1;
-				dev.On();
-				iterm.DecreaseTemperature();
-				sh.AddDevice(dev);
-
-				dev = shc.CreateDevice("Clock", "clk1");
-
-				dev.On();
-				sh.AddDevice(dev);
-
-				Session.Add("SmartHouse", sh);
+				sh = Session["SmartHouse"] as ISmartHouse;
 			}
 			else
 			{
-				sh = Session["SmartHouse"] as ISmartHouse;
+				sh = LoadFromStorage();
+			}
+
+			if (sh == null)
+			{
+				sh = CreateTestSet();
+				if (shConfig.UseSession)
+				{
+					Session.Add("SmartHouse", sh);
+				}
 			}
 
 			shContext.SmartHouse = sh;
@@ -231,6 +245,117 @@ namespace Homework2.Controllers
 			shContext.DevCreationContext = null;
 
 			return shContext;
+		}
+
+		private ISmartHouse CreateTestSet()
+		{
+			ISmartHouseCreator shc = Manufacture.GetManufacture(modelAssembly);
+
+			ISmartHouse sh = null;
+
+			ISmartDevice dev;
+			IBrightable ibri;
+			IHaveThermostat iterm;
+
+			sh = shc.CreateSmartHouse();
+
+			dev = shc.CreateDevice("SmartLamp", "l1");
+
+			ibri = dev as IBrightable;
+			ibri.BrightnessMax = 100;
+			ibri.BrightnessMin = 10;
+			ibri.BrightnessStep = 10;
+			ibri.Brightness = ibri.BrightnessMax;
+			sh.AddDevice(dev);
+
+			dev = shc.CreateDevice("SmartLamp", "l2");
+
+			ibri = dev as IBrightable;
+			ibri.BrightnessMax = 100;
+			ibri.BrightnessMin = 10;
+			ibri.BrightnessStep = 15;
+			ibri.Brightness = ibri.BrightnessMax;
+			sh.AddDevice(dev);
+
+			dev = shc.CreateDevice("Fridge", "fr1");
+
+			iterm = dev as IHaveThermostat;
+			iterm.TempMax = 0;
+			iterm.TempMin = -5;
+			iterm.TempStep = 1;
+			dev.On();
+			iterm.DecreaseTemperature();
+			sh.AddDevice(dev);
+
+			dev = shc.CreateDevice("Clock", "clk1");
+
+			dev.On();
+			sh.AddDevice(dev);
+
+			return sh;
+		}
+
+		private ISmartHouse LoadFromStorage()
+		{
+			ISmartHouse result = null;
+
+			SmartHouseConfig shConfig = GetConfig();
+			string storagePath = Path.Combine(shConfig.StorageFilePath, shConfig.StorageFileName);
+			storagePath = HostingEnvironment.MapPath(storagePath);
+			FileInfo fi = null;
+
+			try
+			{
+				fi = new FileInfo(storagePath);
+			}
+			catch { }
+
+			if (fi != null && fi.Exists)
+			{
+				using (FileStream fs = fi.Open(FileMode.Open))
+				{
+					try
+					{
+						BinaryFormatter bf = new BinaryFormatter();
+						result = bf.Deserialize(fs) as ISmartHouse;
+					}
+					catch { }
+				}
+			}
+
+			return result;
+		}
+
+		private bool SaveToStorage(ISmartHouse sh)
+		{
+			bool saved = false;
+
+			SmartHouseConfig shConfig = GetConfig();
+			string storagePath = Path.Combine(shConfig.StorageFilePath, shConfig.StorageFileName);
+			storagePath = HostingEnvironment.MapPath(storagePath);
+			FileInfo fi = null;
+
+			try
+			{
+				fi = new FileInfo(storagePath);
+			}
+			catch { }
+
+			if (fi != null)
+			{
+				using (FileStream fs = fi.Open(FileMode.Create))
+				{
+					try
+					{
+						BinaryFormatter bf = new BinaryFormatter();
+						bf.Serialize(fs, sh);
+						saved = true;
+					}
+					catch { }
+				}
+			}
+
+			return saved;
 		}
 
 		private IList<DevTypesDescription> LoadAvailableDevTypes()
@@ -296,7 +421,7 @@ namespace Homework2.Controllers
 				int max;
 				int min;
 				int step;
-				
+
 				if (!int.TryParse(Request.Params[CreateDeviceFields.brightnessMax], out max))
 				{
 					max = CreateDevicePlaceholders.brightnessMax;
@@ -314,6 +439,13 @@ namespace Homework2.Controllers
 				idev.BrightnessMax = max;
 				idev.BrightnessStep = step;
 			}
+		}
+
+		private SmartHouseConfig GetConfig()
+		{
+			Configuration config = WebConfigurationManager.OpenWebConfiguration(Request.ApplicationPath);
+			SmartHouseConfig shSection = (SmartHouseConfig)config.GetSection(SmartHouseConfig.SectionName);
+			return shSection;
 		}
 	}
 }
