@@ -23,6 +23,9 @@ namespace Homework2
 			bundles.Add(new StyleBundle("~/Content/css").Include(
 					  "~/Content/devicons.css",
 					  "~/Content/style.css"));
+
+			bundles.Add(new ScriptBundle("~/bundles/btnHandlers").Include(
+								  "~/Scripts/AjaxScripts/setBtnHandlers.js"));
 		}
 	}
 }

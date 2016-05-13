@@ -31,14 +31,14 @@ namespace Homework2.Controllers
 			}
 			else
 			{
-				result = Ok(dev.State.ToString());
+				result = Ok(dev.State.ToString().ToLower());
 			}
 
 			return result;
 		}
 
 		// PUT api/PowerState/5
-		public IHttpActionResult Put(string id, [FromBody]EPowerState value)
+		public IHttpActionResult Put(string id, [FromBody]string value)
 		{
 			ISmartHouse sh = LoadFromStorage();
 			ISmartDevice dev = sh[id];
@@ -50,8 +50,18 @@ namespace Homework2.Controllers
 			}
 			else
 			{
-				dev.State = value;
-				result = Ok(dev.State);
+				switch (value)
+				{
+					case "on":
+						dev.State = EPowerState.On;
+						break;
+					default:
+						dev.State = EPowerState.Off;
+						break;
+				}
+
+				result = Ok(dev.State.ToString().ToLower());
+				SaveToStorage(sh);
 			}
 
 			return result;
