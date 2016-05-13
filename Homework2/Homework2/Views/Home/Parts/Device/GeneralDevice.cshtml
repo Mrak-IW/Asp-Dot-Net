@@ -6,8 +6,8 @@
 @{
 	bool open = (Model != null) && (Model is IOpenCloseable) && (Model as IOpenCloseable).IsOpened;
 	bool on = (Model != null) && (Model.State == EPowerState.On);
-	string openAttr = open ? "open=\"open\"" : "";
-	string onAttr = on ? "on=\"on\"" : "";
+	HtmlString openAttr = new HtmlString(open ? "open=\"open\"" : "");
+	HtmlString onAttr = new HtmlString(on ? "on=\"on\"" : "");
 	string devtype = Model.GetType().Name;
 }
 
