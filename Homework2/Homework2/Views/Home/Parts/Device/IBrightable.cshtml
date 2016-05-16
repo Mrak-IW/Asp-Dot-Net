@@ -7,9 +7,9 @@
 @if (device != null)
 {
 	<div interface="IBrightable">
-		<a href="/Home/AdjustBrightness/@Model.Name/down" title="Min = @device.BrightnessMin" class="btnArrow btnArrowLeft"></a>
+		<a href="/Home/AdjustBrightness/@Model.Name/down" title="Min = @device.BrightnessMin" class="btnArrow btnDecrease"></a>
 		<span class="value">@device.Brightness</span>
-		<a href="/Home/AdjustBrightness/@Model.Name/up" title="Max = @device.BrightnessMax" class="btnArrow btnArrowRight"></a>
+		<a href="/Home/AdjustBrightness/@Model.Name/up" title="Max = @device.BrightnessMax" class="btnArrow btnIncrease"></a>
 		<span>Яркость</span>
 	</div>
 }

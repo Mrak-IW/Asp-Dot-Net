@@ -165,6 +165,9 @@
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\GeneralSmartHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IBrightableController.cs" />
+    <Compile Include="Controllers\IHaveThermostatController.cs" />
+    <Compile Include="Controllers\IsOpenedController.cs" />
     <Compile Include="Controllers\PowerStateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

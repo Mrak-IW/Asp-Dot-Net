@@ -280,18 +280,18 @@ input[type="submit"], input[type="button"] {
 	width: 10px;
 }
 
-.btnArrowRight {
+.btnIncrease {
 	background-image: url(./Images/btnArrowRightDark.png);
 }
 
-	.btnArrowRight:hover {
+	.btnIncrease:hover {
 		background-image: url(./Images/btnArrowRightLight.png);
 	}
 
-.btnArrowLeft {
+.btnDecrease {
 	background-image: url(./Images/btnArrowLeftDark.png);
 }
 
-	.btnArrowLeft:hover {
+	.btnDecrease:hover {
 		background-image: url(./Images/btnArrowLeftLight.png);
 	}

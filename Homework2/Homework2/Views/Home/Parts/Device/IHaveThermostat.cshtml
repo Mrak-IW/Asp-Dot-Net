@@ -9,9 +9,9 @@
 @if (device != null)
 {
 	<div interface="IHaveThermostat">
-		<a href="/Home/AdjustTemperature/@Model.Name/@AdjustDirections.decrease" class="btnArrow btnArrowLeft" title="Min = @device.TempMin"></a>
+		<a href="/Home/AdjustTemperature/@Model.Name/@AdjustDirections.decrease" class="btnArrow btnDecrease" title="Min = @device.TempMin"></a>
 		<span class="value">@device.Temperature</span>
-		<a href="/Home/AdjustTemperature/@Model.Name/@AdjustDirections.increase" class="btnArrow btnArrowRight" title="Max = @device.TempMax"></a>
+		<a href="/Home/AdjustTemperature/@Model.Name/@AdjustDirections.increase" class="btnArrow btnIncrease" title="Max = @device.TempMax"></a>
 		<span>Температура</span>
 	</div>
 }
