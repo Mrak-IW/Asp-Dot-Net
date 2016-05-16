@@ -238,6 +238,10 @@ namespace Homework2.Controllers
 				{
 					Session.Add("SmartHouse", sh);
 				}
+				else
+				{
+					SaveToStorage(sh);
+				}
 			}
 
 			shContext.SmartHouse = sh;
