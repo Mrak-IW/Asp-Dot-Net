@@ -91,9 +91,22 @@ namespace Homework2.Controllers
 			return View("Index", shContext as object);
 		}
 
-		public ActionResult CreateDeviceForm()
+		public ActionResult CreateDeviceFormPartial(string devType)
 		{
-			return PartialView("Parts/CreateDeviceForm/CreateDeviceForm", null /*вставить контекст создания*/);
+			DeviceCreationContext dcc = new DeviceCreationContext();
+			ISmartHouseCreator devCreator = Manufacture.GetManufacture(modelAssembly);
+
+			ISmartDevice dev = devCreator.CreateDevice(devType, "dummy");
+
+			if (dev != null)
+			{
+				dcc.DevTypeTranslation = dev.DeviceType;
+				dcc.DevType = devType;
+				dcc.DevIsBrightable = dev is IBrightable;
+				dcc.DevHasThermostat = dev is IHaveThermostat;
+			}
+
+			return PartialView("Parts/CreateDeviceForm/CreateDeviceForm", dcc);
 		}
 
 		public ActionResult TogglePower(string id)

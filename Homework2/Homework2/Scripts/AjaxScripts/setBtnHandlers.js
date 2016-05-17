@@ -1,10 +1,8 @@
-﻿function RefreshDevice(id)
-{
+﻿function RefreshDevice(id) {
 	RefreshBrightness(id);
 }
 
-function RefreshBrightness(id)
-{
+function RefreshBrightness(id) {
 	var label = $("#" + id + " [interface=\"IBrightable\"] .value");
 	if (label.length > 0) {
 		$.ajax({
@@ -16,6 +14,28 @@ function RefreshBrightness(id)
 		});
 	}
 }
+
+//btnAddDevice
+$("body").on("click", "#btnAddDevice", function () {
+	event.preventDefault();
+	var selectDevType = $("#selectDeviceType");
+	var devType = selectDevType[0].value;
+
+	$.ajax({
+		url: "/Home/CreateDeviceFormPartial",
+		data: { "devType": devType },
+		type: "GET",
+		success: function (data) {
+			$("body").append($(data));
+		}
+	});
+});
+
+//frmAddDevice btnClose
+$("body").on("click", "#frmAddDevice .btnClose", function () {
+	event.preventDefault();
+	$(this).parentsUntil("body").filter(".overlay").last().remove();
+});
 
 //btnDelete
 $("#devicePanel").on("click", ".btnDelete", function () {
