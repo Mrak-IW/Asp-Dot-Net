@@ -39,22 +39,15 @@ namespace Homework2.Controllers
 			ViewBag.Title = title;
 
 			SmartHouseContext shContext = LoadContext();
-			DeviceCreationContext dcc = new DeviceCreationContext();
-			ISmartHouseCreator devCreator = Manufacture.GetManufacture(modelAssembly);
 
-			ISmartDevice dev = devCreator.CreateDevice(selectDeviceType, "dummy");
-
-			if (dev != null)
-			{
-				dcc.DevTypeTranslation = dev.DeviceType;
-				dcc.DevType = selectDeviceType;
-				dcc.DevIsBrightable = dev is IBrightable;
-				dcc.DevHasThermostat = dev is IHaveThermostat;
-
-				shContext.DevCreationContext = dcc;
-			}
+			shContext.DevCreationContext = GetDeviceCreationContext(selectDeviceType);
 
 			return View("Index", shContext as object);
+		}
+
+		public ActionResult CreateDeviceFormPartial(string devType)
+		{
+			return PartialView("Parts/CreateDeviceForm/CreateDeviceForm", GetDeviceCreationContext(devType));
 		}
 
 		public ActionResult CreateDevice()
@@ -89,24 +82,6 @@ namespace Homework2.Controllers
 			}
 
 			return View("Index", shContext as object);
-		}
-
-		public ActionResult CreateDeviceFormPartial(string devType)
-		{
-			DeviceCreationContext dcc = new DeviceCreationContext();
-			ISmartHouseCreator devCreator = Manufacture.GetManufacture(modelAssembly);
-
-			ISmartDevice dev = devCreator.CreateDevice(devType, "dummy");
-
-			if (dev != null)
-			{
-				dcc.DevTypeTranslation = dev.DeviceType;
-				dcc.DevType = devType;
-				dcc.DevIsBrightable = dev is IBrightable;
-				dcc.DevHasThermostat = dev is IHaveThermostat;
-			}
-
-			return PartialView("Parts/CreateDeviceForm/CreateDeviceForm", dcc);
 		}
 
 		public ActionResult TogglePower(string id)
@@ -468,6 +443,25 @@ namespace Homework2.Controllers
 			Configuration config = WebConfigurationManager.OpenWebConfiguration(Request.ApplicationPath);
 			SmartHouseConfig shSection = (SmartHouseConfig)config.GetSection(SmartHouseConfig.SectionName);
 			return shSection;
+		}
+
+		private DeviceCreationContext GetDeviceCreationContext(string devType)
+		{
+			DeviceCreationContext dcc = null;
+			ISmartHouseCreator devCreator = Manufacture.GetManufacture(modelAssembly);
+
+			ISmartDevice dev = devCreator.CreateDevice(devType, "dummy");
+
+			if (dev != null)
+			{
+				dcc = new DeviceCreationContext();
+				dcc.DevTypeTranslation = dev.DeviceType;
+				dcc.DevType = devType;
+				dcc.DevIsBrightable = dev is IBrightable;
+				dcc.DevHasThermostat = dev is IHaveThermostat;
+			}
+
+			return dcc;
 		}
 	}
 }

@@ -16,8 +16,8 @@ function RefreshBrightness(id) {
 }
 
 //btnAddDevice
-$("body").on("click", "#btnAddDevice", function () {
-	event.preventDefault();
+$("body").on("click", "#btnAddDevice", function (event) {
+    event.preventDefault();
 	var selectDevType = $("#selectDeviceType");
 	var devType = selectDevType[0].value;
 
@@ -32,14 +32,14 @@ $("body").on("click", "#btnAddDevice", function () {
 });
 
 //frmAddDevice btnClose
-$("body").on("click", "#frmAddDevice .btnClose", function () {
-	event.preventDefault();
+$("body").on("click", "#frmAddDevice .btnClose", function (event) {
+    event.preventDefault();
 	$(this).parentsUntil("body").filter(".overlay").last().remove();
 });
 
 //btnDelete
-$("#devicePanel").on("click", ".btnDelete", function () {
-	event.preventDefault();
+$("#devicePanel").on("click", ".btnDelete", function (event) {
+    event.preventDefault();
 	var device = $(this).parentsUntil("#devicePanel").last();
 	var id = device.prop("id");
 	//Some useful code must be here
@@ -47,8 +47,8 @@ $("#devicePanel").on("click", ".btnDelete", function () {
 });
 
 //btnPower
-$("#devicePanel").on("click", ".btnPower", function () {
-	event.preventDefault();
+$("#devicePanel").on("click", ".btnPower", function (event) {
+    event.preventDefault();
 	var device = $(this).parentsUntil("#devicePanel").last();
 	var id = device.prop("id");
 	var nextState;
@@ -79,8 +79,8 @@ $("#devicePanel").on("click", ".btnPower", function () {
 });
 
 //IOpenCloseable
-$("#devicePanel").on("click", "[interface=\"IOpenCloseable\"] .btnSwitch", function () {
-	event.preventDefault();
+$("#devicePanel").on("click", "[interface=\"IOpenCloseable\"] .btnSwitch", function (event) {
+    event.preventDefault();
 	var device = $(this).parentsUntil("#devicePanel").last();
 	var button = this;
 	var id = device.prop("id");
@@ -113,8 +113,8 @@ $("#devicePanel").on("click", "[interface=\"IOpenCloseable\"] .btnSwitch", funct
 });
 
 //IHaveThermostat
-$("#devicePanel").on("click", "[interface=\"IHaveThermostat\"] .btnArrow", function () {
-	event.preventDefault();
+$("#devicePanel").on("click", "[interface=\"IHaveThermostat\"] .btnArrow", function (event) {
+    event.preventDefault();
 	var device = $(this).parentsUntil("#devicePanel").last();
 	var button = $(this);
 	var id = device.prop("id");
@@ -139,8 +139,8 @@ $("#devicePanel").on("click", "[interface=\"IHaveThermostat\"] .btnArrow", funct
 });
 
 //IBrightable
-$("#devicePanel").on("click", "[interface=\"IBrightable\"] .btnArrow", function () {
-	event.preventDefault();
+$("#devicePanel").on("click", "[interface=\"IBrightable\"] .btnArrow", function (event) {
+    event.preventDefault();
 	var device = $(this).parentsUntil("#devicePanel").last();
 	var button = $(this);
 	var id = device.prop("id");
