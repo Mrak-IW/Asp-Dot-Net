@@ -91,6 +91,11 @@ namespace Homework2.Controllers
 			return View("Index", shContext as object);
 		}
 
+		public ActionResult CreateDeviceForm()
+		{
+			return PartialView("Parts/CreateDeviceForm/CreateDeviceForm", null /*вставить контекст создания*/);
+		}
+
 		public ActionResult TogglePower(string id)
 		{
 			ViewBag.Title = title;
