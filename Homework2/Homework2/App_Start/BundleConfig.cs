@@ -25,7 +25,8 @@ namespace Homework2
 					  "~/Content/style.css"));
 
 			bundles.Add(new ScriptBundle("~/bundles/btnHandlers").Include(
-								  "~/Scripts/AjaxScripts/setBtnHandlers.js"));
+								  "~/Scripts/AjaxScripts/deviceBtnHandlers.js",
+								  "~/Scripts/AjaxScripts/addDeviceBtnHandlers.js"));
 		}
 	}
 }
