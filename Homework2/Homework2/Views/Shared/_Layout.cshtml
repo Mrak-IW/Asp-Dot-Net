@@ -13,7 +13,10 @@
     @RenderBody()
 
     @Scripts.Render("~/bundles/jquery")
-	@Scripts.Render("~/bundles/btnHandlers")
+	@if (ViewBag.JsEnabled != null && ViewBag.JsEnabled)
+	{
+		@Scripts.Render("~/bundles/btnHandlers");
+	}
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -25,9 +25,13 @@ namespace Homework2.Controllers
 
 		Assembly modelAssembly = Assembly.Load("SmartHouse");
 
-		public ActionResult Index()
+		public ActionResult Index(bool JsEnabled = true)
 		{
 			ViewBag.Title = title;
+			if (JsEnabled)
+			{
+				ViewBag.JsEnabled = true;
+			}
 
 			SmartHouseContext shContext = LoadContext();
 

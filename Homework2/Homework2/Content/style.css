@@ -211,7 +211,7 @@ body {
 /*Кнопки*/
 
 [name^="btn"], [class^="btn"], [id^="btn"],
-input[type="submit"], input[type="button"] {
+input[type="submit"], input[type="button"], .headerLink {
 	height: 20px;
 	margin: 5px;
 	appearance: none;
@@ -226,33 +226,44 @@ input[type="submit"], input[type="button"] {
 	text-decoration: none;
 }
 
+.headerLink {
+	display: block;
+	float: right;
+	margin: 10px;
+	padding-right: 25px;
+	background-position: right;
+}
+
 .btnPower {
 	width: 20px;
 	float: right;
 	margin: 12px 10px 15px 5px;
+}
+
+.btnPower, .headerLink {
 	background-image: url('./Images/btnRoundDark.png');
 }
 
-	.btnPower:hover {
-		width: 20px;
-		float: right;
-		margin: 12px 10px 15px 5px;
+	.btnPower:hover, .headerLink:hover {
 		background-image: url('./Images/btnRoundDarkPush.png');
 	}
 
-[on] .btnPower {
-	background-image: url('./Images/btnRoundLight.png');
-}
-
-	[on] .btnPower:hover {
-		background-image: url('./Images/btnRoundLightPush.png');
+	[on] .btnPower, .headerLink[on] {
+		background-image: url('./Images/btnRoundLight.png');
 	}
+
+		[on] .btnPower:hover, .headerLink:hover[on] {
+			background-image: url('./Images/btnRoundLightPush.png');
+		}
 
 .btnSwitch {
 	width: auto;
 	float: left;
 	margin: 2px 5px;
 	padding-left: 25px;
+}
+
+.btnSwitch {
 	background-image: url('./Images/btnRoundDark.png');
 }
 

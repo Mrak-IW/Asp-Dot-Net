@@ -2,6 +2,10 @@
 @using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 @model SmartHouseContext
 
+@{ 
+	bool jsEnabled = ViewBag.JsEnabled != null && ViewBag.JsEnabled;
+}
+
 <div class="header">
 	<a href="/"><img id="logo" src="~/Content/Images/Logo.png"></a>
 	<div id="headerControls">
@@ -13,6 +17,14 @@
 			<input type="submit" value="Добавить устройство" id="btnAddDevice" title="Добавить устройство" class="btnSwitch" />
 		</form>
 	</div>
+	@if (jsEnabled)
+	{
+		<a href="/Home/Index?JsEnabled=false" on="on" class="headerLink" title="Выключить">Ajax</a>
+	}
+	else
+	{
+		<a href="/" class="headerLink" title="Включить">Ajax</a>
+	}
 	<div class="headerBorder"></div>
 </div>
 <div class="devicePanel" id="devicePanel">
