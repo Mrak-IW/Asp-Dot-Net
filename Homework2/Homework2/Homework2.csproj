@@ -166,6 +166,7 @@
     <Compile Include="Controllers\GeneralSmartHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IBrightableController.cs" />
+    <Compile Include="Controllers\IHaveClockController.cs" />
     <Compile Include="Controllers\IHaveThermostatController.cs" />
     <Compile Include="Controllers\IsOpenedController.cs" />
     <Compile Include="Controllers\PowerStateController.cs" />

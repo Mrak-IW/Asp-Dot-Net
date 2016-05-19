@@ -1,9 +1,11 @@
 ﻿function RefreshDevice(id) {
 	RefreshBrightness(id);
+	RefreshClock(id);
 }
 
 function RefreshBrightness(id) {
 	var label = $("#" + id + " [interface=\"IBrightable\"] .value");
+
 	if (label.length > 0) {
 		$.ajax({
 			url: "/api/IBrightable/" + id,
@@ -13,6 +15,24 @@ function RefreshBrightness(id) {
 			}
 		});
 	}
+}
+
+function RefreshClock(id) {
+	var device = $("#" + id);
+
+	$.ajax({
+		url: "/api/IHaveClock/" + id,
+		type: "GET",
+		success: function (data) {
+			if (device.attr("on") == "on") {
+				$("#" + id + " .devIcon")[0].innerHTML = "<span>" + data.hour + " " + (data.minute < 10 ? 0 : "") + data.minute + "</span>";
+			}
+			else {
+				$("#" + id + " .devIcon span").remove();
+			}
+			
+		}
+	});
 }
 
 //btnDelete
