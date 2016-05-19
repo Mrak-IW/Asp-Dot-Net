@@ -11,7 +11,7 @@ namespace Homework2.Controllers
 		// GET api/PowerState/5
 		public IHttpActionResult Get(string id)
 		{
-			ISmartHouse sh = LoadFromStorage();
+			ISmartHouse sh = LoadSmartHouse();
 			ISmartDevice dev = sh[id];
 			IHttpActionResult result;
 
@@ -30,7 +30,7 @@ namespace Homework2.Controllers
 		// PUT api/PowerState/5
 		public IHttpActionResult Put(string id, [FromBody]string value)
 		{
-			ISmartHouse sh = LoadFromStorage();
+			ISmartHouse sh = LoadSmartHouse();
 			ISmartDevice dev = sh[id];
 			IHttpActionResult result;
 
@@ -51,7 +51,7 @@ namespace Homework2.Controllers
 				}
 
 				result = Ok(dev.State.ToString().ToLower());
-				SaveToStorage(sh);
+				SaveSmartHouse(sh);
 			}
 
 			return result;

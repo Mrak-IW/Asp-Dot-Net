@@ -76,12 +76,16 @@ namespace Homework2.Controllers
 			}
 
 			SmartHouseConfig shConfig = GetConfig();
-			if (!shConfig.UseSession)
-			{
-				SaveToStorage(shContext.SmartHouse);
-			}
+			SaveSmartHouse(shContext.SmartHouse);
 
 			return View("Index", shContext as object);
+		}
+
+		public ActionResult GetDeviceView(string id)
+		{
+			
+
+			return View("Index");
 		}
 
 		public ActionResult TogglePower(string id)
@@ -101,10 +105,7 @@ namespace Homework2.Controllers
 			}
 
 			SmartHouseConfig shConfig = GetConfig();
-			if (!shConfig.UseSession)
-			{
-				SaveToStorage(shContext.SmartHouse);
-			}
+			SaveSmartHouse(shContext.SmartHouse);
 
 			return View("Index", shContext as object);
 		}
@@ -122,10 +123,7 @@ namespace Homework2.Controllers
 			}
 
 			SmartHouseConfig shConfig = GetConfig();
-			if (!shConfig.UseSession)
-			{
-				SaveToStorage(shContext.SmartHouse);
-			}
+			SaveSmartHouse(shContext.SmartHouse);
 
 			return View("Index", shContext as object);
 		}
@@ -139,10 +137,7 @@ namespace Homework2.Controllers
 			shContext.SmartHouse.RemoveDevice(id);
 
 			SmartHouseConfig shConfig = GetConfig();
-			if (!shConfig.UseSession)
-			{
-				SaveToStorage(shContext.SmartHouse);
-			}
+			SaveSmartHouse(shContext.SmartHouse);
 
 			return View("Index", shContext as object);
 		}
@@ -170,10 +165,7 @@ namespace Homework2.Controllers
 			}
 
 			SmartHouseConfig shConfig = GetConfig();
-			if (!shConfig.UseSession)
-			{
-				SaveToStorage(shContext.SmartHouse);
-			}
+			SaveSmartHouse(shContext.SmartHouse);
 
 			return View("Index", shContext as object);
 		}
@@ -201,10 +193,7 @@ namespace Homework2.Controllers
 			}
 
 			SmartHouseConfig shConfig = GetConfig();
-			if (!shConfig.UseSession)
-			{
-				SaveToStorage(shContext.SmartHouse);
-			}
+			SaveSmartHouse(shContext.SmartHouse);
 
 			return View("Index", shContext as object);
 		}
@@ -215,26 +204,12 @@ namespace Homework2.Controllers
 			SmartHouseContext shContext = new SmartHouseContext();
 			SmartHouseConfig shConfig = GetConfig();
 
-			if (shConfig.UseSession)
-			{
-				sh = Session["SmartHouse"] as ISmartHouse;
-			}
-			else
-			{
-				sh = LoadFromStorage();
-			}
+			sh = LoadSmartHouse();
 
 			if (sh == null)
 			{
 				sh = CreateTestSet();
-				if (shConfig.UseSession)
-				{
-					Session.Add("SmartHouse", sh);
-				}
-				else
-				{
-					SaveToStorage(sh);
-				}
+				SaveSmartHouse(sh);
 			}
 
 			shContext.SmartHouse = sh;
@@ -290,6 +265,37 @@ namespace Homework2.Controllers
 			sh.AddDevice(dev);
 
 			return sh;
+		}
+
+		private ISmartHouse LoadSmartHouse()
+		{
+			ISmartHouse sh = null;
+			SmartHouseConfig shConfig = GetConfig();
+
+			if (shConfig.UseSession)
+			{
+				sh = Session["SmartHouse"] as ISmartHouse;
+			}
+			else
+			{
+				sh = LoadFromStorage();
+			}
+
+			return sh;
+		}
+
+		private void SaveSmartHouse(ISmartHouse sh)
+		{
+			SmartHouseConfig shConfig = GetConfig();
+
+			if (shConfig.UseSession)
+			{
+				Session.Add("SmartHouse", sh);
+			}
+			else
+			{
+				SaveToStorage(sh);
+			}
 		}
 
 		private ISmartHouse LoadFromStorage()

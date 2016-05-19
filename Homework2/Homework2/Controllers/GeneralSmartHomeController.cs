@@ -4,6 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Web.Configuration;
 using System.Web.Hosting;
 using System.Web.Http;
+using System.Web;
 
 using Homework2.Config;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
@@ -13,7 +14,41 @@ namespace Homework2.Controllers
 {
     public abstract class GeneralSmartHomeController : ApiController
     {
-		protected ISmartHouse LoadFromStorage()
+		protected ISmartHouse LoadSmartHouse()
+		{
+			ISmartHouse sh = null;
+			SmartHouseConfig shConfig = GetConfig();
+
+			if (shConfig.UseSession)
+			{
+				var Session = HttpContext.Current.Session;
+				sh = Session["SmartHouse"] as ISmartHouse;
+			}
+			else
+			{
+				sh = LoadFromStorage();
+			}
+
+			return sh;
+		}
+
+		protected void SaveSmartHouse(ISmartHouse sh)
+		{
+			SmartHouseConfig shConfig = GetConfig();
+
+			if (shConfig.UseSession)
+			{
+				var Session = HttpContext.Current.Session;
+				Session.Add("SmartHouse", sh);
+			}
+			else
+			{
+				SaveToStorage(sh);
+			}
+		}
+
+
+		private ISmartHouse LoadFromStorage()
 		{
 			ISmartHouse result = null;
 
@@ -44,7 +79,14 @@ namespace Homework2.Controllers
 			return result;
 		}
 
-		protected bool SaveToStorage(ISmartHouse sh)
+		protected SmartHouseConfig GetConfig()
+		{
+			Configuration config = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
+			SmartHouseConfig shSection = (SmartHouseConfig)config.GetSection(SmartHouseConfig.SectionName);
+			return shSection;
+		}
+
+		private bool SaveToStorage(ISmartHouse sh)
 		{
 			bool saved = false;
 
@@ -74,13 +116,6 @@ namespace Homework2.Controllers
 			}
 
 			return saved;
-		}
-
-		protected SmartHouseConfig GetConfig()
-		{
-			Configuration config = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
-			SmartHouseConfig shSection = (SmartHouseConfig)config.GetSection(SmartHouseConfig.SectionName);
-			return shSection;
 		}
 	}
 }

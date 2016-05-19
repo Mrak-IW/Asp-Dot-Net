@@ -11,7 +11,7 @@ namespace Homework2.Controllers
 		// GET api/IsOpenedController/5
 		public IHttpActionResult Get(string id)
 		{
-			ISmartHouse sh = LoadFromStorage();
+			ISmartHouse sh = LoadSmartHouse();
 			ISmartDevice dev = sh[id];
 			IHttpActionResult result;
 
@@ -37,7 +37,7 @@ namespace Homework2.Controllers
 		// PUT api/IsOpenedController/5
 		public IHttpActionResult Put(string id, [FromBody]string value)
 		{
-			ISmartHouse sh = LoadFromStorage();
+			ISmartHouse sh = LoadSmartHouse();
 			ISmartDevice dev = sh[id];
 			IHttpActionResult result;
 
@@ -62,7 +62,7 @@ namespace Homework2.Controllers
 					}
 
 					result = Ok((dev as IBrightable).Brightness);
-					SaveToStorage(sh);
+					SaveSmartHouse(sh);
 				}
 				else
 				{

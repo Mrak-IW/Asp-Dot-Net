@@ -11,7 +11,7 @@ namespace Homework2.Controllers
 		// GET api/IsOpenedController/5
 		public IHttpActionResult Get(string id)
 		{
-			ISmartHouse sh = LoadFromStorage();
+			ISmartHouse sh = LoadSmartHouse();
 			ISmartDevice dev = sh[id];
 			IHttpActionResult result;
 
@@ -38,7 +38,7 @@ namespace Homework2.Controllers
 		// PUT api/IsOpenedController/5
 		public IHttpActionResult Put(string id, [FromBody]bool value)
 		{
-			ISmartHouse sh = LoadFromStorage();
+			ISmartHouse sh = LoadSmartHouse();
 			ISmartDevice dev = sh[id];
 			IHttpActionResult result;
 
@@ -53,7 +53,7 @@ namespace Homework2.Controllers
 					(dev as IOpenCloseable).IsOpened = value;
 
 					result = Ok((dev as IOpenCloseable).IsOpened);
-					SaveToStorage(sh);
+					SaveSmartHouse(sh);
 				}
 				else
 				{

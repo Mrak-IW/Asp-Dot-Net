@@ -18,7 +18,7 @@ namespace Homework2.Controllers
 		{
 			IHttpActionResult result;
 
-			ISmartHouse sh = LoadFromStorage();
+			ISmartHouse sh = LoadSmartHouse();
 			ISmartDevice dev = sh[id];
 
 			if (dev == null)
@@ -43,7 +43,7 @@ namespace Homework2.Controllers
 			{
 				fields = (Dictionary<string, string>)js.ReadObject(str);
 			}
-			ISmartHouse sh = LoadFromStorage();
+			ISmartHouse sh = LoadSmartHouse();
 
 			if (sh[fields[CreateDeviceFields.name]] == null)
 			{
@@ -71,7 +71,7 @@ namespace Homework2.Controllers
 
 
 					sh.AddDevice(dev);
-					SaveToStorage(sh);
+					SaveSmartHouse(sh);
 					result = Ok();
 				}
 			}
@@ -87,7 +87,7 @@ namespace Homework2.Controllers
 		{
 			IHttpActionResult result;
 
-			ISmartHouse sh = LoadFromStorage();
+			ISmartHouse sh = LoadSmartHouse();
 			ISmartDevice dev = sh[id];
 
 			if (dev == null)
@@ -97,7 +97,7 @@ namespace Homework2.Controllers
 			else
 			{
 				sh.RemoveDevice(id);
-				SaveToStorage(sh);
+				SaveSmartHouse(sh);
 				result = Ok();
 			}
 
