@@ -40,7 +40,8 @@ $("body").on("click", "#frmAddDevice [name=\"btnAddDevice\"]", function (event) 
 	var i = 0;
 	device[i] = {};
 	device[i].Key = "tbName";
-	device[i].Value = tbName[0].value !== "" ? tbName[0].value : tbName[0].placeholder;
+	var devName = tbName[0].value !== "" ? tbName[0].value : tbName[0].placeholder;
+	device[i].Value = devName;
 
 	device[++i] = {};
 	device[i].Key = "hidDevType";
@@ -77,10 +78,17 @@ $("body").on("click", "#frmAddDevice [name=\"btnAddDevice\"]", function (event) 
 		data: { "": str },
 		type: "POST",
 		success: function (data) {
-			alert("Добавлено");
+			$.ajax({
+				url: "/Home/GetDeviceView/",
+				data: { "id": devName },
+				type: "GET",
+				success: function (data) {
+					$("#devicePanel").append($(data));
+				}
+			});
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
-			alert("Возникла ошибка: " + errorThrown);
+			alert("Возникла ошибка: " + JSON.parse(jqXHR.responseText).Message);
 		}
 	});
 	$(this).parentsUntil("body").filter(".overlay").last().remove();

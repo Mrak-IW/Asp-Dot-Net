@@ -83,9 +83,15 @@ namespace Homework2.Controllers
 
 		public ActionResult GetDeviceView(string id)
 		{
-			
+			ISmartHouse sh = LoadSmartHouse();
+			ISmartDevice dev = sh[id];
 
-			return View("Index");
+			if (dev == null)
+			{
+				return HttpNotFound(string.Format("Устройство с id == \"{0}\" не найдено", id));
+			}
+
+			return PartialView("Parts/Device/GeneralDevice", dev as object);
 		}
 
 		public ActionResult TogglePower(string id)
