@@ -71,9 +71,11 @@ $("body").on("click", "#frmAddDevice [name=\"btnAddDevice\"]", function (event) 
 		device[i].Value = tbBrightnessStep[0].value !== "" ? tbBrightnessStep[0].value : tbBrightnessStep[0].placeholder;
 	}
 
+	var str = JSON.stringify(device);
+
 	$.ajax({
 		url: "/api/Device",
-		data: { "": device },
+		data: { "": str },
 		type: "POST",
 		success: function (data) {
 			$.ajax({
