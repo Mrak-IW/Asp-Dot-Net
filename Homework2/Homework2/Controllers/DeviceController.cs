@@ -37,12 +37,16 @@ namespace Homework2.Controllers
 		{
 			IHttpActionResult result = BadRequest();
 			Dictionary<string, string> fields;
-			DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
 
+			DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
 			using (Stream str = GenerateStreamFromString(value))
 			{
 				fields = (Dictionary<string, string>)js.ReadObject(str);
+				//Я в курсе, что этот способ выглядит странным, но я проверял - если попробовать принять
+				//Dictionary<string, string> или KeyValuePair<string, string>[] через параметр метода,
+				//получим вариацию на тему null
 			}
+
 			ISmartHouse sh = LoadSmartHouse();
 
 			if (sh[fields[CreateDeviceFields.name]] == null)
@@ -68,7 +72,6 @@ namespace Homework2.Controllers
 						idev.TempMin = int.Parse(fields[CreateDeviceFields.temperatureMin]);
 						idev.TempStep = int.Parse(fields[CreateDeviceFields.temperatureStep]);
 					}
-
 
 					sh.AddDevice(dev);
 					SaveSmartHouse(sh);

@@ -18,21 +18,22 @@ function RefreshBrightness(id) {
 }
 
 function RefreshClock(id) {
-	var device = $("#" + id);
+	var clock = $("#" + id + "[devtype=\"Clock\"]");
 
-	$.ajax({
-		url: "/api/IHaveClock/" + id,
-		type: "GET",
-		success: function (data) {
-			if (device.attr("on") == "on") {
-				$("#" + id + " .devIcon")[0].innerHTML = "<span>" + data.hour + " " + (data.minute < 10 ? 0 : "") + data.minute + "</span>";
+	if (clock.length > 0) {
+		$.ajax({
+			url: "/api/IHaveClock/" + id,
+			type: "GET",
+			success: function (data) {
+				if (clock.attr("on") == "on") {
+					$("#" + id + " .devIcon")[0].innerHTML = "<span>" + data.hour + " " + (data.minute < 10 ? 0 : "") + data.minute + "</span>";
+				}
+				else {
+					$("#" + id + " .devIcon span").remove();
+				}
 			}
-			else {
-				$("#" + id + " .devIcon span").remove();
-			}
-			
-		}
-	});
+		});
+	}
 }
 
 //btnDelete
