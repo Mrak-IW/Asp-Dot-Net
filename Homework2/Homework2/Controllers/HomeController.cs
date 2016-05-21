@@ -17,7 +17,7 @@ using Homework2.Views.ViewHelpers;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using HomeWorkSmartHouse.SmartHouseDir.Enums;
 
-namespace Homework2.Controllers
+namespace Homework2.Controllers.API
 {
 	public class HomeController : Controller
 	{

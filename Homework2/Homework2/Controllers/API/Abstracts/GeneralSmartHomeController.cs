@@ -10,7 +10,7 @@ using Homework2.Config;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using HomeWorkSmartHouse.SmartHouseDir.Enums;
 
-namespace Homework2.Controllers
+namespace Homework2.Controllers.API.Abstracts
 {
     public abstract class GeneralSmartHomeController : ApiController
     {

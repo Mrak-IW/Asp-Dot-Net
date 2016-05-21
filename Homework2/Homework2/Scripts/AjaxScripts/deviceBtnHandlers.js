@@ -8,7 +8,7 @@ function RefreshBrightness(id) {
 
 	if (label.length > 0) {
 		$.ajax({
-			url: "/api/IBrightable/" + id,
+			url: "/api/Brightness/" + id,
 			type: "GET",
 			success: function (data) {
 				label[0].innerHTML = data;
@@ -22,7 +22,7 @@ function RefreshClock(id) {
 
 	if (clock.length > 0) {
 		$.ajax({
-			url: "/api/IHaveClock/" + id,
+			url: "/api/Clock/" + id,
 			type: "GET",
 			success: function (data) {
 				if (clock.attr("on") == "on") {
@@ -105,7 +105,7 @@ $("#devicePanel").on("click", "[interface=\"IOpenCloseable\"] .btnSwitch", funct
 	}
 
 	$.ajax({
-		url: "/api/IsOpened/" + id,
+		url: "/api/Door/" + id,
 		data: { "": nextState },
 		type: "PUT",
 		success: function (data) {
@@ -140,7 +140,7 @@ $("#devicePanel").on("click", "[interface=\"IHaveThermostat\"] .btnArrow", funct
 	}
 
 	$.ajax({
-		url: "/api/IHaveThermostat/" + id,
+		url: "/api/Temperature/" + id,
 		data: { "": action },
 		type: "PUT",
 		success: function (data) {
@@ -166,7 +166,7 @@ $("#devicePanel").on("click", "[interface=\"IBrightable\"] .btnArrow", function 
 	}
 
 	$.ajax({
-		url: "/api/IBrightable/" + id,
+		url: "/api/Brightness/" + id,
 		data: { "": action },
 		type: "PUT",
 		success: function (data) {
