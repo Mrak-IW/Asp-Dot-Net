@@ -14,5 +14,15 @@ namespace Lab16.Controllers
 		{
 			return View(db.Workers);
 		}
+
+		public ActionResult Add()
+		{
+			return View();
+		}
+
+		public ActionResult Edit(int id)
+		{
+			return View(db.Workers.Where(worker => worker.Id == id).FirstOrDefault());
+		}
 	}
 }

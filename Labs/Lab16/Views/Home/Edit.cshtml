@@ -1,0 +1,18 @@
+﻿@using Lab16.Models;
+@model Staff
+
+@{
+	ViewBag.Title = "Add";
+}
+
+@using (Html.BeginForm())
+{
+	@Html.LabelFor(m => m.Name, "Имя")<br />
+	@Html.EditorFor(m => m.Name)<br />
+	@Html.LabelFor(m => m.Surname, "Фамилия")<br />
+	@Html.EditorFor(m => m.Surname)<br />
+	@Html.LabelFor(m => m.Position, "Должность")<br />
+	@Html.EditorFor(m => m.Position)<br />
+	<input type="submit" value="Добавить" />
+}
+

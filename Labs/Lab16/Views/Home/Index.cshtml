@@ -7,6 +7,7 @@
 		<th>Имя</th>
 		<th>Фамилия</th>
 		<th>Должность</th>
+		<th>Действие</th>
 	</tr>
 	@foreach (Staff worker in Model)
 	{
@@ -15,6 +16,10 @@
 			<td>@Html.DisplayFor(model => worker.Name)</td>
 			<td>@Html.DisplayFor(model => worker.Surname)</td>
 			<td>@Html.DisplayFor(model => worker.Position)</td>
+			<td>@Html.ActionLink("edit", "Edit", new { id = worker.Id }) @Html.ActionLink("del", "Delete", new { id = worker.Id })</td>
 		</tr>
 	}
+	<tr>
+		<td>@Html.ActionLink("add", "Add")</td>
+	</tr>
 </table>
