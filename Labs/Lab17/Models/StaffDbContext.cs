@@ -15,5 +15,16 @@ namespace Lab17.Models
 
 		public DbSet<Staff> Workers { get; set; }
 		public DbSet<Company> Companies { get; set; }
+		public DbSet<Hobby> Hobbies { get; set; }
+
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<Hobby>()
+			.HasMany(c => c.Workers)
+			.WithMany(s => s.Hobbies)
+			.Map(t => t.MapLeftKey("HobbyId")
+			.MapRightKey("WorkerId")
+			.ToTable("WorkersHobbies"));
+		}
 	}
 }

@@ -11,7 +11,10 @@ namespace Lab17.Models
 		public string Name { get; set; }
 		public string Surname { get; set; }
 		public string Position { get; set; }
+
 		public int? CompanyID { get; set; }
 		public virtual Company Company { get; set; }
+
+		public ICollection<Hobby> Hobbies { get; set; }
 	}
 }
