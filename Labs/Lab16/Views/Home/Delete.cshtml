@@ -3,12 +3,13 @@
 
 @using (Html.BeginForm())
 {
+	@Html.HiddenFor(m => m.Id)
 	@Html.LabelFor(m => m.Name, "Имя")<br />
-	@Html.EditorFor(m => m.Name)<br />
+	@Html.DisplayFor(m => m.Name)<br />
 	@Html.LabelFor(m => m.Surname, "Фамилия")<br />
-	@Html.EditorFor(m => m.Surname)<br />
+	@Html.DisplayFor(m => m.Surname)<br />
 	@Html.LabelFor(m => m.Position, "Должность")<br />
-	@Html.EditorFor(m => m.Position)<br />
-	<input type="submit" value="Добавить" />
+	@Html.DisplayFor(m => m.Position)<br />
+	<input type="submit" value="Удалить" />
 }
 

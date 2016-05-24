@@ -1,12 +1,9 @@
 ﻿@using Lab16.Models;
 @model Staff
 
-@{
-	ViewBag.Title = "Add";
-}
-
 @using (Html.BeginForm())
 {
+	@Html.HiddenFor(m => m.Id)
 	@Html.LabelFor(m => m.Name, "Имя")<br />
 	@Html.EditorFor(m => m.Name)<br />
 	@Html.LabelFor(m => m.Surname, "Фамилия")<br />
