@@ -128,6 +128,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CompaniesController.cs" />
+    <Compile Include="Controllers\HobbiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Global.asax.cs">
@@ -182,6 +184,16 @@
     <Content Include="Views\Staff\Details.cshtml" />
     <Content Include="Views\Staff\Edit.cshtml" />
     <Content Include="Views\Staff\Index.cshtml" />
+    <Content Include="Views\Companies\Create.cshtml" />
+    <Content Include="Views\Companies\Delete.cshtml" />
+    <Content Include="Views\Companies\Details.cshtml" />
+    <Content Include="Views\Companies\Edit.cshtml" />
+    <Content Include="Views\Companies\Index.cshtml" />
+    <Content Include="Views\Hobbies\Create.cshtml" />
+    <Content Include="Views\Hobbies\Delete.cshtml" />
+    <Content Include="Views\Hobbies\Details.cshtml" />
+    <Content Include="Views\Hobbies\Edit.cshtml" />
+    <Content Include="Views\Hobbies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

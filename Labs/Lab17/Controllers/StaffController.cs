@@ -17,7 +17,7 @@ namespace Lab17.Controllers
 		// GET: Staff
 		public ActionResult Index()
 		{
-			var workers = db.Workers.Include(s => s.Company);
+			var workers = db.Workers.Include(w => w.Company).Include(w => w.Hobbies);
 			return View(workers.ToList());
 		}
 
@@ -71,20 +71,35 @@ namespace Lab17.Controllers
 				return HttpNotFound();
 			}
 			ViewBag.CompanyID = new SelectList(db.Companies, "Id", "Name", staff.CompanyID);
+			ViewBag.Hobbies = db.Hobbies.ToList();
+
 			return View(staff);
 		}
 
 		// POST: Staff/Edit/5
 		[HttpPost]
-		public ActionResult Edit([Bind(Include = "Id,Name,Surname,Position,CompanyID")] Staff staff)
+		public ActionResult Edit([Bind(Include = "Id,Name,Surname,Position,CompanyID")] Staff staff, int[] selectedHobbies)
 		{
 			if (ModelState.IsValid)
 			{
-				db.Entry(staff).State = EntityState.Modified;
+				Staff newWorker = db.Workers.Find(staff.Id);
+				if (selectedHobbies != null)
+				{
+					newWorker.Hobbies.Clear();
+					foreach (int id in selectedHobbies)
+					{
+						Hobby h = db.Hobbies.Find(id);
+						if (h != null)
+						{
+							newWorker.Hobbies.Add(h);
+						}
+					}
+				}
+				db.Entry(newWorker).State = EntityState.Modified;
 				db.SaveChanges();
 				return RedirectToAction("Index");
 			}
-			ViewBag.CompanyID = new SelectList(db.Companies, "Id", "Name", staff.CompanyID);
+			
 			return View(staff);
 		}
 

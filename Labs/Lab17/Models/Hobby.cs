@@ -9,6 +9,6 @@ namespace Lab17.Models
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public ICollection<Staff> Workers { get; set; }
+		public virtual ICollection<Staff> Workers { get; set; }
 	}
 }

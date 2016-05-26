@@ -15,6 +15,6 @@ namespace Lab17.Models
 		public int? CompanyID { get; set; }
 		public virtual Company Company { get; set; }
 
-		public ICollection<Hobby> Hobbies { get; set; }
+		public virtual ICollection<Hobby> Hobbies { get; set; }
 	}
 }
