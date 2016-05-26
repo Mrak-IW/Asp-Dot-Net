@@ -3,5 +3,6 @@ obj/
 Output/
 packages/
 .gitattributes
+.suo
 smarthouse.bin
 *8-)*
