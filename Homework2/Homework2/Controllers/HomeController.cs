@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Web.Configuration;
 using System.IO;
 using System.Web.Hosting;
+using System.Data.Entity;
 
 using Homework2.Config;
 using Homework2.Models;
@@ -16,6 +17,7 @@ using Homework2.Constants;
 using Homework2.Views.ViewHelpers;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using HomeWorkSmartHouse.SmartHouseDir.Enums;
+using HomeWorkSmartHouse.SmartHouseDir.Classes;
 
 namespace Homework2.Controllers.API
 {
@@ -282,13 +284,21 @@ namespace Homework2.Controllers.API
 			ISmartHouse sh = null;
 			SmartHouseConfig shConfig = GetConfig();
 
-			if (shConfig.UseSession)
+
+			if (true)   //TODO: Вставить какой-нибудь способ определения факта, что умный дом управляется EntityFramework
 			{
-				sh = Session["SmartHouse"] as ISmartHouse;
+				sh = new SmartHouse();
 			}
 			else
 			{
-				sh = LoadFromStorage();
+				if (shConfig.UseSession)
+				{
+					sh = Session["SmartHouse"] as ISmartHouse;
+				}
+				else
+				{
+					sh = LoadFromStorage();
+				}
 			}
 
 			return sh;
@@ -298,13 +308,20 @@ namespace Homework2.Controllers.API
 		{
 			SmartHouseConfig shConfig = GetConfig();
 
-			if (shConfig.UseSession)
+			if (sh is DbContext)
 			{
-				Session.Add("SmartHouse", sh);
+				(sh as DbContext).SaveChanges();
 			}
 			else
 			{
-				SaveToStorage(sh);
+				if (shConfig.UseSession)
+				{
+					Session.Add("SmartHouse", sh);
+				}
+				else
+				{
+					SaveToStorage(sh);
+				}
 			}
 		}
 

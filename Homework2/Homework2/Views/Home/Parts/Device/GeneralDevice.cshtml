@@ -8,7 +8,7 @@
 	bool on = (Model != null) && (Model.State == EPowerState.On);
 	HtmlString openAttr = new HtmlString(open ? "open=\"open\"" : "");
 	HtmlString onAttr = new HtmlString(on ? "on=\"on\"" : "");
-	string devtype = Model.GetType().Name;
+	string devtype = Model.DeviceTypeSystem;
 }
 
 <div class="deviceContainer" id="@(Model.Name)" devtype="@devtype" @onAttr @openAttr>
