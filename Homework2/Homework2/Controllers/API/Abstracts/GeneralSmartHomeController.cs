@@ -1,29 +1,35 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Web.Configuration;
 using System.Web.Hosting;
 using System.Web.Http;
 using System.Web;
+using System.Reflection;
+using System.Data.Entity;
 
 using Homework2.Config;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using HomeWorkSmartHouse.SmartHouseDir.Enums;
-using HomeWorkSmartHouse.SmartHouseDir.Classes;
-using System.Data.Entity;
+using Homework2.Models;
 
 namespace Homework2.Controllers.API.Abstracts
 {
-    public abstract class GeneralSmartHomeController : ApiController
-    {
+	public abstract class GeneralSmartHomeController : ApiController
+	{
+		Assembly modelAssembly = Assembly.Load("SmartHouse");
+
 		protected ISmartHouse LoadSmartHouse()
 		{
 			ISmartHouse sh = null;
 			SmartHouseConfig shConfig = GetConfig();
+			ISmartHouseCreator shc = Manufacture.GetManufacture(modelAssembly);
+			Type smartHouseType = shc.SmartHouseType;
 
-			if (true)   //TODO: Вставить какой-нибудь способ определения факта, что умный дом управляется EntityFramework
+			if (smartHouseType.IsSubclassOf(typeof(DbContext)))
 			{
-				sh = new SmartHouse();
+				sh = shc.CreateSmartHouse();
 			}
 			else
 			{
@@ -61,7 +67,6 @@ namespace Homework2.Controllers.API.Abstracts
 			}
 		}
 
-
 		private ISmartHouse LoadFromStorage()
 		{
 			ISmartHouse result = null;
@@ -91,13 +96,6 @@ namespace Homework2.Controllers.API.Abstracts
 			}
 
 			return result;
-		}
-
-		protected SmartHouseConfig GetConfig()
-		{
-			Configuration config = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
-			SmartHouseConfig shSection = (SmartHouseConfig)config.GetSection(SmartHouseConfig.SectionName);
-			return shSection;
 		}
 
 		private bool SaveToStorage(ISmartHouse sh)
@@ -130,6 +128,13 @@ namespace Homework2.Controllers.API.Abstracts
 			}
 
 			return saved;
+		}
+
+		protected SmartHouseConfig GetConfig()
+		{
+			Configuration config = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
+			SmartHouseConfig shSection = (SmartHouseConfig)config.GetSection(SmartHouseConfig.SectionName);
+			return shSection;
 		}
 	}
 }

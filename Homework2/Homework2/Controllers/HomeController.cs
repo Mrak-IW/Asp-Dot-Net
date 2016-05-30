@@ -17,7 +17,6 @@ using Homework2.Constants;
 using Homework2.Views.ViewHelpers;
 using HomeWorkSmartHouse.SmartHouseDir.Interfaces;
 using HomeWorkSmartHouse.SmartHouseDir.Enums;
-using HomeWorkSmartHouse.SmartHouseDir.Classes;
 
 namespace Homework2.Controllers.API
 {
@@ -283,11 +282,12 @@ namespace Homework2.Controllers.API
 		{
 			ISmartHouse sh = null;
 			SmartHouseConfig shConfig = GetConfig();
+			ISmartHouseCreator shc = Manufacture.GetManufacture(modelAssembly);
+			Type smartHouseType = shc.SmartHouseType;
 
-
-			if (true)   //TODO: Вставить какой-нибудь способ определения факта, что умный дом управляется EntityFramework
+			if (smartHouseType.IsSubclassOf(typeof(DbContext)))
 			{
-				sh = new SmartHouse();
+				sh = shc.CreateSmartHouse();
 			}
 			else
 			{
