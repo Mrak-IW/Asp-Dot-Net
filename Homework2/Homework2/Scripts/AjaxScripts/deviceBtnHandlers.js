@@ -26,7 +26,7 @@ function RefreshClock(id) {
 			type: "GET",
 			success: function (data) {
 				if (clock.attr("on") == "on") {
-					$("#" + id + " .devIcon")[0].innerHTML = "<span>" + data.hour + " " + (data.minute < 10 ? 0 : "") + data.minute + "</span>";
+					$("#" + id + " .devIcon")[0].innerHTML = "<span>" + (data.hour < 10 ? "0" : "") + data.hour + " " + (data.minute < 10 ? 0 : "") + data.minute + "</span>";
 				}
 				else {
 					$("#" + id + " .devIcon span").remove();
